@@ -9,12 +9,10 @@ about:
   links: 
     - text: Linkedin
       href: linkedin.com/in/mizeroines
-    - text: Git
+    - text: Github
       href: github.com/inezamizero
     - text: Email
       href: mailto:iinezazmizero@middlebury.edu
-    - text: Github
-      href: https://github.com/inezamizero
       
 ---
 
