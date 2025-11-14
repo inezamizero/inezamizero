@@ -10,7 +10,7 @@ about:
     - text: Linkedin
       href: linkedin.com/in/mizeroines
     - text: Github
-      href: github.com/inezamizero
+      href: https://github.com/inezamizero
     - text: Email
       href: mailto:iinezazmizero@middlebury.edu
       
