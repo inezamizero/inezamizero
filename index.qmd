@@ -1,5 +1,5 @@
 ---
-#title: "Personal Website"
+#title: "Ines Kevine"
 image: pic1.HEIC
 toc: false
 about: 

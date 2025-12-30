@@ -1,35 +1,130 @@
 ---
-title: "All the projects I have worked on!"
+title: "Projects"
 ---
 
-During my time in high school and college, I have been involved in multiple projects that have helped me grow both professionally and personally. I have been blessed to work with my amazing peers who assisted me in the fruition of these projects and taught me a thing or two each in their own ways.
+During my time in high school and college, I have been involved in a range of projects that have contributed to my personal, academic, and professional growth. I have been fortunate to collaborate with inspiring peers whose perspectives and skills shaped these projects in meaningful ways.
 
 
-STEMPossible 
+## Projects
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+
+<div class="col">
+<a href="#stempossible" class="text-decoration-none">
+<div class="card h-100 shadow-sm">
+<div class="card-body">
+<h5 class="card-title">STEMPossible</h5>
+<p class="card-text">STEM education initiative promoting access and opportunity.</p>
+</div>
+</div>
+</a>
+</div>
+
+<div class="col">
+<a href="#8-bit-computer" class="text-decoration-none">
+<div class="card h-100 shadow-sm">
+<div class="card-body">
+<h5 class="card-title">8-Bit Computer</h5>
+<p class="card-text">Design and implementation of an 8-bit computer from discrete logic.</p>
+</div>
+</div>
+</a>
+</div>
+
+<div class="col">
+<a href="#passguide" class="text-decoration-none">
+<div class="card h-100 shadow-sm">
+<div class="card-body">
+<h5 class="card-title">PassGuide</h5>
+<p class="card-text">Embedded systems project for driver situational awareness.</p>
+</div>
+</div>
+</a>
+</div>
+
+<div class="col">
+<a href="#data-science" class="text-decoration-none">
+<div class="card h-100 shadow-sm">
+<div class="card-body">
+<h5 class="card-title">Data Science</h5>
+<p class="card-text">Applied data analysis and research using R and RStudio.</p>
+</div>
+</div>
+</a>
+</div>
+
+<div class="col">
+<a href="#virtual-tour" class="text-decoration-none">
+<div class="card h-100 shadow-sm">
+<div class="card-body">
+<h5 class="card-title">Virtual Tour</h5>
+<p class="card-text">Immersive 360° VR tour of Middlebury College.</p>
+</div>
+</div>
+</a>
+</div>
+
+</div>
 
 
-8-bit computer
+---
 
-In my industrial Design class, I worked on building an 8-bit computer from scratch. From the computer clock to the EEPROM and more. As someone who has never entered an Engineering class, this was a great introduction in the world of Electronics. I gained an understanding of all the basic component of computers, the ALU, registers and built each one of them using integrated chips like the 74LS86 for the XOR gate and 74LS83 for 4-Bit Adder. For. six hours a week, I would work on this with a partner, and by the end of the semester, we have built the computer up to the EEPROM. We built the Computer Clock, ALU, Program Counter, RAM, Latches and Registers. I gained understanding of how a computer works and was able to interact with the different components that comprise it. I learnt how different latches work, and was able to build an ALU that can compute sum, and difference. 
+## STEMPossible {#stempossible}
 
-Apart from understanding Electronics, I was able to also learn other skills that helped me become an all-rounded Engineer. This includes being able to sketch my own schematics and comprehend them. This is a project that opened my eyes and sparked an interest in Electronics in me. It is because of this class that I wish to pursue Electrical Engineering in the future. 
+STEMPossible is an initiative dedicated to increasing STEM awareness among youth in Rwanda, with a particular focus on underserved communities in rural areas. Rural regions remain some of the most vulnerable parts of the country, yet they hold immense potential for transformation through early exposure to Science, Technology, Engineering, and Mathematics. By introducing young people to STEM pathways, STEMPossible aims to create meaningful, long-term impact—not only by nurturing future scientists, engineers, and technologists, but also by developing informed, confident leaders.
 
-PassGuide
+STEMPossible employs multiple outreach approaches to engage youth across Rwanda. To date, the initiative has launched a podcast and implemented two programs in partnership with the Share Our Share (SOS) Club at Gashora Girls Academy of Science and Technology. These programs represent the foundation of STEMPossible’s mission, with plans underway to expand outreach efforts and introduce additional initiatives in the near future.
 
+[Learn more about programs in STEMPossible](stempossible.qmd)
 
-Data Science
+---
 
-It was a pleasure to be part of Professor Emily Malcolm-White’s Introduction to Data Science course this semester.
+## 8-Bit Computer {#8-bit-computer}
 
-Before the semester began, my motivation for enrolling was simple: the world has accumulated an immense amount of data, and there is a growing need for people who can work meaningfully with it. I wanted to be at the forefront of that work. Over the course of the semester, I learned far more than just how to “work with” data. I learned how to analyze, organize, and interpret it, how to web-scrape data, and how to use R and RStudio to communicate insights effectively.
+As part of my Industrial Design coursework, I designed and implemented an 8-bit computer at the hardware level, constructing each subsystem from discrete integrated circuits. The project began with the design of a computer clock and progressed through the development and integration of the core architectural components up to the EEPROM.
 
-For the final project, I collaborated with Comboni Jamal Tutu on a research study examining the relationship between mobile banking usage in select East African countries and their economic development. While I thoroughly enjoyed every aspect of the course, applying newly acquired technical skills to a project connected to my own region was especially meaningful. Through this work, I also deepened my understanding of the East African context beyond the data itself.
+I implemented key components of the computer, including the Arithmetic Logic Unit (ALU), program counter, registers, latches, RAM, and EEPROM. The ALU was built using TTL logic, incorporating integrated circuits such as the 74LS86 XOR gate and the 74LS83 4-bit adder to perform arithmetic operations including addition and subtraction. Through this process, I developed a strong understanding of how combinational and sequential logic interact to enable computation.
 
-I am sharing the results of our research here in the hope that they may be useful to others. One key challenge we encountered was the scarcity of accessible, high-quality data on African countries, a gap that underscores the need for continued research and data-driven work in the region. Addressing this challenge is something I am eager to contribute to as I continue developing my skills in data science.
+Over the course of the semester, I dedicated approximately six hours per week to circuit design, assembly, testing, and debugging alongside a partner. Each subsystem was constructed, validated independently, and then integrated into the larger system, reinforcing concepts such as data flow, clock synchronization, and state management. This hands-on approach provided a concrete understanding of how low-level hardware components collectively form a functioning computer.
 
-Grateful for the learning, collaboration, and perspective this course provided.
+In addition to circuit implementation, I developed technical proficiency in drafting and interpreting schematics, translating logical designs into physical hardware, and systematically troubleshooting electronic systems. This project served as my first rigorous exposure to electronics and computer architecture and played a pivotal role in shaping my interest in pursuing Electrical Engineering.
 
-Virtual Tour 
+[📁 View video of working program counter](https://drive.google.com/file/d/1oJhi6xoUpYk9sE74d4NYtbMq90mw3EDk/view?usp=share_link){.btn .btn-outline-primary target="_blank"}
 
+---
 
+## PassGuide {#passguide}
 
+The goal of this project, created with teammates from my Embedded Systems class, was to extend a driver’s situational awareness by monitoring areas beyond their natural line of sight. We designed a sensor-based system capable of detecting vehicles in visually obstructed regions and communicating this information to approaching drivers through a clear visual alert, similar to a traffic-light signal.
+
+Our final product is a motion-sensored traffic guidance system. Each unit consists of an ESP32, a microwave motion sensor, and an LED ring. The system operates in pairs, with one unit facing oncoming traffic and the other facing the reference driver.
+
+When a vehicle approaches one unit, it signals the paired unit to display a red light, warning oncoming traffic of an approaching vehicle through a narrow passage. The system is intended for high-risk areas such as sharp curves and single-lane bridges where visibility is limited.
+
+One limitation of the system is that microwave sensors respond to all motion, including non-traffic movement or weather conditions, which may lead to false positives. As a result, the system is intended to supplement—not replace—existing traffic signage.
+
+This project served as a proof of concept, with plans to further develop and refine it in Spring 2026.
+
+[📁 View the Project Demo here](https://www.linkedin.com/feed/update/urn:li:activity:7411509731258945536/){.btn .btn-outline-primary target="_blank"}
+---
+
+## Data Science {#data-science}
+
+It was a pleasure to be part of Professor Emily Malcolm-White’s *Introduction to Data Science* course.
+
+Before the semester began, my motivation for enrolling was simple: the world has accumulated an immense amount of data, and there is a growing need for people who can work meaningfully with it. Over the semester, I learned how to analyze, organize, and interpret data; web-scrape datasets; and use R and RStudio to communicate insights effectively.
+
+For the final project, I collaborated with Comboni Jamal Tutu on a research study examining the relationship between mobile banking usage in select East African countries and economic development. Applying newly acquired technical skills to a project connected to my own region was especially meaningful and deepened my understanding of the East African context beyond the data itself.
+
+One of the main challenges we encountered was the limited availability of high-quality, accessible data on African countries, highlighting a significant gap in global data research. Addressing this gap is something I am eager to contribute to as I continue developing my skills in data science.
+
+[📁 Find linkedin post with research here](https://www.linkedin.com/feed/update/urn:li:activity:7411509731258945536/){.btn .btn-outline-primary target="_blank"}
+---
+
+## Virtual Tour {#virtual-tour}
+
+This project is an immersive virtual reality tour of Middlebury College. Using VR and 3D modeling tools, I created interactive 360-degree visuals of key campus spaces—including residence halls, classrooms, and common areas—to give viewers an authentic sense of campus life.
+
+The goal is to provide a more inclusive and accessible way to experience Middlebury, particularly for those who may not be able to visit in person. By incorporating audio guides in multiple languages and highlighting student perspectives, the tour reflects the diversity and lived experiences of the community.
+
+The project also provides students with a creative platform to shape how the college is represented, strengthening community connection and belonging. I am actively working on this project and plan to conclude it by February 2026.

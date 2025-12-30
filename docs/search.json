@@ -9,15 +9,92 @@
   {
     "objectID": "projects.html",
     "href": "projects.html",
-    "title": "All the projects I have worked on!",
+    "title": "Projects",
     "section": "",
-    "text": "During my time in high school and college, I have been involved in multiple projects that have helped me grow both professionally and personally. I have been blessed to work with my amazing peers who assisted me in the fruition of these projects and taught me a thing or two each in their own ways.\nSTEMPossible\n8-bit computer\nIn my industrial Design class, I worked on building an 8-bit computer from scratch. From the computer clock to the EEPROM and more. As someone who has never entered an Engineering class, this was a great introduction in the world of Electronics. I gained an understanding of all the basic component of computers, the ALU, registers and built each one of them using integrated chips like the 74LS86 for the XOR gate and 74LS83 for 4-Bit Adder. For. six hours a week, I would work on this with a partner, and by the end of the semester, we have built the computer up to the EEPROM. We built the Computer Clock, ALU, Program Counter, RAM, Latches and Registers. I gained understanding of how a computer works and was able to interact with the different components that comprise it. I learnt how different latches work, and was able to build an ALU that can compute sum, and difference.\nApart from understanding Electronics, I was able to also learn other skills that helped me become an all-rounded Engineer. This includes being able to sketch my own schematics and comprehend them. This is a project that opened my eyes and sparked an interest in Electronics in me. It is because of this class that I wish to pursue Electrical Engineering in the future.\nPassGuide\nData Science\nIt was a pleasure to be part of Professor Emily Malcolm-White’s Introduction to Data Science course this semester.\nBefore the semester began, my motivation for enrolling was simple: the world has accumulated an immense amount of data, and there is a growing need for people who can work meaningfully with it. I wanted to be at the forefront of that work. Over the course of the semester, I learned far more than just how to “work with” data. I learned how to analyze, organize, and interpret it, how to web-scrape data, and how to use R and RStudio to communicate insights effectively.\nFor the final project, I collaborated with Comboni Jamal Tutu on a research study examining the relationship between mobile banking usage in select East African countries and their economic development. While I thoroughly enjoyed every aspect of the course, applying newly acquired technical skills to a project connected to my own region was especially meaningful. Through this work, I also deepened my understanding of the East African context beyond the data itself.\nI am sharing the results of our research here in the hope that they may be useful to others. One key challenge we encountered was the scarcity of accessible, high-quality data on African countries, a gap that underscores the need for continued research and data-driven work in the region. Addressing this challenge is something I am eager to contribute to as I continue developing my skills in data science.\nGrateful for the learning, collaboration, and perspective this course provided.\nVirtual Tour"
+    "text": "During my time in high school and college, I have been involved in a range of projects that have contributed to my personal, academic, and professional growth. I have been fortunate to collaborate with inspiring peers whose perspectives and skills shaped these projects in meaningful ways."
   },
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Personal Website",
+    "title": "Ines Kevine",
     "section": "",
     "text": "Hi there! My name is Ineza Mizero Ines Kevine, a junior at Middlebury College majoring in Computer Science with a focus in Electronics. I am originally from Kigali, Rwanda, and I am passionate about technology and how it can be leveraged to create meaningful impact. I love building and understanding systems; currently, I am constructing an 8-bit computer, which has deepened my excitement for hardware and engineering. I also work on projects that expand access and inclusion, such as developing a Virtual Campus Tour to help international students experience Middlebury remotely. This is an idea came to mind when I worked as an admissions assistant welcoming visitors and noticed the lack of international visitors from countries like Asia and Africa. This took me back to how much I wanted to see more than what was online about the school but could not because of distance. I am a dedicated fast learner with strong communication and collaboration skills. I am eager to take on opportunities that allow me to grow and contribute to impactful work in Electronics and Computer Science to my country and the world."
+  },
+  {
+    "objectID": "projects.html#project-menu",
+    "href": "projects.html#project-menu",
+    "title": "Projects",
+    "section": "Project Menu",
+    "text": "Project Menu\n\nSTEMPossible\n8-Bit Computer\nPassGuide\nData Science\nVirtual Tour"
+  },
+  {
+    "objectID": "projects.html#stempossible",
+    "href": "projects.html#stempossible",
+    "title": "Projects",
+    "section": "STEMPossible",
+    "text": "STEMPossible\nSTEMPossible is an initiative dedicated to increasing STEM awareness among youth in Rwanda, with a particular focus on underserved communities in rural areas. Rural regions remain some of the most vulnerable parts of the country, yet they hold immense potential for transformation through early exposure to Science, Technology, Engineering, and Mathematics. By introducing young people to STEM pathways, STEMPossible aims to create meaningful, long-term impact—not only by nurturing future scientists, engineers, and technologists, but also by developing informed, confident leaders.\nSTEMPossible employs multiple outreach approaches to engage youth across Rwanda. To date, the initiative has launched a podcast and implemented two programs in partnership with the Share Our Share (SOS) Club at Gashora Girls Academy of Science and Technology. These programs represent the foundation of STEMPossible’s mission, with plans underway to expand outreach efforts and introduce additional initiatives in the near future.\nLearn more about STEMPossible"
+  },
+  {
+    "objectID": "projects.html#8-bit-computer",
+    "href": "projects.html#8-bit-computer",
+    "title": "Projects",
+    "section": "8-Bit Computer",
+    "text": "8-Bit Computer\nAs part of my Industrial Design coursework, I designed and implemented an 8-bit computer at the hardware level, constructing each subsystem from discrete integrated circuits. The project began with the design of a computer clock and progressed through the development and integration of the core architectural components up to the EEPROM.\nI implemented key components of the computer, including the Arithmetic Logic Unit (ALU), program counter, registers, latches, RAM, and EEPROM. The ALU was built using TTL logic, incorporating integrated circuits such as the 74LS86 XOR gate and the 74LS83 4-bit adder to perform arithmetic operations including addition and subtraction. Through this process, I developed a strong understanding of how combinational and sequential logic interact to enable computation.\nOver the course of the semester, I dedicated approximately six hours per week to circuit design, assembly, testing, and debugging alongside a partner. Each subsystem was constructed, validated independently, and then integrated into the larger system, reinforcing concepts such as data flow, clock synchronization, and state management. This hands-on approach provided a concrete understanding of how low-level hardware components collectively form a functioning computer.\nIn addition to circuit implementation, I developed technical proficiency in drafting and interpreting schematics, translating logical designs into physical hardware, and systematically troubleshooting electronic systems. This project served as my first rigorous exposure to electronics and computer architecture and played a pivotal role in shaping my interest in pursuing Electrical Engineering.\n📁 View video of working program counter"
+  },
+  {
+    "objectID": "projects.html#passguide",
+    "href": "projects.html#passguide",
+    "title": "Projects",
+    "section": "PassGuide",
+    "text": "PassGuide\nThe goal of this project, created with teammates from my Embedded Systems class, was to extend a driver’s situational awareness by monitoring areas beyond their natural line of sight. We designed a sensor-based system capable of detecting vehicles in visually obstructed regions and communicating this information to approaching drivers through a clear visual alert, similar to a traffic-light signal.\nOur final product is a motion-sensored traffic guidance system. Each unit consists of an ESP32, a microwave motion sensor, and an LED ring. The system operates in pairs, with one unit facing oncoming traffic and the other facing the reference driver.\nWhen a vehicle approaches one unit, it signals the paired unit to display a red light, warning oncoming traffic of an approaching vehicle through a narrow passage. The system is intended for high-risk areas such as sharp curves and single-lane bridges where visibility is limited.\nOne limitation of the system is that microwave sensors respond to all motion, including non-traffic movement or weather conditions, which may lead to false positives. As a result, the system is intended to supplement—not replace—existing traffic signage.\nThis project served as a proof of concept, with plans to further develop and refine it in Spring 2026.\n📁 View the Project Demo here"
+  },
+  {
+    "objectID": "projects.html#data-science",
+    "href": "projects.html#data-science",
+    "title": "Projects",
+    "section": "Data Science",
+    "text": "Data Science\nIt was a pleasure to be part of Professor Emily Malcolm-White’s Introduction to Data Science course.\nBefore the semester began, my motivation for enrolling was simple: the world has accumulated an immense amount of data, and there is a growing need for people who can work meaningfully with it. Over the semester, I learned how to analyze, organize, and interpret data; web-scrape datasets; and use R and RStudio to communicate insights effectively.\nFor the final project, I collaborated with Comboni Jamal Tutu on a research study examining the relationship between mobile banking usage in select East African countries and economic development. Applying newly acquired technical skills to a project connected to my own region was especially meaningful and deepened my understanding of the East African context beyond the data itself.\nOne of the main challenges we encountered was the limited availability of high-quality, accessible data on African countries, highlighting a significant gap in global data research. Addressing this gap is something I am eager to contribute to as I continue developing my skills in data science.\n📁 Find linkedin post with research here"
+  },
+  {
+    "objectID": "projects.html#virtual-tour",
+    "href": "projects.html#virtual-tour",
+    "title": "Projects",
+    "section": "Virtual Tour",
+    "text": "Virtual Tour\nThis project is an immersive virtual reality tour of Middlebury College. Using VR and 3D modeling tools, I created interactive 360-degree visuals of key campus spaces—including residence halls, classrooms, and common areas—to give viewers an authentic sense of campus life.\nThe goal is to provide a more inclusive and accessible way to experience Middlebury, particularly for those who may not be able to visit in person. By incorporating audio guides in multiple languages and highlighting student perspectives, the tour reflects the diversity and lived experiences of the community.\nThe project also provides students with a creative platform to shape how the college is represented, strengthening community connection and belonging. I am actively working on this project and plan to conclude it by February 2026."
+  },
+  {
+    "objectID": "projects.html#projects",
+    "href": "projects.html#projects",
+    "title": "Projects",
+    "section": "Projects",
+    "text": "Projects\n\n\n\n\n\n\nSTEMPossible\n\n\nSTEM education initiative promoting access and opportunity.\n\n\n\n\n\n\n\n\n\n\n8-Bit Computer\n\n\nDesign and implementation of an 8-bit computer from discrete logic.\n\n\n\n\n\n\n\n\n\n\nPassGuide\n\n\nEmbedded systems project for driver situational awareness.\n\n\n\n\n\n\n\n\n\n\nData Science\n\n\nApplied data analysis and research using R and RStudio.\n\n\n\n\n\n\n\n\n\n\nVirtual Tour\n\n\nImmersive 360° VR tour of Middlebury College."
+  },
+  {
+    "objectID": "stempossible.html",
+    "href": "stempossible.html",
+    "title": "STEMPossible",
+    "section": "",
+    "text": "The STEMVerse Podcast is hosted by Ineza Mizero Ines Kevine and is designed to promote STEM awareness among young people. The podcast features accomplished women working in Rwanda’s STEM fields, who share their personal journeys, challenges, and successes. By highlighting real stories of resilience and achievement, the podcast seeks to inspire youth—especially young women, to pursue careers in STEM. The STEMVerse Podcast is currently available on YouTube."
+  },
+  {
+    "objectID": "stempossible.html#the-stemverse-podcast",
+    "href": "stempossible.html#the-stemverse-podcast",
+    "title": "STEMPossible",
+    "section": "",
+    "text": "The STEMVerse Podcast is hosted by Ineza Mizero Ines Kevine and is designed to promote STEM awareness among young people. The podcast features accomplished women working in Rwanda’s STEM fields, who share their personal journeys, challenges, and successes. By highlighting real stories of resilience and achievement, the podcast seeks to inspire youth—especially young women, to pursue careers in STEM. The STEMVerse Podcast is currently available on YouTube."
+  },
+  {
+    "objectID": "stempossible.html#stempossible-at-gs-gashora",
+    "href": "stempossible.html#stempossible-at-gs-gashora",
+    "title": "STEMPossible",
+    "section": "STEMPossible at GS Gashora",
+    "text": "STEMPossible at GS Gashora\nSTEMPossible conducts weekly STEM workshops at GS (Groupe Scholaire) Gashora in alignment with the initiative’s broader mission. Each week, a team of moderators travels to the school to engage Grade 8 students in interactive sessions designed to spark interest in STEM during their early academic years.\nThese workshops emphasize exploration and curiosity, encouraging students to immerse themselves in STEM subjects while building confidence and motivation. The curriculum and additional program details are included in the accompanying documentation.\nTo further enhance the learning experience, additional funding is needed to acquire hands-on tools that simulate professional equipment used in Science, Technology, Engineering, and Mathematics. These resources will allow students to engage more deeply with practical, real-world applications of STEM concepts."
+  },
+  {
+    "objectID": "stempossible.html#share-our-share-share-your-share-fundraising-initiative",
+    "href": "stempossible.html#share-our-share-share-your-share-fundraising-initiative",
+    "title": "STEMPossible",
+    "section": "Share Our Share: Share Your Share Fundraising Initiative",
+    "text": "Share Our Share: Share Your Share Fundraising Initiative\nThrough the Share Your Share annual fundraising event, Share Our Share seeks to amplify the impact of STEMPossible by addressing barriers beyond access to knowledge. Conversations with students have revealed that financial constraints; particularly school fees and scholastic materials—pose significant challenges to their education. The Share Your Share initiative was established to help alleviate this burden by raising funds to cover school tuition and provide essential learning materials. By reducing financial stress on families, the program enables students to focus fully on their education and pursue their academic goals without interruption."
   }
 ]
