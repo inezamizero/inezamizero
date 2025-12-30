@@ -1,0 +1,35 @@
+---
+title: "All the projects I have worked on!"
+---
+
+During my time in high school and college, I have been involved in multiple projects that have helped me grow both professionally and personally. I have been blessed to work with my amazing peers who assisted me in the fruition of these projects and taught me a thing or two each in their own ways.
+
+
+STEMPossible 
+
+
+8-bit computer
+
+In my industrial Design class, I worked on building an 8-bit computer from scratch. From the computer clock to the EEPROM and more. As someone who has never entered an Engineering class, this was a great introduction in the world of Electronics. I gained an understanding of all the basic component of computers, the ALU, registers and built each one of them using integrated chips like the 74LS86 for the XOR gate and 74LS83 for 4-Bit Adder. For. six hours a week, I would work on this with a partner, and by the end of the semester, we have built the computer up to the EEPROM. We built the Computer Clock, ALU, Program Counter, RAM, Latches and Registers. I gained understanding of how a computer works and was able to interact with the different components that comprise it. I learnt how different latches work, and was able to build an ALU that can compute sum, and difference. 
+
+Apart from understanding Electronics, I was able to also learn other skills that helped me become an all-rounded Engineer. This includes being able to sketch my own schematics and comprehend them. This is a project that opened my eyes and sparked an interest in Electronics in me. It is because of this class that I wish to pursue Electrical Engineering in the future. 
+
+PassGuide
+
+
+Data Science
+
+It was a pleasure to be part of Professor Emily Malcolm-White’s Introduction to Data Science course this semester.
+
+Before the semester began, my motivation for enrolling was simple: the world has accumulated an immense amount of data, and there is a growing need for people who can work meaningfully with it. I wanted to be at the forefront of that work. Over the course of the semester, I learned far more than just how to “work with” data. I learned how to analyze, organize, and interpret it, how to web-scrape data, and how to use R and RStudio to communicate insights effectively.
+
+For the final project, I collaborated with Comboni Jamal Tutu on a research study examining the relationship between mobile banking usage in select East African countries and their economic development. While I thoroughly enjoyed every aspect of the course, applying newly acquired technical skills to a project connected to my own region was especially meaningful. Through this work, I also deepened my understanding of the East African context beyond the data itself.
+
+I am sharing the results of our research here in the hope that they may be useful to others. One key challenge we encountered was the scarcity of accessible, high-quality data on African countries, a gap that underscores the need for continued research and data-driven work in the region. Addressing this challenge is something I am eager to contribute to as I continue developing my skills in data science.
+
+Grateful for the learning, collaboration, and perspective this course provided.
+
+Virtual Tour 
+
+
+
