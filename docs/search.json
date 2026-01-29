@@ -32,7 +32,7 @@
     "href": "projects.html#stempossible",
     "title": "Projects",
     "section": "STEMPossible",
-    "text": "STEMPossible\nSTEMPossible is an initiative dedicated to increasing STEM awareness among youth in Rwanda, with a particular focus on underserved communities in rural areas. Rural regions remain some of the most vulnerable parts of the country, yet they hold immense potential for transformation through early exposure to Science, Technology, Engineering, and Mathematics. By introducing young people to STEM pathways, STEMPossible aims to create meaningful, long-term impact—not only by nurturing future scientists, engineers, and technologists, but also by developing informed, confident leaders.\nSTEMPossible employs multiple outreach approaches to engage youth across Rwanda. To date, the initiative has launched a podcast and implemented two programs in partnership with the Share Our Share (SOS) Club at Gashora Girls Academy of Science and Technology. These programs represent the foundation of STEMPossible’s mission, with plans underway to expand outreach efforts and introduce additional initiatives in the near future.\nLearn more about STEMPossible"
+    "text": "STEMPossible\nSTEMPossible is an initiative dedicated to increasing STEM awareness among youth in Rwanda, with a particular focus on underserved communities in rural areas. Rural regions remain some of the most vulnerable parts of the country, yet they hold immense potential for transformation through early exposure to Science, Technology, Engineering, and Mathematics. By introducing young people to STEM pathways, STEMPossible aims to create meaningful, long-term impact—not only by nurturing future scientists, engineers, and technologists, but also by developing informed, confident leaders.\nSTEMPossible employs multiple outreach approaches to engage youth across Rwanda. To date, the initiative has launched a podcast and implemented two programs in partnership with the Share Our Share (SOS) Club at Gashora Girls Academy of Science and Technology. These programs represent the foundation of STEMPossible’s mission, with plans underway to expand outreach efforts and introduce additional initiatives in the near future.\nLearn more about programs in STEMPossible"
   },
   {
     "objectID": "projects.html#8-bit-computer",
@@ -46,14 +46,14 @@
     "href": "projects.html#passguide",
     "title": "Projects",
     "section": "PassGuide",
-    "text": "PassGuide\nThe goal of this project, created with teammates from my Embedded Systems class, was to extend a driver’s situational awareness by monitoring areas beyond their natural line of sight. We designed a sensor-based system capable of detecting vehicles in visually obstructed regions and communicating this information to approaching drivers through a clear visual alert, similar to a traffic-light signal.\nOur final product is a motion-sensored traffic guidance system. Each unit consists of an ESP32, a microwave motion sensor, and an LED ring. The system operates in pairs, with one unit facing oncoming traffic and the other facing the reference driver.\nWhen a vehicle approaches one unit, it signals the paired unit to display a red light, warning oncoming traffic of an approaching vehicle through a narrow passage. The system is intended for high-risk areas such as sharp curves and single-lane bridges where visibility is limited.\nOne limitation of the system is that microwave sensors respond to all motion, including non-traffic movement or weather conditions, which may lead to false positives. As a result, the system is intended to supplement—not replace—existing traffic signage.\nThis project served as a proof of concept, with plans to further develop and refine it in Spring 2026.\n📁 View the Project Demo here"
+    "text": "PassGuide\nThe goal of this project, created with teammates from my Embedded Systems class, was to extend a driver’s situational awareness by monitoring areas beyond their natural line of sight. We designed a sensor-based system capable of detecting vehicles in visually obstructed regions and communicating this information to approaching drivers through a clear visual alert, similar to a traffic-light signal.\nOur final product is a motion-sensored traffic guidance system. Each unit consists of an ESP32, a microwave motion sensor, and an LED ring. The system operates in pairs, with one unit facing oncoming traffic and the other facing the reference driver.\nWhen a vehicle approaches one unit, it signals the paired unit to display a red light, warning oncoming traffic of an approaching vehicle through a narrow passage. The system is intended for high-risk areas such as sharp curves and single-lane bridges where visibility is limited.\nOne limitation of the system is that microwave sensors respond to all motion, including non-traffic movement or weather conditions, which may lead to false positives. As a result, the system is intended to supplement—not replace—existing traffic signage.\nThis project served as a proof of concept, with plans to further develop and refine it in Spring 2026."
   },
   {
     "objectID": "projects.html#data-science",
     "href": "projects.html#data-science",
     "title": "Projects",
     "section": "Data Science",
-    "text": "Data Science\nIt was a pleasure to be part of Professor Emily Malcolm-White’s Introduction to Data Science course.\nBefore the semester began, my motivation for enrolling was simple: the world has accumulated an immense amount of data, and there is a growing need for people who can work meaningfully with it. Over the semester, I learned how to analyze, organize, and interpret data; web-scrape datasets; and use R and RStudio to communicate insights effectively.\nFor the final project, I collaborated with Comboni Jamal Tutu on a research study examining the relationship between mobile banking usage in select East African countries and economic development. Applying newly acquired technical skills to a project connected to my own region was especially meaningful and deepened my understanding of the East African context beyond the data itself.\nOne of the main challenges we encountered was the limited availability of high-quality, accessible data on African countries, highlighting a significant gap in global data research. Addressing this gap is something I am eager to contribute to as I continue developing my skills in data science.\n📁 Find linkedin post with research here"
+    "text": "Data Science\nIt was a pleasure being part of Professor Emily Malcolm-White’s Introduction to Data Science course.\nBefore the semester began, my motivation for enrolling was simple: the world has accumulated an immense amount of data, and there is a growing need for people who can work meaningfully with it. Over the semester, I learned how to analyze, organize, and interpret data; web-scrape datasets; and use R and RStudio to communicate insights effectively.\nFor the final project, I collaborated with Comboni Jamal Tutu on a research study examining the relationship between mobile banking usage in select East African countries and economic development. Applying newly acquired technical skills to a project connected to my own region was especially meaningful and deepened my understanding of the East African context beyond the data itself.\nOne of the main challenges we encountered was the limited availability of high-quality, accessible data on African countries, highlighting a significant gap in global data research. Addressing this gap is something I am eager to contribute to as I continue developing my skills in data science."
   },
   {
     "objectID": "projects.html#virtual-tour",
@@ -96,5 +96,19 @@
     "title": "STEMPossible",
     "section": "Share Our Share: Share Your Share Fundraising Initiative",
     "text": "Share Our Share: Share Your Share Fundraising Initiative\nThrough the Share Your Share annual fundraising event, Share Our Share seeks to amplify the impact of STEMPossible by addressing barriers beyond access to knowledge. Conversations with students have revealed that financial constraints; particularly school fees and scholastic materials—pose significant challenges to their education. The Share Your Share initiative was established to help alleviate this burden by raising funds to cover school tuition and provide essential learning materials. By reducing financial stress on families, the program enables students to focus fully on their education and pursue their academic goals without interruption."
+  },
+  {
+    "objectID": "projects.html#view-the-project-demo-here",
+    "href": "projects.html#view-the-project-demo-here",
+    "title": "Projects",
+    "section": "📁 View the Project Demo here",
+    "text": "📁 View the Project Demo here"
+  },
+  {
+    "objectID": "projects.html#find-linkedin-post-with-research-here",
+    "href": "projects.html#find-linkedin-post-with-research-here",
+    "title": "Projects",
+    "section": "📁 Find linkedin post with research here",
+    "text": "📁 Find linkedin post with research here"
   }
 ]
