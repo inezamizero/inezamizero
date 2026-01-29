@@ -110,7 +110,7 @@ This project served as a proof of concept, with plans to further develop and ref
 
 ## Data Science {#data-science}
 
-It was a pleasure to be part of Professor Emily Malcolm-White’s *Introduction to Data Science* course.
+It was a pleasure being part of Professor Emily Malcolm-White’s *Introduction to Data Science* course.
 
 Before the semester began, my motivation for enrolling was simple: the world has accumulated an immense amount of data, and there is a growing need for people who can work meaningfully with it. Over the semester, I learned how to analyze, organize, and interpret data; web-scrape datasets; and use R and RStudio to communicate insights effectively.
 
