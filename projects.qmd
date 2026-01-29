@@ -105,6 +105,8 @@ One limitation of the system is that microwave sensors respond to all motion, in
 
 This project served as a proof of concept, with plans to further develop and refine it in Spring 2026.
 
+[View a report made on this project](https://flexarea.github.io/#authors-esdras-ntuyenabo-ines-ineza-robsan-dinka)
+
 [📁 View the Project Demo here](https://drive.google.com/file/d/1Xn9pw0aXVl3hj0-awZxdRkob2oVAlvP9/view?usp=share_link){.btn .btn-outline-primary target="_blank"}
 ---
 
