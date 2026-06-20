@@ -56,12 +56,12 @@ const MONTHS_RW = [
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 14 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.35, ease: "easeOut", delay },
+  transition: { duration: 0.35, ease: "easeOut" as const, delay },
 });
 
 const tileVariant = {
   hidden: { opacity: 0, y: 16 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" as const } },
 };
 
 export default function Home() {
@@ -75,7 +75,7 @@ export default function Home() {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
+      transition={{ duration: 0.5, ease: "easeOut" as const }}
       className="min-h-screen font-body pb-20 md:pb-0"
     >
       <Navbar />
@@ -144,7 +144,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.35, ease: "easeOut" }}
+            transition={{ duration: 0.35, ease: "easeOut" as const }}
             className="font-heading text-3xl font-semibold text-siyoni-brown text-center mb-10"
           >
             Hitamo uko usenga
@@ -188,7 +188,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
+            transition={{ duration: 0.4, ease: "easeOut" as const }}
             className="bg-siyoni-card border border-siyoni-border rounded-card shadow-card p-6 md:p-8"
           >
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
