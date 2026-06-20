@@ -3,25 +3,30 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --siyoni-cream: #F7F3EE;
+  --siyoni-card: #FDFAF6;
+  --siyoni-brown: #1C1008;
+  --siyoni-mid: #5C3D1E;
+  --siyoni-ochre: #C4882A;
+  --siyoni-border: #E8E0D5;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--siyoni-cream);
+  color: var(--siyoni-brown);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* Prayer text: larger line-height for readability during prayer */
+  .prayer-text {
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.9;
   }
 }
