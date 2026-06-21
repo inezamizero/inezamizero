@@ -84,18 +84,11 @@ export async function GET() {
 
     const data = await res.json();
 
-    const titles = (data.items ?? []).map(
-      (item: { snippet: { title: string } }) => item.snippet.title
-    );
-
     const video = findMassVideo(data.items ?? [], new Date());
 
-    // DEBUG: return titles so we can see what YouTube found
-    // Remove the _debug field once everything is working
     return NextResponse.json({
       videoId: video?.videoId ?? null,
       title: video?.title ?? null,
-      _debug: { count: titles.length, titles, searchQuery, dateStr: formatDate(new Date()) },
     });
   } catch (err) {
     console.error("pacistv route error:", err);
