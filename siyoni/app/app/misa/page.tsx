@@ -130,14 +130,38 @@ export default function MisaPage() {
   const season = getLiturgicalSeason(today);
   const dateLabel = formatDateRw(today);
 
-  // Video state: loading → found (videoId) | not-yet (uploaded later today) | error
+  // Video state: undefined = loading, null = not found, string = video ID
   const [videoId, setVideoId] = useState<string | null | undefined>(undefined);
 
+  // Saint state: undefined = loading, null = no specific saint today, string = name
+  const [saintName, setSaintName] = useState<string | null | undefined>(undefined);
+
   useEffect(() => {
+    // Fetch today's Pacis TV morning mass
     fetch("/api/pacistv")
       .then((r) => r.json())
       .then((data) => setVideoId(data.videoId ?? null))
       .catch(() => setVideoId(null));
+
+    // Fetch today's saint from the free Catholic calendar API (no key needed)
+    fetch("https://calapi.inadiutorium.cz/api/v0/en/calendars/default/today")
+      .then((r) => r.json())
+      .then((data) => {
+        // celebrations is sorted by rank — pick the first named feast/memorial
+        const celebration = (data.celebrations ?? []).find(
+          (c: { rank: string }) => c.rank !== "feria"
+        );
+        if (!celebration) { setSaintName(null); return; }
+
+        // Translate "Saint/Saints" → "Mutagatifu", "Blessed" → "Ukundwa"
+        const name = celebration.title
+          .replace(/^Saints?\s+/i, "Mutagatifu ")
+          .replace(/^Blessed\s+/i, "Ukundwa ")
+          .replace(/^Our Lady/i, "Bikira Mariya");
+
+        setSaintName(name);
+      })
+      .catch(() => setSaintName(null));
   }, []);
 
   return (
@@ -168,19 +192,28 @@ export default function MisaPage() {
         >
           <p className="font-body text-sm text-siyoni-mid mb-1">{dateLabel}</p>
 
-          <div className="flex items-center gap-3 mb-6 flex-wrap">
-            <h1 className="font-heading text-4xl font-bold text-siyoni-brown">
-              Misa y'Umunsi
-            </h1>
+          <h1 className="font-heading text-4xl font-bold text-siyoni-brown mb-3">
+            Misa y'Umunsi
+          </h1>
+
+          {/* Liturgical season — shown prominently below the title */}
+          <div
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-card mb-6"
+            style={{ backgroundColor: season.badgeBg }}
+          >
+            <div
+              className="w-2 h-2 rounded-full flex-shrink-0"
+              style={{ backgroundColor: season.accent }}
+            />
             <span
-              className="inline-block font-body text-xs font-medium px-3 py-1 rounded-full"
-              style={{ backgroundColor: season.badgeBg, color: season.badgeText }}
+              className="font-body text-sm font-medium"
+              style={{ color: season.accent }}
             >
               {season.nameRw}
             </span>
           </div>
 
-          {/* Saint of the day */}
+          {/* Saint of the day — fetched automatically from Catholic calendar API */}
           <div className="bg-siyoni-card border border-siyoni-border rounded-card shadow-card p-5">
             <p
               className="font-body text-xs font-medium tracking-widest uppercase mb-2"
@@ -188,28 +221,41 @@ export default function MisaPage() {
             >
               Umutagatifu w'uyu munsi
             </p>
-            <p className="font-heading text-xl font-semibold text-siyoni-brown mb-1">
-              [PLACEHOLDER — Izina ry'umutagatifu]
-            </p>
-            <p className="font-body text-sm text-siyoni-mid">
-              [PLACEHOLDER — Amateka make y'umutagatifu w'uyu munsi]
-            </p>
+
+            {saintName === undefined && (
+              <p className="font-body text-sm text-siyoni-mid">Gushakisha...</p>
+            )}
+            {saintName === null && (
+              <p className="font-body text-sm text-siyoni-mid">
+                Nta mutagatifu wihariye ubonetse uyu munsi.
+              </p>
+            )}
+            {saintName && (
+              <>
+                <p className="font-heading text-xl font-semibold text-siyoni-brown mb-1">
+                  {saintName}
+                </p>
+                <p className="font-body text-sm text-siyoni-mid">
+                  [PLACEHOLDER — Amateka make y'uyu mutagatifu mu Kinyarwanda azashyirwaho vuba]
+                </p>
+              </>
+            )}
           </div>
         </motion.div>
 
-        {/* ── Section 2: Pacis TV ──────────────────────────────────────────── */}
+        {/* ── Section 2: Pacis TV — breaks out of narrow container to fill width */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.35, ease: "easeOut" as const }}
-          className="mb-10"
+          className="mb-10 -mx-6 md:mx-0"
         >
-          <h2 className="font-heading text-2xl font-semibold text-siyoni-brown mb-4">
+          <h2 className="font-heading text-2xl font-semibold text-siyoni-brown mb-4 px-6 md:px-0">
             Misa kuri Pacis TV
           </h2>
 
-          <div className="bg-siyoni-card border border-siyoni-border rounded-card shadow-card overflow-hidden">
+          <div className="bg-siyoni-card border-y md:border border-siyoni-border md:rounded-card shadow-card overflow-hidden">
             {videoId === undefined && (
               // Loading state
               <div className="flex items-center justify-center h-48">
