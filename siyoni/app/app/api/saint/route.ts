@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { getSaintOfDay } from "@/lib/saints";
 
+export const dynamic = "force-dynamic"; // always run fresh — saint changes every day
+
 // Returns today's saint from the built-in static calendar.
 // No external API needed — works offline and never goes down.
 
