@@ -27,16 +27,11 @@ function formatDateRw(date: Date): string {
 // ── Liturgical season calculator ──────────────────────────────────────────────
 
 function getEaster(year: number): Date {
-  const a = year % 19;
-  const b = Math.floor(year / 100);
-  const c = year % 100;
-  const d = Math.floor(b / 4);
-  const e = b % 4;
-  const f = Math.floor((b + 8) / 25);
+  const a = year % 19, b = Math.floor(year / 100), c = year % 100;
+  const d = Math.floor(b / 4), e = b % 4, f = Math.floor((b + 8) / 25);
   const g = Math.floor((b - f + 1) / 3);
   const h = (19 * a + b - d - g + 15) % 30;
-  const i = Math.floor(c / 4);
-  const k = c % 4;
+  const i = Math.floor(c / 4), k = c % 4;
   const l = (32 + 2 * e + 2 * i - h - k) % 7;
   const m = Math.floor((a + 11 * h + 22 * l) / 451);
   const month = Math.floor((h + l - 7 * m + 114) / 31);
@@ -54,26 +49,27 @@ function getAdventStart(year: number): Date {
   const christmas = new Date(year, 11, 25);
   const dow = christmas.getDay();
   const daysBack = dow === 0 ? 7 : dow;
-  const fourthSunday = new Date(year, 11, 25 - daysBack);
-  return addDays(fourthSunday, -21);
+  return addDays(new Date(year, 11, 25 - daysBack), -21);
 }
 
 type Season = {
   nameRw: string;
-  accent: string;
-  badgeBg: string;
+  accent: string;       // full season color — for badges and small accents
+  pageBg: string;       // very light tint — used as the page background
+  topLine: string;      // Tailwind class for the 2px line
   badgeText: string;
-  topLine: string;
 };
 
+// pageBg is a very desaturated, light tint of the season color.
+// Visible enough to notice, not bold enough to fight the text.
 const SEASONS: Record<string, Season> = {
-  ordinary:  { nameRw: "Igihe gisanzwe", accent: "#2D6A4F", badgeBg: "#EBF4EF", badgeText: "#2D6A4F", topLine: "bg-[#2D6A4F]" },
-  advent:    { nameRw: "Agatasi",         accent: "#4A235A", badgeBg: "#F0EBF4", badgeText: "#4A235A", topLine: "bg-[#4A235A]" },
-  christmas: { nameRw: "Noheli",          accent: "#8B6914", badgeBg: "#F8F2E2", badgeText: "#8B6914", topLine: "bg-[#C9A235]" },
-  lent:      { nameRw: "Igisibo",         accent: "#3B1F5E", badgeBg: "#EEE9F5", badgeText: "#3B1F5E", topLine: "bg-[#3B1F5E]" },
-  holyweek:  { nameRw: "Icyumweru Cyera", accent: "#7A0C2E", badgeBg: "#F5E8EC", badgeText: "#7A0C2E", topLine: "bg-[#7A0C2E]" },
-  easter:    { nameRw: "Pasika",          accent: "#8B6914", badgeBg: "#F8F2E2", badgeText: "#8B6914", topLine: "bg-[#D4A017]" },
-  pentecost: { nameRw: "Ipentekosite",    accent: "#8B1A1A", badgeBg: "#F5EBEB", badgeText: "#8B1A1A", topLine: "bg-[#B22222]" },
+  ordinary:  { nameRw: "Igihe gisanzwe", accent: "#2D6A4F", pageBg: "#EDF5F1", topLine: "bg-[#2D6A4F]", badgeText: "#2D6A4F" },
+  advent:    { nameRw: "Agatasi",         accent: "#4A235A", pageBg: "#F2EDF6", topLine: "bg-[#4A235A]", badgeText: "#4A235A" },
+  christmas: { nameRw: "Noheli",          accent: "#8B6914", pageBg: "#F9F4E7", topLine: "bg-[#C9A235]", badgeText: "#8B6914" },
+  lent:      { nameRw: "Igisibo",         accent: "#3B1F5E", pageBg: "#F0EBF6", topLine: "bg-[#3B1F5E]", badgeText: "#3B1F5E" },
+  holyweek:  { nameRw: "Icyumweru Cyera", accent: "#7A0C2E", pageBg: "#F6EAEE", topLine: "bg-[#7A0C2E]", badgeText: "#7A0C2E" },
+  easter:    { nameRw: "Pasika",          accent: "#8B6914", pageBg: "#F9F4E7", topLine: "bg-[#D4A017]", badgeText: "#8B6914" },
+  pentecost: { nameRw: "Ipentekosite",    accent: "#8B1A1A", pageBg: "#F6EDEC", topLine: "bg-[#B22222]", badgeText: "#8B1A1A" },
 };
 
 function getLiturgicalSeason(date: Date): Season {
@@ -98,263 +94,190 @@ function getLiturgicalSeason(date: Date): Season {
   return SEASONS.ordinary;
 }
 
-// ── Reading placeholders ──────────────────────────────────────────────────────
+// ── Readings placeholders ─────────────────────────────────────────────────────
 
 const READINGS = [
-  {
-    label: "Isomo rya mbere",
-    ref: "[PLACEHOLDER — e.g. Iz 6:1-8]",
-    text: "[PLACEHOLDER — shyiramo hano isomo rya mbere ry'uyu munsi]",
-  },
-  {
-    label: "Zaburi yo gusubiza",
-    ref: "[PLACEHOLDER — e.g. Zb 138]",
-    text: "[PLACEHOLDER — shyiramo hano zaburi yo gusubiza]",
-  },
-  {
-    label: "Isomo rya kabiri",
-    ref: "[PLACEHOLDER — e.g. Rm 5:1-5]",
-    text: "[PLACEHOLDER — shyiramo hano isomo rya kabiri (Ku cyumweru gusa)]",
-  },
-  {
-    label: "Ubutumwa bwiza",
-    ref: "[PLACEHOLDER — e.g. Lk 3:15-22]",
-    text: "[PLACEHOLDER — shyiramo hano ubutumwa bwiza bw'uyu munsi]",
-  },
+  { label: "Isomo rya mbere",      ref: "[PLACEHOLDER — e.g. Iz 6:1-8]",  text: "[PLACEHOLDER — isomo rya mbere ry'uyu munsi]" },
+  { label: "Zaburi yo gusubiza",   ref: "[PLACEHOLDER — e.g. Zb 138]",    text: "[PLACEHOLDER — zaburi yo gusubiza]" },
+  { label: "Isomo rya kabiri",     ref: "[PLACEHOLDER — e.g. Rm 5:1-5]",  text: "[PLACEHOLDER — isomo rya kabiri (Ku cyumweru gusa)]" },
+  { label: "Ubutumwa bwiza",       ref: "[PLACEHOLDER — e.g. Lk 3:15-22]",text: "[PLACEHOLDER — ubutumwa bwiza bw'uyu munsi]" },
 ];
 
-// ── Component ─────────────────────────────────────────────────────────────────
+// ── Page ──────────────────────────────────────────────────────────────────────
 
 export default function MisaPage() {
   const today = new Date();
   const season = getLiturgicalSeason(today);
   const dateLabel = formatDateRw(today);
 
-  // Video state: undefined = loading, null = not found, string = video ID
   const [videoId, setVideoId] = useState<string | null | undefined>(undefined);
-
-  // Saint state: undefined = loading, null = no specific saint today, string = name
   const [saintName, setSaintName] = useState<string | null | undefined>(undefined);
 
   useEffect(() => {
-    // Fetch today's Pacis TV morning mass
+    // Pacis TV morning mass
     fetch("/api/pacistv")
       .then((r) => r.json())
       .then((data) => setVideoId(data.videoId ?? null))
       .catch(() => setVideoId(null));
 
-    // Fetch today's saint from the free Catholic calendar API (no key needed)
+    // Saint of the day — free Catholic calendar API, no key needed
     fetch("https://calapi.inadiutorium.cz/api/v0/en/calendars/default/today")
       .then((r) => r.json())
       .then((data) => {
-        // celebrations is sorted by rank — pick the first named feast/memorial
         const celebration = (data.celebrations ?? []).find(
           (c: { rank: string }) => c.rank !== "feria"
         );
         if (!celebration) { setSaintName(null); return; }
-
-        // Translate "Saint/Saints" → "Mutagatifu", "Blessed" → "Ukundwa"
         const name = celebration.title
           .replace(/^Saints?\s+/i, "Mutagatifu ")
           .replace(/^Blessed\s+/i, "Ukundwa ")
           .replace(/^Our Lady/i, "Bikira Mariya");
-
         setSaintName(name);
       })
       .catch(() => setSaintName(null));
   }, []);
 
   return (
-    <div className="min-h-screen bg-siyoni-cream font-body pb-20 md:pb-0">
+    // Seasonal background — very light tint, changes each liturgical season
+    <div className="min-h-screen font-body pb-20 md:pb-0" style={{ backgroundColor: season.pageBg }}>
       <Navbar />
 
-      {/* Thin seasonal color line — the only place the full season color appears */}
-      <div className={`h-1 w-full ${season.topLine} opacity-60`} />
+      {/* Thin season color line at the very top */}
+      <div className={`h-1 w-full ${season.topLine} opacity-70`} />
 
       <div className="h-10 overflow-hidden">
         <ImigongoPattern className="w-full h-full" />
       </div>
 
-      <main className="max-w-2xl mx-auto px-6 py-10">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-1 text-siyoni-mid text-sm mb-8 hover:text-siyoni-brown transition-colors"
-        >
-          ← Subira ahabanza
-        </Link>
+      {/* ── VIDEO FIRST — large, fills most of the width ─────────────────── */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, ease: "easeOut" as const }}
+        className="w-full max-w-5xl mx-auto px-4 pt-6 pb-4"
+      >
+        <div className="rounded-card overflow-hidden shadow-card-hover border border-siyoni-border">
+          {videoId === undefined && (
+            <div className="flex items-center justify-center bg-siyoni-card" style={{ aspectRatio: "16/9" }}>
+              <p className="font-body text-sm text-siyoni-mid">Gushakisha amashusho...</p>
+            </div>
+          )}
 
-        {/* ── Section 1: Date, season, saint ──────────────────────────────── */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.35, ease: "easeOut" as const }}
-          className="mb-10"
-        >
-          <p className="font-body text-sm text-siyoni-mid mb-1">{dateLabel}</p>
+          {videoId === null && (
+            <div className="flex flex-col items-center justify-center gap-3 bg-siyoni-card px-6 text-center" style={{ aspectRatio: "16/9" }}>
+              <p className="font-body text-sm text-siyoni-mid">
+                Misa y'uyu munsi ntiyashyizweho kuri YouTube. Subira nyuma cyangwa fungura channel ya Pacis TV.
+              </p>
+              <a
+                href="https://www.youtube.com/@PacisTv"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 font-body text-sm font-medium text-siyoni-brown border border-siyoni-border rounded-card px-4 py-2 hover:border-siyoni-brown transition-colors"
+              >
+                Reba Pacis TV kuri YouTube
+                <ExternalLink size={13} />
+              </a>
+            </div>
+          )}
 
-          <h1 className="font-heading text-4xl font-bold text-siyoni-brown mb-3">
+          {videoId && (
+            <>
+              <div className="relative w-full" style={{ paddingTop: "56.25%" }}>
+                <iframe
+                  className="absolute inset-0 w-full h-full"
+                  src={`https://www.youtube-nocookie.com/embed/${videoId}`}
+                  title="Misa y'Umunsi — Pacis TV"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+              <div className="bg-siyoni-card px-4 py-3 flex items-center justify-between">
+                <p className="font-body text-xs text-siyoni-mid">Pacis TV — Regina Pacis Remera</p>
+                <a
+                  href={`https://www.youtube.com/watch?v=${videoId}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 font-body text-xs text-siyoni-mid hover:text-siyoni-brown transition-colors"
+                >
+                  Fungura kuri YouTube <ExternalLink size={11} />
+                </a>
+              </div>
+            </>
+          )}
+        </div>
+      </motion.div>
+
+      {/* ── COMPACT INFO BAR — date, season, saint in one line ───────────── */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2, duration: 0.35, ease: "easeOut" as const }}
+        className="max-w-5xl mx-auto px-4 pb-8"
+      >
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+          {/* Page title */}
+          <h1 className="font-heading text-2xl font-bold text-siyoni-brown">
             Misa y'Umunsi
           </h1>
 
-          {/* Liturgical season — shown prominently below the title */}
-          <div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-card mb-6"
-            style={{ backgroundColor: season.badgeBg }}
+          {/* Season badge */}
+          <span
+            className="font-body text-xs font-medium px-2.5 py-1 rounded-full"
+            style={{ backgroundColor: season.accent + "18", color: season.accent }}
           >
-            <div
-              className="w-2 h-2 rounded-full flex-shrink-0"
-              style={{ backgroundColor: season.accent }}
-            />
-            <span
-              className="font-body text-sm font-medium"
-              style={{ color: season.accent }}
-            >
-              {season.nameRw}
-            </span>
-          </div>
+            {season.nameRw}
+          </span>
 
-          {/* Saint of the day — fetched automatically from Catholic calendar API */}
-          <div className="bg-siyoni-card border border-siyoni-border rounded-card shadow-card p-5">
-            <p
-              className="font-body text-xs font-medium tracking-widest uppercase mb-2"
-              style={{ color: season.accent }}
-            >
-              Umutagatifu w'uyu munsi
-            </p>
+          {/* Separator */}
+          <span className="text-siyoni-border hidden sm:inline">·</span>
 
-            {saintName === undefined && (
-              <p className="font-body text-sm text-siyoni-mid">Gushakisha...</p>
-            )}
-            {saintName === null && (
-              <p className="font-body text-sm text-siyoni-mid">
-                Nta mutagatifu wihariye ubonetse uyu munsi.
-              </p>
-            )}
-            {saintName && (
-              <>
-                <p className="font-heading text-xl font-semibold text-siyoni-brown mb-1">
-                  {saintName}
-                </p>
-                <p className="font-body text-sm text-siyoni-mid">
-                  [PLACEHOLDER — Amateka make y'uyu mutagatifu mu Kinyarwanda azashyirwaho vuba]
-                </p>
-              </>
-            )}
-          </div>
-        </motion.div>
+          {/* Date */}
+          <span className="font-body text-sm text-siyoni-mid">{dateLabel}</span>
 
-        {/* ── Section 2: Pacis TV — breaks out of narrow container to fill width */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.35, ease: "easeOut" as const }}
-          className="mb-10 -mx-6 md:mx-0"
-        >
-          <h2 className="font-heading text-2xl font-semibold text-siyoni-brown mb-4 px-6 md:px-0">
-            Misa kuri Pacis TV
+          {/* Saint — compact, same line */}
+          {saintName && (
+            <>
+              <span className="text-siyoni-border hidden sm:inline">·</span>
+              <span className="font-body text-sm text-siyoni-mid">{saintName}</span>
+            </>
+          )}
+        </div>
+      </motion.div>
+
+      {/* ── READINGS ─────────────────────────────────────────────────────── */}
+      <div className="max-w-5xl mx-auto px-4 pb-12">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="font-heading text-2xl font-semibold text-siyoni-brown">
+            Amasomo y'uyu munsi
           </h2>
-
-          <div className="bg-siyoni-card border-y md:border border-siyoni-border md:rounded-card shadow-card overflow-hidden">
-            {videoId === undefined && (
-              // Loading state
-              <div className="flex items-center justify-center h-48">
-                <p className="font-body text-sm text-siyoni-mid">Gushakisha amashusho...</p>
-              </div>
-            )}
-
-            {videoId === null && (
-              // Not found — either not uploaded yet or no match
-              <div className="flex flex-col items-center justify-center gap-3 h-48 px-6 text-center">
-                <p className="font-body text-sm text-siyoni-mid">
-                  Misa y'uyu munsi ntiyashyizweho kuri YouTube. Subira nyuma cyangwa reba channel ya Pacis TV.
+          <span className="font-body text-xs text-siyoni-mid border border-siyoni-border px-3 py-1 rounded-full">
+            Phase 3
+          </span>
+        </div>
+        <p className="font-body text-sm text-siyoni-mid mb-6">
+          Amasomo azabonahana iyo twunganye API y'Itorero Gatorika.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {READINGS.map((reading, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.07, duration: 0.35, ease: "easeOut" as const }}
+              className="bg-white/60 border border-siyoni-border rounded-card p-5"
+            >
+              <div className="flex items-baseline justify-between mb-2">
+                <p className="font-body text-xs font-medium tracking-widest uppercase" style={{ color: season.accent }}>
+                  {reading.label}
                 </p>
-                <a
-                  href="https://www.youtube.com/@PacisTv"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 font-body text-sm font-medium text-siyoni-brown border border-siyoni-border rounded-card px-4 py-2 hover:border-siyoni-brown transition-colors"
-                >
-                  Reba Pacis TV kuri YouTube
-                  <ExternalLink size={13} />
-                </a>
+                <p className="font-body text-xs text-siyoni-mid ml-3">{reading.ref}</p>
               </div>
-            )}
-
-            {videoId && (
-              // Video found — embed using youtube-nocookie.com for privacy
-              <>
-                <div className="relative w-full" style={{ paddingTop: "56.25%" }}>
-                  <iframe
-                    className="absolute inset-0 w-full h-full"
-                    src={`https://www.youtube-nocookie.com/embed/${videoId}`}
-                    title="Misa y'Umunsi — Pacis TV"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                </div>
-                <div className="p-4 flex items-center justify-between">
-                  <p className="font-body text-sm text-siyoni-mid">Pacis TV — Regina Pacis Remera</p>
-                  <a
-                    href={`https://www.youtube.com/watch?v=${videoId}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 font-body text-sm font-medium text-siyoni-brown hover:text-siyoni-mid transition-colors"
-                  >
-                    Fungura kuri YouTube
-                    <ExternalLink size={13} />
-                  </a>
-                </div>
-              </>
-            )}
-          </div>
-        </motion.div>
-
-        {/* ── Section 3: Readings ──────────────────────────────────────────── */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.35, ease: "easeOut" as const }}
-        >
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="font-heading text-2xl font-semibold text-siyoni-brown">
-              Amasomo y'uyu munsi
-            </h2>
-            <span className="font-body text-xs text-siyoni-mid bg-siyoni-border/50 px-3 py-1 rounded-full">
-              Phase 3
-            </span>
-          </div>
-
-          <p className="font-body text-sm text-siyoni-mid mb-6">
-            Amasomo azabonahana iyo twunganye API y'Itorero Gatorika.
-          </p>
-
-          <div className="flex flex-col gap-4">
-            {READINGS.map((reading, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.07, duration: 0.35, ease: "easeOut" as const }}
-                className="bg-siyoni-card border border-siyoni-border rounded-card shadow-card p-5"
-              >
-                <div className="flex items-baseline justify-between mb-3">
-                  <p
-                    className="font-body text-xs font-medium tracking-widest uppercase"
-                    style={{ color: season.accent }}
-                  >
-                    {reading.label}
-                  </p>
-                  <p className="font-body text-xs text-siyoni-mid ml-4">{reading.ref}</p>
-                </div>
-                <p className="prayer-text text-siyoni-brown">{reading.text}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </main>
+              <p className="prayer-text text-siyoni-brown text-sm">{reading.text}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
