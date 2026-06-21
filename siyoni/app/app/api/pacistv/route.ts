@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic"; // never cache this route
+
 // Pacis TV YouTube channel ID
 const CHANNEL_ID = "UCkKVUyOqvKk1W-QadPy_WHQ";
 
@@ -81,19 +83,19 @@ export async function GET() {
 
     const data = await res.json();
 
-    // Temporary debug log — shows in Vercel function logs
-    console.log("YouTube returned", data.items?.length ?? 0, "videos");
-    data.items?.forEach((item: { snippet: { title: string } }) =>
-      console.log(" →", item.snippet.title)
+    const titles = (data.items ?? []).map(
+      (item: { snippet: { title: string } }) => item.snippet.title
     );
 
     const video = findMassVideo(data.items ?? [], new Date());
 
-    if (!video) {
-      return NextResponse.json({ videoId: null, title: null });
-    }
-
-    return NextResponse.json({ videoId: video.videoId, title: video.title });
+    // DEBUG: return titles so we can see what YouTube found
+    // Remove the _debug field once everything is working
+    return NextResponse.json({
+      videoId: video?.videoId ?? null,
+      title: video?.title ?? null,
+      _debug: { count: titles.length, titles, searchQuery, dateStr: formatDate(new Date()) },
+    });
   } catch (err) {
     console.error("pacistv route error:", err);
     return NextResponse.json({ videoId: null, title: null });
