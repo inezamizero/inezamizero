@@ -120,20 +120,10 @@ export default function MisaPage() {
       .then((data) => setVideoId(data.videoId ?? null))
       .catch(() => setVideoId(null));
 
-    // Saint of the day — free Catholic calendar API, no key needed
-    fetch("https://calapi.inadiutorium.cz/api/v0/en/calendars/default/today")
+    // Saint of the day — fetched via our own server route to avoid CORS
+    fetch("/api/saint")
       .then((r) => r.json())
-      .then((data) => {
-        const celebration = (data.celebrations ?? []).find(
-          (c: { rank: string }) => c.rank !== "feria"
-        );
-        if (!celebration) { setSaintName(null); return; }
-        const name = celebration.title
-          .replace(/^Saints?\s+/i, "Mutagatifu ")
-          .replace(/^Blessed\s+/i, "Ukundwa ")
-          .replace(/^Our Lady/i, "Bikira Mariya");
-        setSaintName(name);
-      })
+      .then((data) => setSaintName(data.name ?? null))
       .catch(() => setSaintName(null));
   }, []);
 
@@ -166,15 +156,15 @@ export default function MisaPage() {
 
         <span className="text-siyoni-mid/40 text-xs">·</span>
 
-        {/* Date */}
-        <span className="font-body text-sm text-siyoni-brown">{dateLabel}</span>
+        {/* Date — same Cormorant Garamond heading font as the title */}
+        <span className="font-heading text-2xl font-semibold text-siyoni-brown">{dateLabel}</span>
 
-        {/* Saint — appears once loaded */}
+        {/* Saint — appears once loaded, same heading style */}
         {saintName && (
           <>
-            <span className="text-siyoni-mid/40 text-xs">·</span>
+            <span className="text-siyoni-mid/40 text-sm mx-1">·</span>
             <span
-              className="font-body text-sm font-medium"
+              className="font-heading text-xl font-semibold"
               style={{ color: season.accent }}
             >
               {saintName}
