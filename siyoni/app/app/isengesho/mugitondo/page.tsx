@@ -6,39 +6,63 @@ import Navbar from "@/components/Navbar";
 import ImigongoPattern from "@/components/ImigongoPattern";
 
 // ── Prayers ───────────────────────────────────────────────────────────────────
-// Replace each [PLACEHOLDER] with the actual Kinyarwanda prayer text.
-// The key (e.g. ikimenyetso) is for code reference only — not shown to users.
+// Replace each [PLACEHOLDER] with the actual Kinyarwanda text.
+// Structure follows the Liturgy of the Hours — Lauds (Morning Prayer).
 
 const PRAYERS = {
-  // Sign of the Cross
-  ikimenyetso: `[PLACEHOLDER — Ikimenyetso ky'Umusalaba]`,
 
-  // Morning Offering
-  kwiyegurira: `[PLACEHOLDER — Isengesho ryo kwiyegurira igitondo]`,
+  // ── 1. Intangiriro ────────────────────────────────────────────────────────
+  // Opening verse — same every day
+  intangiriro: `[PLACEHOLDER — Intangiriro / Opening verse
+e.g. "Mwami fungura iminwa yanjye, ngo akanwa kanjye gashime ubuhizi bwawe."]`,
 
+  // ── 2. Indirimbo ──────────────────────────────────────────────────────────
+  // Morning hymn
+  indirimbo: `[PLACEHOLDER — Indirimbo yo mu gitondo (Morning Hymn)]`,
+
+  // ── 3. Igisingizo ─────────────────────────────────────────────────────────
+  // Glory Be / Antiphon before psalmody
+  igisingizo: `[PLACEHOLDER — Igisingizo (Glory Be)
+"Ikuzo Nyene Data, na Mwana, na Roho Mutagatifu..."]`,
+
+  // ── 4. Zaburi — weekday ───────────────────────────────────────────────────
+  // Psalm(s) for weekday Lauds — these rotate across the 4-week psalter.
+  // For now one placeholder; you can add the specific psalms per week later.
+  zaburiWeekday: `[PLACEHOLDER — Zaburi zo mu gitondo (Iminsi isanzwe)
+Shyiramo hano zaburi zikoreshwa mu gitondo ku minsi isanzwe.
+Zirahinduka buri cyumweru mu Igitabo cy'Isengesho — Psalter ya Ibyumweru 4.]`,
+
+  // ── 4. Zaburi — Sunday ────────────────────────────────────────────────────
+  // Psalm(s) specifically for Sunday Lauds
+  zaburiSunday: `[PLACEHOLDER — Zaburi zo mu gitondo (Ku cyumweru)
+Shyiramo hano zaburi zikoreshwa mu gitondo ku Cyumweru.
+Zirashobora kuba: Zaburi 63, Magnificat, Zaburi 149, n'izindi.]`,
+
+  // ── 5. Indirimbo ya Zakariya (Benedictus) ─────────────────────────────────
+  // Canticle of Zechariah — Luke 1:68-79 — prayed every morning
+  zakariya: `[PLACEHOLDER — Indirimbo ya Zakariya (Benedictus) — Luka 1:68-79
+"Nisingizwe Uwiteka Imana ya Isirayeli, kuko yabonye abantu be akabakura..."]`,
+
+  // ── 6. Amasengesho yo gusaba ──────────────────────────────────────────────
+  // Morning intercessions — petitions for the day
+  gusaba: `[PLACEHOLDER — Amasengesho yo gusaba (Morning Intercessions)
+Petitions offered in the morning for the day ahead.
+Each petition ends with the community response, e.g. "Mwami, utwe inema."]`,
+
+  // ── 7. Dawe uri mu ijuru ──────────────────────────────────────────────────
   // Our Father
-  babaWacu: `[PLACEHOLDER — Baba Wacu]`,
+  dawe: `[PLACEHOLDER — Dawe Uri mu Ijuru (Our Father)]`,
 
-  // Hail Mary
-  ndakwibuka: `[PLACEHOLDER — Ndakwibuka Mariya]`,
+  // ── 8. Isengesho risoza ───────────────────────────────────────────────────
+  // Closing collect/prayer — changes with the liturgical calendar
+  risoza: `[PLACEHOLDER — Isengesho risoza (Closing Collect)
+This prayer changes with the liturgical season and feast day.
+Shyiramo hano isengesho risoza ry'uyu munsi.]`,
 
-  // Glory Be
-  igisingizo: `[PLACEHOLDER — Igisingizo]`,
-
-  // Act of Faith
-  kwemera: `[PLACEHOLDER — Isengesho cyo kwemera (Act of Faith)]`,
-
-  // Act of Hope
-  kwizigama: `[PLACEHOLDER — Isengesho cyo kwizigama (Act of Hope)]`,
-
-  // Act of Charity
-  gukunda: `[PLACEHOLDER — Isengesho cyo gukunda (Act of Charity)]`,
-
-  // Act of Contrition
-  kunenga: `[PLACEHOLDER — Isengesho cyo kunenga ibyaha (Act of Contrition)]`,
-
-  // Morning Prayer (general)
-  igitondo: `[PLACEHOLDER — Isengesho ryo mu gitondo]`,
+  // ── 9. Umusozo ────────────────────────────────────────────────────────────
+  // Dismissal blessing
+  umusozo: `[PLACEHOLDER — Umusozo (Dismissal)
+e.g. "Nimugire amahoro. — Amen."]`,
 };
 
 // ── Sub-components ────────────────────────────────────────────────────────────
@@ -58,9 +82,7 @@ function SectionHeader({ title }: { title: string }) {
 function PrayerBlock({ name, text }: { name: string; text: string }) {
   return (
     <div className="mb-6">
-      <h3 className="font-heading text-lg font-semibold text-siyoni-brown mb-2">
-        {name}
-      </h3>
+      <h3 className="font-heading text-lg font-semibold text-siyoni-brown mb-2">{name}</h3>
       <div className="bg-siyoni-card border border-siyoni-border rounded-card p-5 shadow-card">
         <p className="prayer-text text-siyoni-brown">{text}</p>
         {/* Audio player — uncomment when audio files are ready */}
@@ -73,6 +95,8 @@ function PrayerBlock({ name, text }: { name: string; text: string }) {
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 export default function MugitondoPage() {
+  const isSunday = new Date().getDay() === 0;
+
   return (
     <div className="min-h-screen bg-siyoni-cream font-body pb-20 md:pb-0">
       <Navbar />
@@ -93,39 +117,53 @@ export default function MugitondoPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.35, ease: "easeOut" as const }}
         >
-          <h1 className="font-heading text-4xl font-bold text-siyoni-brown mb-2">
+          <h1 className="font-heading text-4xl font-bold text-siyoni-brown mb-1">
             Amasengesho ya Mugitondo
           </h1>
           <p className="font-body text-sm text-siyoni-mid mb-10">
-            Tangira umunsi wawe uherekejwe n'Imana.
+            {isSunday ? "Ku Cyumweru" : "Iminsi isanzwe"}
           </p>
 
-          {/* ── Opening ───────────────────────────────────────────────────── */}
-          <SectionHeader title="Gutangira" />
-          <PrayerBlock name="Ikimenyetso ky'Umusalaba" text={PRAYERS.ikimenyetso} />
+          {/* 1. Intangiriro */}
+          <SectionHeader title="1. Intangiriro" />
+          <PrayerBlock name="Intangiriro" text={PRAYERS.intangiriro} />
 
-          {/* ── Offerings ─────────────────────────────────────────────────── */}
-          <SectionHeader title="Kwiyegurira" />
-          <PrayerBlock name="Isengesho ryo Kwiyegurira Igitondo" text={PRAYERS.kwiyegurira} />
+          {/* 2. Indirimbo */}
+          <SectionHeader title="2. Indirimbo" />
+          <PrayerBlock name="Indirimbo yo mu Gitondo" text={PRAYERS.indirimbo} />
 
-          {/* ── Core prayers ──────────────────────────────────────────────── */}
-          <SectionHeader title="Amasengesho Asanzwe" />
-          <PrayerBlock name="Baba Wacu" text={PRAYERS.babaWacu} />
-          <PrayerBlock name="Ndakwibuka Mariya" text={PRAYERS.ndakwibuka} />
+          {/* 3. Igisingizo */}
+          <SectionHeader title="3. Igisingizo" />
           <PrayerBlock name="Igisingizo" text={PRAYERS.igisingizo} />
 
-          {/* ── Acts ──────────────────────────────────────────────────────── */}
-          <SectionHeader title="Ivugurura" />
-          <PrayerBlock name="Kwemera" text={PRAYERS.kwemera} />
-          <PrayerBlock name="Kwizigama" text={PRAYERS.kwizigama} />
-          <PrayerBlock name="Gukunda" text={PRAYERS.gukunda} />
-          <PrayerBlock name="Kunenga Ibyaha" text={PRAYERS.kunenga} />
+          {/* 4. Zaburi — switches between Sunday and weekday */}
+          <SectionHeader title={isSunday ? "4. Zaburi — Ku Cyumweru" : "4. Zaburi — Iminsi Isanzwe"} />
+          <PrayerBlock
+            name="Zaburi"
+            text={isSunday ? PRAYERS.zaburiSunday : PRAYERS.zaburiWeekday}
+          />
 
-          {/* ── Morning prayer ────────────────────────────────────────────── */}
-          <SectionHeader title="Isengesho ryo mu Gitondo" />
-          <PrayerBlock name="Isengesho ryo mu Gitondo" text={PRAYERS.igitondo} />
+          {/* 5. Indirimbo ya Zakariya */}
+          <SectionHeader title="5. Indirimbo ya Zakariya" />
+          <PrayerBlock name="Benedictus — Luka 1:68-79" text={PRAYERS.zakariya} />
 
-          {/* Done */}
+          {/* 6. Amasengesho yo gusaba */}
+          <SectionHeader title="6. Amasengesho yo Gusaba" />
+          <PrayerBlock name="Amasengesho yo Gusaba" text={PRAYERS.gusaba} />
+
+          {/* 7. Dawe uri mu ijuru */}
+          <SectionHeader title="7. Dawe Uri mu Ijuru" />
+          <PrayerBlock name="Dawe Uri mu Ijuru" text={PRAYERS.dawe} />
+
+          {/* 8. Isengesho risoza */}
+          <SectionHeader title="8. Isengesho Risoza" />
+          <PrayerBlock name="Isengesho Risoza" text={PRAYERS.risoza} />
+
+          {/* 9. Umusozo */}
+          <SectionHeader title="9. Umusozo" />
+          <PrayerBlock name="Umusozo" text={PRAYERS.umusozo} />
+
+          {/* End */}
           <div className="mt-10 text-center">
             <div className="w-12 h-0.5 bg-siyoni-ochre mx-auto mb-4" />
             <p className="font-heading text-xl text-siyoni-brown">
