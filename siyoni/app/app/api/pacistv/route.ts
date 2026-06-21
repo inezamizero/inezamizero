@@ -46,14 +46,26 @@ export async function GET() {
   }
 
   try {
-    // Search only within Pacis TV's completed live streams for today.
-    // eventType=completed returns past live streams — exactly what the Live tab shows.
-    // Cached for 1 hour so we don't burn through the daily quota.
+    // Search Pacis TV's completed live streams for today's morning mass.
+    // We pass a search query to narrow results, plus publishedAfter = midnight today
+    // so YouTube only returns videos uploaded today.
+    const today = new Date();
+    const isSunday = today.getDay() === 0;
+    const searchQuery = isSunday
+      ? "IGITAMBO CYA MISA YA GATATU TALIKI"
+      : "IGITAMBO CYA MISA YA MUGITONDO";
+
+    // publishedAfter must be an RFC 3339 timestamp — midnight UTC today
+    const midnightUTC = new Date(today);
+    midnightUTC.setUTCHours(0, 0, 0, 0);
+
     const url = new URL("https://www.googleapis.com/youtube/v3/search");
     url.searchParams.set("part", "snippet");
     url.searchParams.set("channelId", CHANNEL_ID);
+    url.searchParams.set("q", searchQuery);
     url.searchParams.set("type", "video");
-    url.searchParams.set("eventType", "completed"); // live streams only
+    url.searchParams.set("eventType", "completed");
+    url.searchParams.set("publishedAfter", midnightUTC.toISOString());
     url.searchParams.set("order", "date");
     url.searchParams.set("maxResults", "10");
     url.searchParams.set("key", apiKey);
@@ -69,6 +81,13 @@ export async function GET() {
     }
 
     const data = await res.json();
+
+    // Temporary debug log — shows in Vercel function logs
+    console.log("YouTube returned", data.items?.length ?? 0, "videos");
+    data.items?.forEach((item: { snippet: { title: string } }) =>
+      console.log(" →", item.snippet.title)
+    );
+
     const video = findMassVideo(data.items ?? [], new Date());
 
     if (!video) {
