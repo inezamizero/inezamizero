@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import {
   BookOpen,
   CalendarDays,
+  ChevronRight,
   ExternalLink,
   Heart,
   Music,
@@ -189,44 +190,28 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, ease: "easeOut" as const }}
-            className="bg-siyoni-card border border-siyoni-border rounded-card shadow-card p-6 md:p-8"
           >
-            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+            <Link
+              href="/misa"
+              className="group flex items-center justify-between bg-siyoni-card border border-siyoni-border rounded-card shadow-card p-6 md:p-8 hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-200"
+            >
               <div>
                 <p className="font-body text-xs font-medium text-siyoni-mid tracking-[0.12em] uppercase mb-1">
                   Uyu munsi
                 </p>
-                <h2 className="font-heading text-2xl font-semibold text-siyoni-brown">
+                <h2 className="font-heading text-2xl font-semibold text-siyoni-brown mb-1">
                   Misa y&apos;Umunsi
                 </h2>
-                <p className="font-body text-sm text-siyoni-mid mt-1">{todayLabel}</p>
+                <p className="font-body text-sm text-siyoni-mid">{todayLabel}</p>
+                <p className="font-body text-sm text-siyoni-mid mt-2">
+                  Amasomo, umutagatifu w&apos;uyu munsi na Misa kuri Pacis TV
+                </p>
               </div>
-
-              <a
-                href="https://www.youtube.com/@PacisTv"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 self-start px-5 py-2.5 rounded-card bg-siyoni-brown text-siyoni-cream font-body text-sm font-medium hover:bg-siyoni-mid transition-colors duration-200 whitespace-nowrap"
-              >
-                Reba Pacis TV
-                <ExternalLink size={13} />
-              </a>
-            </div>
-
-            <div className="border border-dashed border-siyoni-border rounded-card p-6 text-center">
-              <Sun size={32} className="text-siyoni-ochre mx-auto mb-3" strokeWidth={1.5} />
-              <p className="font-heading text-lg font-semibold text-siyoni-brown mb-1">
-                Amasomo azaza vuba
-              </p>
-              <p className="font-body text-sm text-siyoni-mid">
-                Amasomo ya Misa y&apos;umunsi azabonahana iyo twunganye Supabase. Ubu reba Pacis TV
-                hejuru cyangwa ujye kuri{" "}
-                <a href="/misa" className="text-siyoni-ochre underline underline-offset-2">
-                  urupapuro rwa Misa
-                </a>
-                .
-              </p>
-            </div>
+              <ChevronRight
+                size={24}
+                className="text-siyoni-ochre flex-shrink-0 ml-6 group-hover:translate-x-1 transition-transform duration-200"
+              />
+            </Link>
           </motion.div>
         </section>
 
