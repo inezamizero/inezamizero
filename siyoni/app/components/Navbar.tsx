@@ -21,7 +21,7 @@ import {
 const sections = [
   { name: "Isengesho",          mobileLabel: "Isengesho",  href: "/isengesho", icon: BookOpen },
   { name: "Rozari n'amashapure", mobileLabel: "Rozari n'…", href: "/rozari",    icon: Heart },
-  { name: "Novena",              mobileLabel: "Novena",     href: "/novena",    icon: CalendarDays },
+  { name: "Noveni",              mobileLabel: "Noveni",     href: "/novena",    icon: CalendarDays },
   { name: "Misa",                mobileLabel: "Misa",       href: "/misa",      icon: Sun },
   { name: "Indirimbo",           mobileLabel: "Indirimbo",  href: "/indirimbo", icon: Music },
 ];
