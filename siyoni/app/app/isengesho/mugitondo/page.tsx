@@ -5,68 +5,86 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import ImigongoPattern from "@/components/ImigongoPattern";
 
-// ── Prayers ───────────────────────────────────────────────────────────────────
+// ── Liturgical helpers ────────────────────────────────────────────────────────
+
+function getEaster(year: number): Date {
+  const a = year % 19, b = Math.floor(year / 100), c = year % 100;
+  const d = Math.floor(b / 4), e = b % 4, f = Math.floor((b + 8) / 25);
+  const g = Math.floor((b - f + 1) / 3);
+  const h = (19 * a + b - d - g + 15) % 30;
+  const i = Math.floor(c / 4), k = c % 4;
+  const l = (32 + 2 * e + 2 * i - h - k) % 7;
+  const m = Math.floor((a + 11 * h + 22 * l) / 451);
+  const month = Math.floor((h + l - 7 * m + 114) / 31);
+  const day = ((h + l - 7 * m + 114) % 31) + 1;
+  return new Date(year, month - 1, day);
+}
+
+function isLent(date: Date): boolean {
+  const year = date.getFullYear();
+  const easter = getEaster(year);
+  const ashWed = new Date(easter);
+  ashWed.setDate(easter.getDate() - 46);
+  const palmSunday = new Date(easter);
+  palmSunday.setDate(easter.getDate() - 7);
+  return date >= ashWed && date < palmSunday;
+}
+
+// ── Prayer content ────────────────────────────────────────────────────────────
 // Replace each [PLACEHOLDER] with the actual Kinyarwanda text.
-// Structure follows the Liturgy of the Hours — Lauds (Morning Prayer).
+// You can scan the physical book using Google Lens or Apple Live Text to copy text fast.
 
 const PRAYERS = {
 
   // ── 1. Intangiriro ────────────────────────────────────────────────────────
-  // Opening verse — same every day
-  intangiriro: `[PLACEHOLDER — Intangiriro / Opening verse
-e.g. "Mwami fungura iminwa yanjye, ngo akanwa kanjye gashime ubuhizi bwawe."]`,
+  intangiriro: `[PLACEHOLDER — Intangiriro (Opening prayer)]`,
+  ikuzoIntangiriro: `[PLACEHOLDER — Ikuzo ry'Imana (Glory to God) — mu Ntangiriro]`,
 
   // ── 2. Indirimbo ──────────────────────────────────────────────────────────
-  // Morning hymn
+  inyikirizoIndirimbo: `[PLACEHOLDER — Inyikirizo y'Indirimbo (Antiphon before Hymn)]`,
+  alleluya: `[PLACEHOLDER — Alleluya (hazivugwa mu Igisibo)]`,
   indirimbo: `[PLACEHOLDER — Indirimbo yo mu gitondo (Morning Hymn)]`,
 
   // ── 3. Igisingizo ─────────────────────────────────────────────────────────
-  // Glory Be / Antiphon before psalmody
-  igisingizo: `[PLACEHOLDER — Igisingizo (Glory Be)
-"Ikuzo Nyene Data, na Mwana, na Roho Mutagatifu..."]`,
+  inyikirizoIgisingizo: `[PLACEHOLDER — Inyikirizo y'Igisingizo (Antiphon)]`,
+  igisingizo: `[PLACEHOLDER — Igisingizo (Glory Be)]`,
+  igisingizoSentence: `[PLACEHOLDER — "horana impundu rurema iteka ryose, Amen"]`,
 
-  // ── 4. Zaburi — weekday ───────────────────────────────────────────────────
-  // Psalm(s) for weekday Lauds — these rotate across the 4-week psalter.
-  // For now one placeholder; you can add the specific psalms per week later.
-  zaburiWeekday: `[PLACEHOLDER — Zaburi zo mu gitondo (Iminsi isanzwe)
-Shyiramo hano zaburi zikoreshwa mu gitondo ku minsi isanzwe.
-Zirahinduka buri cyumweru mu Igitabo cy'Isengesho — Psalter ya Ibyumweru 4.]`,
-
-  // ── 4. Zaburi — Sunday ────────────────────────────────────────────────────
-  // Psalm(s) specifically for Sunday Lauds
-  zaburiSunday: `[PLACEHOLDER — Zaburi zo mu gitondo (Ku cyumweru)
-Shyiramo hano zaburi zikoreshwa mu gitondo ku Cyumweru.
-Zirashobora kuba: Zaburi 63, Magnificat, Zaburi 149, n'izindi.]`,
+  // ── 4. Zaburi ─────────────────────────────────────────────────────────────
+  // Three antiphon options — the reader picks one
+  inyikirizo1: `[PLACEHOLDER — Inyikirizo ya 1]`,
+  inyikirizo2: `[PLACEHOLDER — Inyikirizo ya 2]`,
+  inyikirizo3: `[PLACEHOLDER — Inyikirizo ya 3]`,
+  // Psalms — weekday vs Sunday
+  zaburiWeekday: `[PLACEHOLDER — Zaburi zo mu gitondo (Iminsi isanzwe)]`,
+  zaburiSunday: `[PLACEHOLDER — Zaburi zo mu gitondo (Ku Cyumweru)]`,
+  // After the psalm
+  igisubizo: `[PLACEHOLDER — Igisubizo (Response after Psalm)]`,
+  zaburiSentence: `ibisingizo bye bizahora ubudatuza mu munwa wange, iteka n'ahantu hose`,
+  ikuzoZaburi: `[PLACEHOLDER — Ikuzo ry'Imana (Glory to God) — mu Zaburi]`,
 
   // ── 5. Indirimbo ya Zakariya (Benedictus) ─────────────────────────────────
-  // Canticle of Zechariah — Luke 1:68-79 — prayed every morning
-  zakariya: `[PLACEHOLDER — Indirimbo ya Zakariya (Benedictus) — Luka 1:68-79
-"Nisingizwe Uwiteka Imana ya Isirayeli, kuko yabonye abantu be akabakura..."]`,
+  inyikirizoZakariya: `[PLACEHOLDER — Inyikirizo y'Indirimbo ya Zakariya]`,
+  zakariya: `[PLACEHOLDER — Indirimbo ya Zakariya (Benedictus) — Luka 1:68-79]`,
+  ikuzoZakariya: `[PLACEHOLDER — Ikuzo ry'Imana (Glory to God) — nyuma ya Zakariya]`,
 
   // ── 6. Amasengesho yo gusaba ──────────────────────────────────────────────
-  // Morning intercessions — petitions for the day
-  gusaba: `[PLACEHOLDER — Amasengesho yo gusaba (Morning Intercessions)
-Petitions offered in the morning for the day ahead.
-Each petition ends with the community response, e.g. "Mwami, utwe inema."]`,
+  gusaba: `[PLACEHOLDER — Amasengesho yo gusaba (Morning Intercessions)]`,
 
   // ── 7. Dawe uri mu ijuru ──────────────────────────────────────────────────
-  // Our Father
   dawe: `[PLACEHOLDER — Dawe Uri mu Ijuru (Our Father)]`,
 
   // ── 8. Isengesho risoza ───────────────────────────────────────────────────
-  // Closing collect/prayer — changes with the liturgical calendar
-  risoza: `[PLACEHOLDER — Isengesho risoza (Closing Collect)
-This prayer changes with the liturgical season and feast day.
-Shyiramo hano isengesho risoza ry'uyu munsi.]`,
+  risozaWeekday: `[PLACEHOLDER — Isengesho risoza (Iminsi isanzwe / Weekday Collect)]`,
+  risozaSunday: `[PLACEHOLDER — Isengesho risoza (Ku Cyumweru / Sunday Collect)]`,
 
   // ── 9. Umusozo ────────────────────────────────────────────────────────────
-  // Dismissal blessing
-  umusozo: `[PLACEHOLDER — Umusozo (Dismissal)
-e.g. "Nimugire amahoro. — Amen."]`,
+  umusozo: `[PLACEHOLDER — Umusozo (Dismissal)]`,
 };
 
 // ── Sub-components ────────────────────────────────────────────────────────────
 
+// Main section divider — title in the line
 function SectionHeader({ title }: { title: string }) {
   return (
     <div className="flex items-center gap-4 my-8">
@@ -79,14 +97,35 @@ function SectionHeader({ title }: { title: string }) {
   );
 }
 
+// Main prayer card — full width, prominent
 function PrayerBlock({ text }: { text: string }) {
   return (
-    <div className="mb-6">
-      <div className="bg-siyoni-card border border-siyoni-border rounded-card p-5 shadow-card">
-        <p className="prayer-text text-siyoni-brown">{text}</p>
-        {/* Audio player — uncomment when audio files are ready */}
-        {/* <audio controls src="..." className="w-full mt-4" /> */}
-      </div>
+    <div className="bg-siyoni-card border border-siyoni-border rounded-card p-5 shadow-card mb-4">
+      <p className="prayer-text text-siyoni-brown">{text}</p>
+    </div>
+  );
+}
+
+// Sub-section — smaller label + indented card, visually lighter than main section
+function SubBlock({ label, text }: { label: string; text: string }) {
+  return (
+    <div className="mb-4 ml-4 border-l-2 border-siyoni-ochre/30 pl-4">
+      <p className="font-body text-xs font-medium text-siyoni-ochre tracking-widest uppercase mb-2">
+        {label}
+      </p>
+      <p className="prayer-text text-siyoni-brown text-sm">{text}</p>
+    </div>
+  );
+}
+
+// Dialogue line — for priest / people call-and-response
+function DialogueLine({ speaker, text }: { speaker: string; text: string }) {
+  return (
+    <div className="flex gap-3 mb-2">
+      <span className="font-body text-xs font-semibold text-siyoni-mid uppercase w-16 flex-shrink-0 pt-0.5">
+        {speaker}
+      </span>
+      <p className="prayer-text text-siyoni-brown text-sm flex-1">{text}</p>
     </div>
   );
 }
@@ -94,7 +133,9 @@ function PrayerBlock({ text }: { text: string }) {
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 export default function MugitondoPage() {
-  const isSunday = new Date().getDay() === 0;
+  const today = new Date();
+  const isSunday = today.getDay() === 0;
+  const inLent = isLent(today);
 
   return (
     <div className="min-h-screen bg-siyoni-cream font-body pb-20 md:pb-0">
@@ -121,34 +162,66 @@ export default function MugitondoPage() {
           </h1>
           <p className="font-body text-sm text-siyoni-mid mb-10">
             {isSunday ? "Ku Cyumweru" : "Iminsi isanzwe"}
+            {inLent && " · Igisibo"}
           </p>
 
+          {/* ── 1. Intangiriro ─────────────────────────────────────────────── */}
           <SectionHeader title="Intangiriro" />
           <PrayerBlock text={PRAYERS.intangiriro} />
+          <SubBlock label="Ikuzo ry'Imana" text={PRAYERS.ikuzoIntangiriro} />
 
+          {/* ── 2. Indirimbo ───────────────────────────────────────────────── */}
           <SectionHeader title="Indirimbo" />
+          <SubBlock label="Inyikirizo" text={PRAYERS.inyikirizoIndirimbo} />
+          {/* Alleluya is omitted during Lent */}
+          {!inLent && (
+            <SubBlock label="Alleluya" text={PRAYERS.alleluya} />
+          )}
           <PrayerBlock text={PRAYERS.indirimbo} />
 
+          {/* ── 3. Igisingizo ──────────────────────────────────────────────── */}
           <SectionHeader title="Igisingizo" />
+          <SubBlock label="Inyikirizo" text={PRAYERS.inyikirizoIgisingizo} />
           <PrayerBlock text={PRAYERS.igisingizo} />
+          <SubBlock label="" text={PRAYERS.igisingizoSentence} />
 
+          {/* ── 4. Zaburi ──────────────────────────────────────────────────── */}
           <SectionHeader title={isSunday ? "Zaburi — Ku Cyumweru" : "Zaburi — Iminsi Isanzwe"} />
+          <SubBlock label="Inyikirizo 1" text={PRAYERS.inyikirizo1} />
+          <SubBlock label="Inyikirizo 2" text={PRAYERS.inyikirizo2} />
+          <SubBlock label="Inyikirizo 3" text={PRAYERS.inyikirizo3} />
           <PrayerBlock text={isSunday ? PRAYERS.zaburiSunday : PRAYERS.zaburiWeekday} />
+          <SubBlock label="Igisubizo" text={PRAYERS.igisubizo} />
+          <SubBlock label="" text={PRAYERS.zaburiSentence} />
+          <SubBlock label="Ikuzo ry'Imana" text={PRAYERS.ikuzoZaburi} />
 
+          {/* ── 5. Indirimbo ya Zakariya ───────────────────────────────────── */}
           <SectionHeader title="Indirimbo ya Zakariya" />
+          <SubBlock label="Inyikirizo" text={PRAYERS.inyikirizoZakariya} />
           <PrayerBlock text={PRAYERS.zakariya} />
+          <SubBlock label="Ikuzo ry'Imana" text={PRAYERS.ikuzoZakariya} />
 
+          {/* ── 6. Amasengesho yo gusaba ───────────────────────────────────── */}
           <SectionHeader title="Amasengesho yo Gusaba" />
           <PrayerBlock text={PRAYERS.gusaba} />
 
+          {/* ── 7. Dawe uri mu ijuru ───────────────────────────────────────── */}
           <SectionHeader title="Dawe Uri mu Ijuru" />
           <PrayerBlock text={PRAYERS.dawe} />
 
+          {/* ── 8. Isengesho risoza ────────────────────────────────────────── */}
           <SectionHeader title="Isengesho Risoza" />
-          <PrayerBlock text={PRAYERS.risoza} />
+          <PrayerBlock text={isSunday ? PRAYERS.risozaSunday : PRAYERS.risozaWeekday} />
 
+          {/* ── 9. Umusozo ─────────────────────────────────────────────────── */}
           <SectionHeader title="Umusozo" />
           <PrayerBlock text={PRAYERS.umusozo} />
+
+          {/* Call and response — priest and people */}
+          <div className="bg-siyoni-card border border-siyoni-border rounded-card p-5 shadow-card mt-4">
+            <DialogueLine speaker="Umutambyi" text="Dusingize Nyagasani" />
+            <DialogueLine speaker="Abantu" text="Dushimiye Imana" />
+          </div>
 
           {/* End */}
           <div className="mt-10 text-center">
