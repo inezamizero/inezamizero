@@ -67,16 +67,8 @@ e.g. "Nimugire amahoro. — Amen."]`,
 
 // ── Sub-components ────────────────────────────────────────────────────────────
 
-function SectionHeader({ title }: { title: string }) {
-  return (
-    <div className="flex items-center gap-4 my-8">
-      <div className="flex-1 h-px bg-siyoni-border" />
-      <span className="font-body text-xs font-medium text-siyoni-mid tracking-widest uppercase whitespace-nowrap">
-        {title}
-      </span>
-      <div className="flex-1 h-px bg-siyoni-border" />
-    </div>
-  );
+function SectionHeader() {
+  return <div className="h-px bg-siyoni-border my-8" />;
 }
 
 function PrayerBlock({ name, text }: { name: string; text: string }) {
@@ -125,42 +117,42 @@ export default function MugitondoPage() {
           </p>
 
           {/* 1. Intangiriro */}
-          <SectionHeader title="1. Intangiriro" />
+          <SectionHeader />
           <PrayerBlock name="Intangiriro" text={PRAYERS.intangiriro} />
 
           {/* 2. Indirimbo */}
-          <SectionHeader title="2. Indirimbo" />
+          <SectionHeader />
           <PrayerBlock name="Indirimbo yo mu Gitondo" text={PRAYERS.indirimbo} />
 
           {/* 3. Igisingizo */}
-          <SectionHeader title="3. Igisingizo" />
+          <SectionHeader />
           <PrayerBlock name="Igisingizo" text={PRAYERS.igisingizo} />
 
           {/* 4. Zaburi — switches between Sunday and weekday */}
-          <SectionHeader title={isSunday ? "4. Zaburi — Ku Cyumweru" : "4. Zaburi — Iminsi Isanzwe"} />
+          <SectionHeader />
           <PrayerBlock
             name="Zaburi"
             text={isSunday ? PRAYERS.zaburiSunday : PRAYERS.zaburiWeekday}
           />
 
           {/* 5. Indirimbo ya Zakariya */}
-          <SectionHeader title="5. Indirimbo ya Zakariya" />
+          <SectionHeader />
           <PrayerBlock name="Benedictus — Luka 1:68-79" text={PRAYERS.zakariya} />
 
           {/* 6. Amasengesho yo gusaba */}
-          <SectionHeader title="6. Amasengesho yo Gusaba" />
+          <SectionHeader />
           <PrayerBlock name="Amasengesho yo Gusaba" text={PRAYERS.gusaba} />
 
           {/* 7. Dawe uri mu ijuru */}
-          <SectionHeader title="7. Dawe Uri mu Ijuru" />
+          <SectionHeader />
           <PrayerBlock name="Dawe Uri mu Ijuru" text={PRAYERS.dawe} />
 
           {/* 8. Isengesho risoza */}
-          <SectionHeader title="8. Isengesho Risoza" />
+          <SectionHeader />
           <PrayerBlock name="Isengesho Risoza" text={PRAYERS.risoza} />
 
           {/* 9. Umusozo */}
-          <SectionHeader title="9. Umusozo" />
+          <SectionHeader />
           <PrayerBlock name="Umusozo" text={PRAYERS.umusozo} />
 
           {/* End */}
