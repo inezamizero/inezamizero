@@ -22,7 +22,7 @@ const sections = [
     icon: BookOpen,
   },
   {
-    name: "Rozari",
+    name: "Rozari n'amashapure",
     desc: "Vuga Rozari wiyambaza Bikiramariya, ishapure y'impuhwe z'Imana",
     href: "/rozari",
     icon: Heart,

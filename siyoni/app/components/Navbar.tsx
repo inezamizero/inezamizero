@@ -19,11 +19,11 @@ import {
 
 // The five prayer sections — used in both desktop center links and mobile tabs.
 const sections = [
-  { name: "Isengesho", href: "/isengesho", icon: BookOpen },
-  { name: "Rozari",    href: "/rozari",    icon: Heart },
-  { name: "Novena",    href: "/novena",    icon: CalendarDays },
-  { name: "Misa",      href: "/misa",      icon: Sun },
-  { name: "Indirimbo", href: "/indirimbo", icon: Music },
+  { name: "Isengesho",          mobileLabel: "Isengesho",  href: "/isengesho", icon: BookOpen },
+  { name: "Rozari n'amashapure", mobileLabel: "Rozari n'…", href: "/rozari",    icon: Heart },
+  { name: "Novena",              mobileLabel: "Novena",     href: "/novena",    icon: CalendarDays },
+  { name: "Misa",                mobileLabel: "Misa",       href: "/misa",      icon: Sun },
+  { name: "Indirimbo",           mobileLabel: "Indirimbo",  href: "/indirimbo", icon: Music },
 ];
 
 // Mobile tab bar also includes a Home tab as the first item.
@@ -142,9 +142,8 @@ export default function Navbar() {
                 strokeWidth={active ? 2 : 1.5}
                 className="transition-all duration-200"
               />
-              {/* Short name — truncated so it fits in the narrow column */}
               <span className="truncate max-w-[52px] text-center leading-tight">
-                {tab.name}
+                {"mobileLabel" in tab ? tab.mobileLabel : tab.name}
               </span>
             </Link>
           );
