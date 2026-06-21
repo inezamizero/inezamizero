@@ -23,61 +23,123 @@ function getEaster(year: number): Date {
 function isLent(date: Date): boolean {
   const year = date.getFullYear();
   const easter = getEaster(year);
-  const ashWed = new Date(easter);
-  ashWed.setDate(easter.getDate() - 46);
-  const palmSunday = new Date(easter);
-  palmSunday.setDate(easter.getDate() - 7);
+  const ashWed = new Date(easter); ashWed.setDate(easter.getDate() - 46);
+  const palmSunday = new Date(easter); palmSunday.setDate(easter.getDate() - 7);
   return date >= ashWed && date < palmSunday;
 }
 
 // ── Prayer content ────────────────────────────────────────────────────────────
-// Replace each [PLACEHOLDER] with the actual Kinyarwanda text.
-// Scan the physical book using Google Lens or Apple Live Text to copy text fast.
 
 const PRAYERS = {
 
   // ── 1. Intangiriro ────────────────────────────────────────────────────────
-  intangiriro: `[PLACEHOLDER — Intangiriro (Opening prayer)]`,
-  ikuzoIntangiriro: `[PLACEHOLDER — Ikuzo ry'Imana (Glory to God) — mu Ntangiriro]`,
+  intangiriro: `Mana ngwino unyikirize +
+Nyagasani banguka undengere.`,
+
+  ikuzoIntangiriro: `Hubahwe Imana Data na Mwana na Roho Mutagatifu,
+nk'uko bisanzwe iteka, bubahwe n'ubu n'iteka ryose. Amen.`,
+
+  alleluya: `Alleluya (usibye mu gihe cy'igisibo)`,
 
   // ── 2. Indirimbo ──────────────────────────────────────────────────────────
-  inyikirizoIndirimbo: `[PLACEHOLDER — Inyikirizo y'Indirimbo (Antiphon before Hymn)]`,
-  alleluya: `[PLACEHOLDER — Alleluya (hazivugwa mu Igisibo)]`,
-  indirimbo: `[PLACEHOLDER — Indirimbo ya nimugoroba (Evening Hymn)]`,
+  // References to the physical hymn book — add the hymn text here when available
+  indirimboRef: `D 54 cyangwa X 4, X 6, X 13`,
+  indirimbo: `[PLACEHOLDER — Shyiramo hano inyandiko y'indirimbo yo mu mugoroba]`,
 
-  // ── 3. Igisingizo ─────────────────────────────────────────────────────────
-  inyikirizoIgisingizo: `[PLACEHOLDER — Inyikirizo y'Igisingizo (Antiphon)]`,
-  igisingizo: `[PLACEHOLDER — Igisingizo (Glory Be)]`,
-  igisingizoSentence: `[PLACEHOLDER — "horana impundu rurema iteka ryose, Amen"]`,
+  // ── 3. Igisingizo cya Kristu ──────────────────────────────────────────────
+  // Canticle of Christ — Colossians 1:12-20 (primary option)
+  igisingizoKristu: `"Nimunezerwe kandi mushimire Imana Data watumye mugira umugabane ku murage w'abatagatifujwe bari mu mucyo. Koko rero, yatugobotoye ku ngoyi y'umwijima, atujyana mu Ngoma y'Umwana we akunda byimazeyo, ari na We dukesha gucungurwa no kubabarirwa ibyaha.
+Ni We shusho ry'Imana itagaragara,
+Umuvukambere mu byitwa ikiremwa cyose,
+kuko byose byaremewe muri We,
+ari ibiri mu ijuru, ari n'ibiri ku isi.
+Ibigaragara n'ibitagaragara,
+Ibinyabubasha n'Inganji, Ibikomangoma n'Ibihangange:
+byose byaremwe na We, kandi ni We byaremewe;
+yariho mbere ya byose, kandi byose bibeshwaho na We.
+Ni We kandi Mutwe w'umubiri, ari wo Kiliziya,
+akaba n'Ishingiro, n'Umuvukambere mu bapfuye,
+kugira ngo ahorane muri byose umwanya w'ibanze;
+kuko Imana yizihijwe no kumusenderezamo ibyiza byose,
+kandi muri We yiyunga n'ibiriho byose, ndetse ari We ibigirira, ari ibiri ku isi, ari n'ibiri mu ijuru, byose ibisakazaho amahoro aturutse ku maraso ye yameneye ku musaraba."`,
+
+  // Alternative canticle — Ephesians 1:3-10
+  igisingizoAlt: `"Nihasingizwe Imana, Se w'Umwami wacu Yezu Kristu,
+Yo yadusakajemo imigisha y'amoko yose, ituruka kuri Roho, mu ijuru, ku bwa Kristu.
+Nguko uko yadutoreye muri We nyine, mbere y'ihangwa ry'ibiriho byose,
+kugira ngo tuzayihore imbere mu rukundo, turi intungane n'abaziranenge.
+Igena ityo mbere y'igihe, ko tuzayibera abana yihitiyemo, tubikesheje Yezu Kristu.
+Uko ni ko yabyishakiye ku buntu bwayo,
+kugira ngo izahore isingirizwa ingabire yaduhereye ubuntu mu Mwana wayo w'Inkoramutima.
+Ni We dukesha ugucunguzwa amaraso ye, tukamuronkeramo imbabazi z'ibyaha byacu,
+ku rugero rw'ubusendere bw'ineza yayo,
+ikaba yarabudusesekajemo ibigiranye ubuhanga n'ubumenyi bwose.
+Yaduhishuriye ibanga ry'ugushaka kwayo,
+wa mugambi wuje urugwiro yari yifitemo kuva kera,
+ngo izawuzuze ibihe bigeze: umugambi wo gukoranyiriza ibintu byose
+ku Mutware umwe rukumbi, Kristu, ari ibiri mu ijuru, ari n'ibiri ku isi."`,
+
+  // Antiphons after the canticle
+  inyikirizoKristu1: `Habwa ikuzo Nyagasani, icyubahiro, ububasha n'ishema.`,
+  inyikirizoKristu2: `Uragasingizwa Mubyeyi wacu, Wowe waduhereye umugisha muri Kristu.`,
 
   // ── 4. Zaburi ─────────────────────────────────────────────────────────────
-  inyikirizo1: `[PLACEHOLDER — Inyikirizo ya 1]`,
-  inyikirizo2: `[PLACEHOLDER — Inyikirizo ya 2]`,
-  inyikirizo3: `[PLACEHOLDER — Inyikirizo ya 3]`,
-  zaburiWeekday: `[PLACEHOLDER — Zaburi za nimugoroba (Iminsi isanzwe)]`,
-  zaburiSunday: `[PLACEHOLDER — Zaburi za nimugoroba (Ku Cyumweru)]`,
-  igisubizo: `[PLACEHOLDER — Igisubizo (Response after Psalm)]`,
-  zaburiSentence: `ibisingizo bye bizahora ubudatuza mu munwa wange, iteka n'ahantu hose`,
-  ikuzoZaburi: `[PLACEHOLDER — Ikuzo ry'Imana (Glory to God) — mu Zaburi]`,
+  inyikirizoZab1: `Nihasingizwe izina rya Nyagasani, ubu n'iteka ryose.`,
+  zaburi1ref: `Zab 113 (112)`,
+  zaburi1: `[PLACEHOLDER — Shyiramo hano inyandiko ya Zaburi 113 (112) mu Kinyarwanda]`,
 
-  // ── 5. Indirimbo ya Mariya (Magnificat) ───────────────────────────────────
-  // Evening prayer uses the Magnificat instead of the Benedictus
-  inyikirizoMariya: `[PLACEHOLDER — Inyikirizo y'Indirimbo ya Mariya]`,
-  magnificat: `[PLACEHOLDER — Indirimbo ya Mariya (Magnificat) — Luka 1:46-55]`,
-  ikuzoMariya: `[PLACEHOLDER — Ikuzo ry'Imana (Glory to God) — nyuma ya Magnificat]`,
+  inyikirizoZab2: `Ubuvunyi n'ingabire bituruka kuri Uhoraho.`,
+  zaburi2ref: `Zab 130 (129)`,
+  zaburi2: `[PLACEHOLDER — Shyiramo hano inyandiko ya Zaburi 130 (129) mu Kinyarwanda]`,
 
-  // ── 6. Amasengesho yo gusaba ──────────────────────────────────────────────
-  gusaba: `[PLACEHOLDER — Amasengesho yo gusaba (Evening Intercessions)]`,
+  // ── 5. Isomo ──────────────────────────────────────────────────────────────
+  // Reading — 1 Peter 3:8-9
+  isomo: `"Ahasigaye, nimutekereze ibihuje, mugirirane impuhwe, mukundane urwa kivandimwe, mube abanyambabazi kandi mwicishe bugufi. Ntimukiture undi inabi yabagiriye, cyangwa ngo nabatuka mumusubize; ahubwo mwifurizanye umugisha, kuko ari cyo mwahamagariwe, kugira ngo muzahabwe umugisha ho umurage."`,
 
-  // ── 7. Dawe uri mu ijuru ──────────────────────────────────────────────────
+  igisubizo: `Nishyize mu biganza byawe, Nyagasani.
+Ni wowe uducungura Nyagasani, Mana y'ukuri.`,
+
+  // ── 6. Indirimbo ya Bikira Mariya (Magnificat — Lk 1:47-55) ──────────────
+  inyikirizoMariyaWeekday: `Uhoraho yangiriye ibintu by'agatangaza, izina rye ni ritagatifu.`,
+  inyikirizoMariyaSunday: `Ku mugoroba wa Pasika abigishwa bamenye Nyagasani, igihe yamanyuraga umugati.`,
+
+  magnificat: `"Umutima wanjye urasingiza Nyagasani,
+kandi uhimbajwe n'Imana Umukiza wanjye.
+Kuko yibutse umuja we utavugwaga,
+rwose, kuva ubu amašekuruza yose azanyita umuhire.
+Umushoborabyose yankoreye ibitangaza,
+Izina rye ni ritagatifu,
+Impuhwe ze zisesekarizwa abamutinya bo mu bihe byose.
+Yagaragaje ububasha bw'amaboko ye, atatanya abantu birata;
+yahanantuye abakomeye abakura ku ntebe zabo,
+maze akuza ab'intamenyekana;
+abashonji yabagwirije ibintu, abakungu abasezerera amara masa.
+Yagobotoye Israheli umugaragu we,
+bityo yibuka impuhwe ze,
+nk'uko yari yarabibwiye abakurambere bacu,
+agirira Abrahamu n'urubyaro rwe iteka."`,
+
+  ikuzoMariya: `Hubahwe Imana Data na Mwana na Roho Mutagatifu,
+nk'uko bisanzwe iteka, bubahwe n'ubu n'iteka ryose. Amen.`,
+
+  // ── 7. Amasengesho yo gusaba ──────────────────────────────────────────────
+  gusabaIntro: `Dusabe Imana, Umubyeyi wacu, We ukunda abana be kandi ntiyirengagize amasezerano yabo, tumubwire twiyoroheje tuti: "NYAGASANI UTWIYEGEREZE."`,
+
+  gusaba1: `Mana y'urukundo, wowe wagiranye n'umuryango wawe isezerano ry'iteka, dufashe kwibuka ibitangaza byawe. Tubisabe Imana.`,
+  gusaba2: `Kiliziya yawe uyihe kujya mbere mu rukundo, kandi abakwemera ubakomeze mu bumwe no mu mahoro. Tubisabe Imana.`,
+  gusaba3: `Nyagasani, duhe kutakwirengagiza mu mitunganyirize y'iyi si, maze imigirire yacu ihuze n'ugushaka kwawe. Tubisabe Imana.`,
+  gusaba4: `Ohereza abakozi mu murima wawe, kugira ngo izina ryawe rimenyekane mu miryango yose. Tubisabe Imana.`,
+  gusaba5: `Abapfuye bahe kureba uruhanga rwawe, natwe uduhe kuzasangira na bo umunezero w'ubwiza bwawe. Tubisabe Imana.`,
+
+  // ── 8. Dawe uri mu ijuru ──────────────────────────────────────────────────
   dawe: `[PLACEHOLDER — Dawe Uri mu Ijuru (Our Father)]`,
 
-  // ── 8. Isengesho risoza ───────────────────────────────────────────────────
-  risozaWeekday: `[PLACEHOLDER — Isengesho risoza (Iminsi isanzwe / Weekday Collect)]`,
-  risozaSunday: `[PLACEHOLDER — Isengesho risoza (Ku Cyumweru / Sunday Collect)]`,
+  // ── 9. Isengesho risoza ───────────────────────────────────────────────────
+  risozaWeekday: `Mana itumurikira, duhe gutsinda imitego y'umwanzi muri iri joro, maze ejo mu gitondo tuzahimbarirwe imbere yawe, tugushimira muri Yezu Kristu Umwana wawe n'Umwami wacu. Amen.`,
+  risozaSunday: `Nyagasani, gumana natwe kuko bwije n'umunsi ukaba uciye ikibu; susurutsa imitima yacu iyoboke inzira zawe, tuguhishure mu Byanditswe bitagatifu. Ibyo turabigusaba ku bwa Yezu Kristu, Umwana wawe n'Umwami wacu. Amen.`,
 
-  // ── 9. Umusozo ────────────────────────────────────────────────────────────
-  umusozo: `[PLACEHOLDER — Umusozo (Dismissal)]`,
+  // ── 10. Umusozo ───────────────────────────────────────────────────────────
+  umusozo: `Imana iduhe umugisha + iturinde ikibi cyose, kandi izatugeze mu bugingo bw'iteka. Amen.`,
 };
 
 // ── Sub-components ────────────────────────────────────────────────────────────
@@ -130,10 +192,7 @@ export default function NimugorobaPage() {
       </div>
 
       <main className="max-w-xl mx-auto px-6 py-12">
-        <Link
-          href="/isengesho"
-          className="inline-flex items-center gap-1 text-siyoni-mid text-sm mb-8 hover:text-siyoni-brown transition-colors"
-        >
+        <Link href="/isengesho" className="inline-flex items-center gap-1 text-siyoni-mid text-sm mb-8 hover:text-siyoni-brown transition-colors">
           ← Subira
         </Link>
 
@@ -154,63 +213,70 @@ export default function NimugorobaPage() {
           <SectionHeader title="Intangiriro" />
           <PrayerBlock text={PRAYERS.intangiriro} />
           <SubBlock label="Ikuzo ry'Imana" text={PRAYERS.ikuzoIntangiriro} />
+          {!inLent && <SubBlock label="Alleluya" text={PRAYERS.alleluya} />}
 
           {/* ── 2. Indirimbo ───────────────────────────────────────────────── */}
           <SectionHeader title="Indirimbo" />
-          <SubBlock label="Inyikirizo" text={PRAYERS.inyikirizoIndirimbo} />
-          {!inLent && <SubBlock label="Alleluya" text={PRAYERS.alleluya} />}
+          <SubBlock label="Amarejerero" text={PRAYERS.indirimboRef} />
           <PrayerBlock text={PRAYERS.indirimbo} />
 
-          {/* ── 3. Igisingizo ──────────────────────────────────────────────── */}
-          <SectionHeader title="Igisingizo" />
-          <SubBlock label="Inyikirizo" text={PRAYERS.inyikirizoIgisingizo} />
-          <PrayerBlock text={PRAYERS.igisingizo} />
-          <SubBlock label="" text={PRAYERS.igisingizoSentence} />
+          {/* ── 3. Igisingizo cya Kristu ───────────────────────────────────── */}
+          <SectionHeader title="Igisingizo cya Kristu" />
+          <SubBlock label="Abanyakolosi 1, 12-20" text={PRAYERS.igisingizoKristu} />
+          <SubBlock label="cyangwa — Abanyefezi 1, 3-10" text={PRAYERS.igisingizoAlt} />
+          <SubBlock label="Inyikirizo" text={PRAYERS.inyikirizoKristu1} />
+          <SubBlock label="cyangwa" text={PRAYERS.inyikirizoKristu2} />
 
           {/* ── 4. Zaburi ──────────────────────────────────────────────────── */}
-          <SectionHeader title={isSunday ? "Zaburi — Ku Cyumweru" : "Zaburi — Iminsi Isanzwe"} />
-          <SubBlock label="Inyikirizo 1" text={PRAYERS.inyikirizo1} />
-          <SubBlock label="Inyikirizo 2" text={PRAYERS.inyikirizo2} />
-          <SubBlock label="Inyikirizo 3" text={PRAYERS.inyikirizo3} />
-          <PrayerBlock text={isSunday ? PRAYERS.zaburiSunday : PRAYERS.zaburiWeekday} />
-          <SubBlock label="Igisubizo" text={PRAYERS.igisubizo} />
-          <SubBlock label="" text={PRAYERS.zaburiSentence} />
-          <SubBlock label="Ikuzo ry'Imana" text={PRAYERS.ikuzoZaburi} />
+          <SectionHeader title="Zaburi" />
+          <SubBlock label="Inyikirizo" text={PRAYERS.inyikirizoZab1} />
+          <SubBlock label={PRAYERS.zaburi1ref} text={PRAYERS.zaburi1} />
+          <SubBlock label="Inyikirizo" text={PRAYERS.inyikirizoZab2} />
+          <SubBlock label={PRAYERS.zaburi2ref} text={PRAYERS.zaburi2} />
 
-          {/* ── 5. Indirimbo ya Mariya (Magnificat) ────────────────────────── */}
-          <SectionHeader title="Indirimbo ya Mariya" />
-          <SubBlock label="Inyikirizo" text={PRAYERS.inyikirizoMariya} />
+          {/* ── 5. Isomo ───────────────────────────────────────────────────── */}
+          <SectionHeader title="Isomo — 1 Petero 3, 8-9" />
+          <PrayerBlock text={PRAYERS.isomo} />
+          <SubBlock label="Igisubizo" text={PRAYERS.igisubizo} />
+
+          {/* ── 6. Indirimbo ya Bikira Mariya (Magnificat) ─────────────────── */}
+          <SectionHeader title="Indirimbo ya Bikira Mariya — Lk 1, 47-55" />
+          <SubBlock
+            label={isSunday ? "Inyikirizo yo ku cyumweru" : "Inyikirizo yo ku mibyizi"}
+            text={isSunday ? PRAYERS.inyikirizoMariyaSunday : PRAYERS.inyikirizoMariyaWeekday}
+          />
           <PrayerBlock text={PRAYERS.magnificat} />
           <SubBlock label="Ikuzo ry'Imana" text={PRAYERS.ikuzoMariya} />
 
-          {/* ── 6. Amasengesho yo gusaba ───────────────────────────────────── */}
+          {/* ── 7. Amasengesho yo gusaba ───────────────────────────────────── */}
           <SectionHeader title="Amasengesho yo Gusaba" />
-          <PrayerBlock text={PRAYERS.gusaba} />
+          <PrayerBlock text={PRAYERS.gusabaIntro} />
+          <SubBlock label="" text={PRAYERS.gusaba1} />
+          <SubBlock label="" text={PRAYERS.gusaba2} />
+          <SubBlock label="" text={PRAYERS.gusaba3} />
+          <SubBlock label="" text={PRAYERS.gusaba4} />
+          <SubBlock label="" text={PRAYERS.gusaba5} />
+          <SubBlock label="" text="(Bashobora kongeraho andi)" />
 
-          {/* ── 7. Dawe uri mu ijuru ───────────────────────────────────────── */}
+          {/* ── 8. Dawe uri mu ijuru ───────────────────────────────────────── */}
           <SectionHeader title="Dawe Uri mu Ijuru" />
           <PrayerBlock text={PRAYERS.dawe} />
 
-          {/* ── 8. Isengesho risoza ────────────────────────────────────────── */}
+          {/* ── 9. Isengesho risoza ────────────────────────────────────────── */}
           <SectionHeader title="Isengesho Risoza" />
           <PrayerBlock text={isSunday ? PRAYERS.risozaSunday : PRAYERS.risozaWeekday} />
 
-          {/* ── 9. Umusozo ─────────────────────────────────────────────────── */}
+          {/* ── 10. Umusozo ─────────────────────────────────────────────────── */}
           <SectionHeader title="Umusozo" />
           <PrayerBlock text={PRAYERS.umusozo} />
-          <SubBlock label="Umutambyi" text="Dusingize Nyagasani" />
-          <SubBlock label="Abantu" text="Dushimiye Imana" />
+          <SubBlock label="Umutambyi" text="Dusingize Nyagasani." />
+          <SubBlock label="Abantu" text="Dushimiye Imana." />
+          <SubBlock label="" text="(Ni byiza kuvuga indamutso ya Malayika aya masengesho arangiye)" />
 
-          {/* End */}
           <div className="mt-10 text-center">
             <div className="w-12 h-0.5 bg-siyoni-ochre mx-auto mb-4" />
-            <p className="font-heading text-xl text-siyoni-brown">
-              Imana ikuhe ijoro ryiza. 🙏
-            </p>
-            <Link
-              href="/isengesho"
-              className="inline-block mt-6 font-body text-sm text-siyoni-mid hover:text-siyoni-brown transition-colors underline underline-offset-2"
-            >
+            <p className="font-heading text-xl text-siyoni-brown">Imana ikuhe ijoro ryiza. 🙏</p>
+            <Link href="/isengesho" className="inline-block mt-6 font-body text-sm text-siyoni-mid hover:text-siyoni-brown transition-colors underline underline-offset-2">
               Subira ku masengesho
             </Link>
           </div>
