@@ -8,11 +8,19 @@ const options = [
     name: "Amasengesho ya Mugitondo",
     desc: "Tangira umunsi wawe uherekejwe n'Imana",
     href: "/isengesho/mugitondo",
+    available: true,
   },
   {
     name: "Amasengesho ya Nimugoroba",
     desc: "Soza umunsi wawe neza mbere y'ubuturo",
     href: "/isengesho/nimugoroba",
+    available: true,
+  },
+  {
+    name: "Andi Masengesho",
+    desc: "Amasengesho atandukanye — gusenga imbere ya Sakramentu, kwatura, n'ibindi",
+    href: "/isengesho/andi",
+    available: false,
   },
 ];
 
@@ -40,25 +48,43 @@ export default function IsengeshoPage() {
         </p>
 
         <div className="flex flex-col gap-4">
-          {options.map((option) => (
-            <Link
-              key={option.href}
-              href={option.href}
-              className="group flex items-center justify-between bg-siyoni-card border border-siyoni-border rounded-card shadow-card p-6 hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-200"
-            >
-              <div>
-                <div className="w-8 h-0.5 bg-siyoni-ochre mb-3" />
-                <h2 className="font-heading text-xl font-semibold text-siyoni-brown mb-1">
-                  {option.name}
-                </h2>
-                <p className="font-body text-sm text-siyoni-mid">{option.desc}</p>
+          {options.map((option) =>
+            option.available ? (
+              <Link
+                key={option.href}
+                href={option.href}
+                className="group flex items-center justify-between bg-siyoni-card border border-siyoni-border rounded-card shadow-card p-6 hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-200"
+              >
+                <div>
+                  <div className="w-8 h-0.5 bg-siyoni-ochre mb-3" />
+                  <h2 className="font-heading text-xl font-semibold text-siyoni-brown mb-1">
+                    {option.name}
+                  </h2>
+                  <p className="font-body text-sm text-siyoni-mid">{option.desc}</p>
+                </div>
+                <ChevronRight
+                  size={20}
+                  className="text-siyoni-ochre ml-4 flex-shrink-0 group-hover:translate-x-1 transition-transform duration-200"
+                />
+              </Link>
+            ) : (
+              <div
+                key={option.href}
+                className="flex items-center justify-between bg-siyoni-card border border-siyoni-border rounded-card p-6 opacity-50"
+              >
+                <div>
+                  <div className="w-8 h-0.5 bg-siyoni-border mb-3" />
+                  <h2 className="font-heading text-xl font-semibold text-siyoni-brown mb-1">
+                    {option.name}
+                  </h2>
+                  <p className="font-body text-sm text-siyoni-mid">{option.desc}</p>
+                </div>
+                <span className="font-body text-xs text-siyoni-mid ml-4 flex-shrink-0 whitespace-nowrap">
+                  Vuba
+                </span>
               </div>
-              <ChevronRight
-                size={20}
-                className="text-siyoni-ochre ml-4 flex-shrink-0 group-hover:translate-x-1 transition-transform duration-200"
-              />
-            </Link>
-          ))}
+            )
+          )}
         </div>
       </main>
     </div>
