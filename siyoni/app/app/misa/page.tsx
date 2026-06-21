@@ -146,24 +146,26 @@ export default function MisaPage() {
         transition={{ duration: 0.35, ease: "easeOut" as const }}
         className="max-w-5xl mx-auto px-4 pt-4 pb-2 flex items-start justify-between gap-6"
       >
-        {/* Left: season badge + date */}
+        {/* Left: season label + date */}
         <div>
-          <span
-            className="inline-block font-body text-xs font-medium px-2.5 py-1 rounded-full mb-2"
-            style={{ backgroundColor: season.accent + "22", color: season.accent }}
+          <p
+            className="font-body text-xs font-medium tracking-widest uppercase mb-1"
+            style={{ color: season.accent }}
           >
             {season.nameRw}
-          </span>
+          </p>
           <p className="font-heading text-2xl font-semibold text-siyoni-brown leading-snug">
             {dateLabel}
           </p>
         </div>
 
-        {/* Right: saint of the day */}
+        {/* Right: saint — same label style as left, pushed down to match date level */}
         {saintName && (
-          <div className="text-right flex-shrink-0">
-            <p className="font-body text-xs font-medium tracking-widest uppercase mb-1"
-              style={{ color: season.accent }}>
+          <div className="text-right flex-shrink-0 pt-5">
+            <p
+              className="font-body text-xs font-medium tracking-widest uppercase mb-1"
+              style={{ color: season.accent }}
+            >
               Umutagatifu w'uyu munsi
             </p>
             <p className="font-heading text-lg font-semibold text-siyoni-brown">
