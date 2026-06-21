@@ -23,7 +23,7 @@ function findMassVideo(
     // Collapse multiple spaces — Pacis TV titles sometimes have double spaces e.g. "CYA  MISA"
     const upper = title.toUpperCase().replace(/\s+/g, " ");
     if (!upper.includes(dateStr)) return false;
-    if (isSunday) return upper.includes("IGITAMBO CYA MISA YA GATATU TALIKI");
+    if (isSunday) return upper.includes("IGITAMBO CYA MISA YA GATATU");
     return upper.includes("IGITAMBO CYA MISA") && upper.includes("MUGITONDO");
   });
 
@@ -55,7 +55,7 @@ export async function GET() {
     const today = new Date();
     const isSunday = today.getDay() === 0;
     const searchQuery = isSunday
-      ? "IGITAMBO CYA MISA YA GATATU TALIKI"
+      ? "IGITAMBO CYA MISA YA GATATU"
       : "IGITAMBO CYA MISA YA MUGITONDO";
 
     // publishedAfter must be an RFC 3339 timestamp — midnight UTC today
