@@ -239,12 +239,6 @@ export default function MisaPage() {
         </div>
       </motion.div>
 
-      {/* ── TITLE below video ────────────────────────────────────────────── */}
-      <div className="max-w-5xl mx-auto px-4 pb-8">
-        <h1 className="font-heading text-2xl font-bold text-siyoni-brown">
-          Misa y'Umunsi
-        </h1>
-      </div>
 
       {/* ── READINGS ─────────────────────────────────────────────────────── */}
       <div className="max-w-5xl mx-auto px-4 pb-12">
