@@ -67,14 +67,21 @@ e.g. "Nimugire amahoro. — Amen."]`,
 
 // ── Sub-components ────────────────────────────────────────────────────────────
 
-function SectionHeader() {
-  return <div className="h-px bg-siyoni-border my-8" />;
+function SectionHeader({ title }: { title: string }) {
+  return (
+    <div className="flex items-center gap-4 my-8">
+      <div className="flex-1 h-px bg-siyoni-border" />
+      <span className="font-body text-xs font-medium text-siyoni-mid tracking-widest uppercase whitespace-nowrap">
+        {title}
+      </span>
+      <div className="flex-1 h-px bg-siyoni-border" />
+    </div>
+  );
 }
 
-function PrayerBlock({ name, text }: { name: string; text: string }) {
+function PrayerBlock({ text }: { text: string }) {
   return (
     <div className="mb-6">
-      <h3 className="font-heading text-lg font-semibold text-siyoni-brown mb-2">{name}</h3>
       <div className="bg-siyoni-card border border-siyoni-border rounded-card p-5 shadow-card">
         <p className="prayer-text text-siyoni-brown">{text}</p>
         {/* Audio player — uncomment when audio files are ready */}
@@ -116,44 +123,32 @@ export default function MugitondoPage() {
             {isSunday ? "Ku Cyumweru" : "Iminsi isanzwe"}
           </p>
 
-          {/* 1. Intangiriro */}
-          <SectionHeader />
-          <PrayerBlock name="Intangiriro" text={PRAYERS.intangiriro} />
+          <SectionHeader title="Intangiriro" />
+          <PrayerBlock text={PRAYERS.intangiriro} />
 
-          {/* 2. Indirimbo */}
-          <SectionHeader />
-          <PrayerBlock name="Indirimbo yo mu Gitondo" text={PRAYERS.indirimbo} />
+          <SectionHeader title="Indirimbo" />
+          <PrayerBlock text={PRAYERS.indirimbo} />
 
-          {/* 3. Igisingizo */}
-          <SectionHeader />
-          <PrayerBlock name="Igisingizo" text={PRAYERS.igisingizo} />
+          <SectionHeader title="Igisingizo" />
+          <PrayerBlock text={PRAYERS.igisingizo} />
 
-          {/* 4. Zaburi — switches between Sunday and weekday */}
-          <SectionHeader />
-          <PrayerBlock
-            name="Zaburi"
-            text={isSunday ? PRAYERS.zaburiSunday : PRAYERS.zaburiWeekday}
-          />
+          <SectionHeader title={isSunday ? "Zaburi — Ku Cyumweru" : "Zaburi — Iminsi Isanzwe"} />
+          <PrayerBlock text={isSunday ? PRAYERS.zaburiSunday : PRAYERS.zaburiWeekday} />
 
-          {/* 5. Indirimbo ya Zakariya */}
-          <SectionHeader />
-          <PrayerBlock name="Benedictus — Luka 1:68-79" text={PRAYERS.zakariya} />
+          <SectionHeader title="Indirimbo ya Zakariya" />
+          <PrayerBlock text={PRAYERS.zakariya} />
 
-          {/* 6. Amasengesho yo gusaba */}
-          <SectionHeader />
-          <PrayerBlock name="Amasengesho yo Gusaba" text={PRAYERS.gusaba} />
+          <SectionHeader title="Amasengesho yo Gusaba" />
+          <PrayerBlock text={PRAYERS.gusaba} />
 
-          {/* 7. Dawe uri mu ijuru */}
-          <SectionHeader />
-          <PrayerBlock name="Dawe Uri mu Ijuru" text={PRAYERS.dawe} />
+          <SectionHeader title="Dawe Uri mu Ijuru" />
+          <PrayerBlock text={PRAYERS.dawe} />
 
-          {/* 8. Isengesho risoza */}
-          <SectionHeader />
-          <PrayerBlock name="Isengesho Risoza" text={PRAYERS.risoza} />
+          <SectionHeader title="Isengesho Risoza" />
+          <PrayerBlock text={PRAYERS.risoza} />
 
-          {/* 9. Umusozo */}
-          <SectionHeader />
-          <PrayerBlock name="Umusozo" text={PRAYERS.umusozo} />
+          <SectionHeader title="Umusozo" />
+          <PrayerBlock text={PRAYERS.umusozo} />
 
           {/* End */}
           <div className="mt-10 text-center">
