@@ -215,17 +215,12 @@ export default function NimugorobaPage() {
           <SubBlock label="Ikuzo ry'Imana" text={PRAYERS.ikuzoIntangiriro} />
           {!inLent && <SubBlock label="Alleluya" text={PRAYERS.alleluya} />}
 
-          {/* ── 2. Indirimbo ───────────────────────────────────────────────── */}
-          <SectionHeader title="Indirimbo" />
-          <SubBlock label="Amarejerero" text={PRAYERS.indirimboRef} />
-          <PrayerBlock text={PRAYERS.indirimbo} />
-
-          {/* ── 3. Igisingizo cya Kristu ───────────────────────────────────── */}
+          {/* ── 2. Igisingizo cya Kristu ───────────────────────────────────── */}
           <SectionHeader title="Igisingizo cya Kristu" />
-          <SubBlock label="Abanyakolosi 1, 12-20" text={PRAYERS.igisingizoKristu} />
-          <SubBlock label="cyangwa — Abanyefezi 1, 3-10" text={PRAYERS.igisingizoAlt} />
+          <PrayerBlock text={PRAYERS.igisingizoKristu} />
           <SubBlock label="Inyikirizo" text={PRAYERS.inyikirizoKristu1} />
-          <SubBlock label="cyangwa" text={PRAYERS.inyikirizoKristu2} />
+          <PrayerBlock text={PRAYERS.igisingizoAlt} />
+          <SubBlock label="Inyikirizo" text={PRAYERS.inyikirizoKristu2} />
 
           {/* ── 4. Zaburi ──────────────────────────────────────────────────── */}
           <SectionHeader title="Zaburi" />
