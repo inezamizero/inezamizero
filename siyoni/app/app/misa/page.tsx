@@ -63,13 +63,13 @@ type Season = {
 // pageBg is a very desaturated, light tint of the season color.
 // Visible enough to notice, not bold enough to fight the text.
 const SEASONS: Record<string, Season> = {
-  ordinary:  { nameRw: "Igihe gisanzwe", accent: "#2D6A4F", pageBg: "#EDF5F1", topLine: "bg-[#2D6A4F]", badgeText: "#2D6A4F" },
-  advent:    { nameRw: "Agatasi",         accent: "#4A235A", pageBg: "#F2EDF6", topLine: "bg-[#4A235A]", badgeText: "#4A235A" },
-  christmas: { nameRw: "Noheli",          accent: "#8B6914", pageBg: "#F9F4E7", topLine: "bg-[#C9A235]", badgeText: "#8B6914" },
-  lent:      { nameRw: "Igisibo",         accent: "#3B1F5E", pageBg: "#F0EBF6", topLine: "bg-[#3B1F5E]", badgeText: "#3B1F5E" },
-  holyweek:  { nameRw: "Icyumweru Cyera", accent: "#7A0C2E", pageBg: "#F6EAEE", topLine: "bg-[#7A0C2E]", badgeText: "#7A0C2E" },
-  easter:    { nameRw: "Pasika",          accent: "#8B6914", pageBg: "#F9F4E7", topLine: "bg-[#D4A017]", badgeText: "#8B6914" },
-  pentecost: { nameRw: "Ipentekosite",    accent: "#8B1A1A", pageBg: "#F6EDEC", topLine: "bg-[#B22222]", badgeText: "#8B1A1A" },
+  ordinary:  { nameRw: "Igihe gisanzwe", accent: "#2D6A4F", pageBg: "#C8E2D5", topLine: "bg-[#2D6A4F]", badgeText: "#2D6A4F" },
+  advent:    { nameRw: "Agatasi",         accent: "#4A235A", pageBg: "#CDBFDA", topLine: "bg-[#4A235A]", badgeText: "#4A235A" },
+  christmas: { nameRw: "Noheli",          accent: "#8B6914", pageBg: "#DDD0A0", topLine: "bg-[#C9A235]", badgeText: "#8B6914" },
+  lent:      { nameRw: "Igisibo",         accent: "#3B1F5E", pageBg: "#C9BBDA", topLine: "bg-[#3B1F5E]", badgeText: "#3B1F5E" },
+  holyweek:  { nameRw: "Icyumweru Cyera", accent: "#7A0C2E", pageBg: "#D9B0BC", topLine: "bg-[#7A0C2E]", badgeText: "#7A0C2E" },
+  easter:    { nameRw: "Pasika",          accent: "#8B6914", pageBg: "#DDD0A0", topLine: "bg-[#D4A017]", badgeText: "#8B6914" },
+  pentecost: { nameRw: "Ipentekosite",    accent: "#8B1A1A", pageBg: "#D9AEAC", topLine: "bg-[#B22222]", badgeText: "#8B1A1A" },
 };
 
 function getLiturgicalSeason(date: Date): Season {
@@ -149,7 +149,41 @@ export default function MisaPage() {
         <ImigongoPattern className="w-full h-full" />
       </div>
 
-      {/* ── VIDEO FIRST — large, fills most of the width ─────────────────── */}
+      {/* ── SLIM TOP BAR — saint + date ──────────────────────────────────── */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.35, ease: "easeOut" as const }}
+        className="max-w-5xl mx-auto px-4 pt-4 pb-2 flex flex-wrap items-center gap-x-3 gap-y-1"
+      >
+        {/* Season badge */}
+        <span
+          className="font-body text-xs font-medium px-2.5 py-1 rounded-full"
+          style={{ backgroundColor: season.accent + "22", color: season.accent }}
+        >
+          {season.nameRw}
+        </span>
+
+        <span className="text-siyoni-mid/40 text-xs">·</span>
+
+        {/* Date */}
+        <span className="font-body text-sm text-siyoni-brown">{dateLabel}</span>
+
+        {/* Saint — appears once loaded */}
+        {saintName && (
+          <>
+            <span className="text-siyoni-mid/40 text-xs">·</span>
+            <span
+              className="font-body text-sm font-medium"
+              style={{ color: season.accent }}
+            >
+              {saintName}
+            </span>
+          </>
+        )}
+      </motion.div>
+
+      {/* ── VIDEO — large, fills most of the width ───────────────────────── */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -207,42 +241,12 @@ export default function MisaPage() {
         </div>
       </motion.div>
 
-      {/* ── COMPACT INFO BAR — date, season, saint in one line ───────────── */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2, duration: 0.35, ease: "easeOut" as const }}
-        className="max-w-5xl mx-auto px-4 pb-8"
-      >
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-          {/* Page title */}
-          <h1 className="font-heading text-2xl font-bold text-siyoni-brown">
-            Misa y'Umunsi
-          </h1>
-
-          {/* Season badge */}
-          <span
-            className="font-body text-xs font-medium px-2.5 py-1 rounded-full"
-            style={{ backgroundColor: season.accent + "18", color: season.accent }}
-          >
-            {season.nameRw}
-          </span>
-
-          {/* Separator */}
-          <span className="text-siyoni-border hidden sm:inline">·</span>
-
-          {/* Date */}
-          <span className="font-body text-sm text-siyoni-mid">{dateLabel}</span>
-
-          {/* Saint — compact, same line */}
-          {saintName && (
-            <>
-              <span className="text-siyoni-border hidden sm:inline">·</span>
-              <span className="font-body text-sm text-siyoni-mid">{saintName}</span>
-            </>
-          )}
-        </div>
-      </motion.div>
+      {/* ── TITLE below video ────────────────────────────────────────────── */}
+      <div className="max-w-5xl mx-auto px-4 pb-8">
+        <h1 className="font-heading text-2xl font-bold text-siyoni-brown">
+          Misa y'Umunsi
+        </h1>
+      </div>
 
       {/* ── READINGS ─────────────────────────────────────────────────────── */}
       <div className="max-w-5xl mx-auto px-4 pb-12">
