@@ -102,8 +102,17 @@ export default function Navbar() {
           })}
         </nav>
 
-        {/* Right: language toggle placeholder (Phase 2) */}
-        <div className="w-24" />
+        {/* Right: Contact link */}
+        <Link
+          href="/contact"
+          className={`font-body text-sm font-medium transition-colors duration-200 border-b-2 pb-0.5 ${
+            pathname === "/contact"
+              ? linkActive
+              : linkInactive
+          }`}
+        >
+          Tuvugishe
+        </Link>
       </header>
 
       {/* ── Mobile: fixed bottom tab bar ─────────────────────────────────── */}
