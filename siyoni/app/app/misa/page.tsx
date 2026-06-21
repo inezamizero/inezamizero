@@ -159,9 +159,15 @@ export default function MisaPage() {
           </p>
         </div>
 
-        {/* Right: saint — same label style as left, pushed down to match date level */}
+        {/* Right: saint — wrapped in a bordered card matching the season color */}
         {saintName && (
-          <div className="text-right flex-shrink-0 pt-5">
+          <div
+            className="text-right flex-shrink-0 px-4 py-3 rounded-card border"
+            style={{
+              backgroundColor: season.accent + "15",
+              borderColor: season.accent + "50",
+            }}
+          >
             <p
               className="font-body text-xs font-medium tracking-widest uppercase mb-1"
               style={{ color: season.accent }}
