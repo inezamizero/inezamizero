@@ -139,37 +139,31 @@ export default function MisaPage() {
         <ImigongoPattern className="w-full h-full" />
       </div>
 
-      {/* ── SLIM TOP BAR — saint + date ──────────────────────────────────── */}
+      {/* ── TOP INFO — season badge, then date, then saint ──────────────── */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.35, ease: "easeOut" as const }}
-        className="max-w-5xl mx-auto px-4 pt-4 pb-2 flex flex-wrap items-center gap-x-3 gap-y-1"
+        className="max-w-5xl mx-auto px-4 pt-4 pb-2"
       >
-        {/* Season badge */}
+        {/* Season badge — top */}
         <span
-          className="font-body text-xs font-medium px-2.5 py-1 rounded-full"
+          className="inline-block font-body text-xs font-medium px-2.5 py-1 rounded-full mb-2"
           style={{ backgroundColor: season.accent + "22", color: season.accent }}
         >
           {season.nameRw}
         </span>
 
-        <span className="text-siyoni-mid/40 text-xs">·</span>
+        {/* Date — its own line, heading font */}
+        <p className="font-heading text-2xl font-semibold text-siyoni-brown leading-snug">
+          {dateLabel}
+        </p>
 
-        {/* Date — same Cormorant Garamond heading font as the title */}
-        <span className="font-heading text-2xl font-semibold text-siyoni-brown">{dateLabel}</span>
-
-        {/* Saint — appears once loaded, same heading style */}
+        {/* Saint — below date, accent color */}
         {saintName && (
-          <>
-            <span className="text-siyoni-mid/40 text-sm mx-1">·</span>
-            <span
-              className="font-heading text-xl font-semibold"
-              style={{ color: season.accent }}
-            >
-              {saintName}
-            </span>
-          </>
+          <p className="font-heading text-lg font-medium mt-0.5" style={{ color: season.accent }}>
+            {saintName}
+          </p>
         )}
       </motion.div>
 
