@@ -64,7 +64,6 @@ export async function GET() {
     url.searchParams.set("channelId", CHANNEL_ID);
     url.searchParams.set("q", searchQuery);
     url.searchParams.set("type", "video");
-    url.searchParams.set("eventType", "completed");
     url.searchParams.set("publishedAfter", midnightUTC.toISOString());
     url.searchParams.set("order", "date");
     url.searchParams.set("maxResults", "10");
