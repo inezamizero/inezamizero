@@ -190,27 +190,42 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, ease: "easeOut" as const }}
+            className="bg-siyoni-card border border-siyoni-border rounded-card shadow-card p-6 md:p-8"
           >
-            <Link
-              href="/misa"
-              className="group flex items-center justify-between bg-siyoni-card border border-siyoni-border rounded-card shadow-card p-6 md:p-8 hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-200"
-            >
-              <div>
-                <p className="font-body text-xs font-medium text-siyoni-mid tracking-[0.12em] uppercase mb-1">
-                  Uyu munsi
+            {/* Header */}
+            <div className="mb-5">
+              <p className="font-body text-xs font-medium text-siyoni-mid tracking-[0.12em] uppercase mb-1">
+                Uyu munsi · {todayLabel}
+              </p>
+              <h2 className="font-heading text-2xl font-semibold text-siyoni-brown">
+                Misa y&apos;Umunsi
+              </h2>
+            </div>
+
+            {/* Gospel reading */}
+            <div className="border-l-2 border-siyoni-ochre pl-4 mb-6">
+              <div className="flex items-baseline justify-between mb-2">
+                <p className="font-body text-xs font-medium text-siyoni-ochre tracking-widest uppercase">
+                  Ubutumwa bwiza
                 </p>
-                <h2 className="font-heading text-2xl font-semibold text-siyoni-brown mb-1">
-                  Misa y&apos;Umunsi
-                </h2>
-                <p className="font-body text-sm text-siyoni-mid">{todayLabel}</p>
-                <p className="font-body text-sm text-siyoni-mid mt-2">
-                  Amasomo, umutagatifu w&apos;uyu munsi na Misa kuri Pacis TV
+                {/* Replace this reference with today's Gospel reference */}
+                <p className="font-body text-xs text-siyoni-mid ml-4">
+                  [PLACEHOLDER — e.g. Lk 9:51-62]
                 </p>
               </div>
-              <ChevronRight
-                size={24}
-                className="text-siyoni-ochre flex-shrink-0 ml-6 group-hover:translate-x-1 transition-transform duration-200"
-              />
+              {/* Replace this with today's Gospel text in Kinyarwanda */}
+              <p className="font-body text-sm text-siyoni-brown leading-relaxed line-clamp-4">
+                [PLACEHOLDER — shyiramo hano ubutumwa bwiza bw&apos;uyu munsi mu Kinyarwanda]
+              </p>
+            </div>
+
+            {/* Link to full Misa page */}
+            <Link
+              href="/misa"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-card bg-siyoni-brown text-siyoni-cream font-body text-sm font-medium hover:bg-siyoni-mid transition-colors duration-200"
+            >
+              Reba Misa y&apos;Umunsi yose
+              <ChevronRight size={15} />
             </Link>
           </motion.div>
         </section>
