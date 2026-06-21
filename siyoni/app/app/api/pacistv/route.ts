@@ -20,7 +20,8 @@ function findMassVideo(
   const isSunday = date.getDay() === 0;
 
   const matches = items.filter(({ snippet: { title } }) => {
-    const upper = title.toUpperCase();
+    // Collapse multiple spaces — Pacis TV titles sometimes have double spaces e.g. "CYA  MISA"
+    const upper = title.toUpperCase().replace(/\s+/g, " ");
     if (!upper.includes(dateStr)) return false;
     if (isSunday) return upper.includes("IGITAMBO CYA MISA YA GATATU TALIKI");
     return upper.includes("IGITAMBO CYA MISA") && upper.includes("MUGITONDO");
