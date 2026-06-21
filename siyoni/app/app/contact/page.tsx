@@ -13,7 +13,7 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import ImigongoPattern from "@/components/ImigongoPattern";
 
-const FORMSPREE_ID = "YOUR_FORM_ID"; // ← replace this after signing up at formspree.io
+const FORMSPREE_ID = "mqevzqly";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
