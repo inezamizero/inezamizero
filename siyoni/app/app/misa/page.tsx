@@ -120,8 +120,8 @@ export default function MisaPage() {
       .then((data) => setVideoId(data.videoId ?? null))
       .catch(() => setVideoId(null));
 
-    // Saint of the day — fetched via our own server route to avoid CORS
-    fetch("/api/saint")
+    // Saint of the day — no-store prevents browser from caching the response
+    fetch("/api/saint", { cache: "no-store" })
       .then((r) => r.json())
       .then((data) => setSaintName(data.name ?? null))
       .catch(() => setSaintName(null));
