@@ -148,12 +148,12 @@ export default function MisaPage() {
       >
         {/* Left: season label + date */}
         <div>
-          <p
-            className="font-body text-xs font-medium tracking-widest uppercase mb-1"
-            style={{ color: season.accent }}
+          <span
+            className="inline-block font-body text-xs font-medium px-2.5 py-1 rounded-full mb-2"
+            style={{ backgroundColor: season.accent + "22", color: season.accent }}
           >
             {season.nameRw}
-          </p>
+          </span>
           <p className="font-heading text-2xl font-semibold text-siyoni-brown leading-snug">
             {dateLabel}
           </p>
