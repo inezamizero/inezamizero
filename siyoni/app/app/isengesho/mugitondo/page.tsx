@@ -106,26 +106,15 @@ function PrayerBlock({ text }: { text: string }) {
   );
 }
 
-// Sub-section — smaller label + indented card, visually lighter than main section
 function SubBlock({ label, text }: { label: string; text: string }) {
   return (
     <div className="mb-4 ml-4 border-l-2 border-siyoni-ochre/30 pl-4">
-      <p className="font-body text-xs font-medium text-siyoni-ochre tracking-widest uppercase mb-2">
-        {label}
-      </p>
-      <p className="prayer-text text-siyoni-brown text-sm">{text}</p>
-    </div>
-  );
-}
-
-// Dialogue line — for priest / people call-and-response
-function DialogueLine({ speaker, text }: { speaker: string; text: string }) {
-  return (
-    <div className="flex gap-3 mb-2">
-      <span className="font-body text-xs font-semibold text-siyoni-mid uppercase w-16 flex-shrink-0 pt-0.5">
-        {speaker}
-      </span>
-      <p className="prayer-text text-siyoni-brown text-sm flex-1">{text}</p>
+      {label && (
+        <p className="font-body text-[10px] font-medium text-siyoni-ochre tracking-widest uppercase mb-1">
+          {label}
+        </p>
+      )}
+      <p className="prayer-text text-siyoni-brown text-xs leading-relaxed">{text}</p>
     </div>
   );
 }
@@ -217,11 +206,8 @@ export default function MugitondoPage() {
           <SectionHeader title="Umusozo" />
           <PrayerBlock text={PRAYERS.umusozo} />
 
-          {/* Call and response — priest and people */}
-          <div className="bg-siyoni-card border border-siyoni-border rounded-card p-5 shadow-card mt-4">
-            <DialogueLine speaker="Umutambyi" text="Dusingize Nyagasani" />
-            <DialogueLine speaker="Abantu" text="Dushimiye Imana" />
-          </div>
+          <SubBlock label="Umutambyi" text="Dusingize Nyagasani" />
+          <SubBlock label="Abantu" text="Dushimiye Imana" />
 
           {/* End */}
           <div className="mt-10 text-center">
