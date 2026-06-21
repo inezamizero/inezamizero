@@ -5,36 +5,79 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import ImigongoPattern from "@/components/ImigongoPattern";
 
-// ── Prayers ───────────────────────────────────────────────────────────────────
-// Replace each [PLACEHOLDER] with the actual Kinyarwanda prayer text.
+// ── Liturgical helpers ────────────────────────────────────────────────────────
+
+function getEaster(year: number): Date {
+  const a = year % 19, b = Math.floor(year / 100), c = year % 100;
+  const d = Math.floor(b / 4), e = b % 4, f = Math.floor((b + 8) / 25);
+  const g = Math.floor((b - f + 1) / 3);
+  const h = (19 * a + b - d - g + 15) % 30;
+  const i = Math.floor(c / 4), k = c % 4;
+  const l = (32 + 2 * e + 2 * i - h - k) % 7;
+  const m = Math.floor((a + 11 * h + 22 * l) / 451);
+  const month = Math.floor((h + l - 7 * m + 114) / 31);
+  const day = ((h + l - 7 * m + 114) % 31) + 1;
+  return new Date(year, month - 1, day);
+}
+
+function isLent(date: Date): boolean {
+  const year = date.getFullYear();
+  const easter = getEaster(year);
+  const ashWed = new Date(easter);
+  ashWed.setDate(easter.getDate() - 46);
+  const palmSunday = new Date(easter);
+  palmSunday.setDate(easter.getDate() - 7);
+  return date >= ashWed && date < palmSunday;
+}
+
+// ── Prayer content ────────────────────────────────────────────────────────────
+// Replace each [PLACEHOLDER] with the actual Kinyarwanda text.
+// Scan the physical book using Google Lens or Apple Live Text to copy text fast.
 
 const PRAYERS = {
-  // Sign of the Cross
-  ikimenyetso: `[PLACEHOLDER — Ikimenyetso ky'Umusalaba]`,
 
-  // Evening prayer / Thanksgiving
-  gushimira: `[PLACEHOLDER — Isengesho cyo gushimira (Evening Thanksgiving)]`,
+  // ── 1. Intangiriro ────────────────────────────────────────────────────────
+  intangiriro: `[PLACEHOLDER — Intangiriro (Opening prayer)]`,
+  ikuzoIntangiriro: `[PLACEHOLDER — Ikuzo ry'Imana (Glory to God) — mu Ntangiriro]`,
 
-  // Our Father
-  babaWacu: `[PLACEHOLDER — Baba Wacu]`,
+  // ── 2. Indirimbo ──────────────────────────────────────────────────────────
+  inyikirizoIndirimbo: `[PLACEHOLDER — Inyikirizo y'Indirimbo (Antiphon before Hymn)]`,
+  alleluya: `[PLACEHOLDER — Alleluya (hazivugwa mu Igisibo)]`,
+  indirimbo: `[PLACEHOLDER — Indirimbo ya nimugoroba (Evening Hymn)]`,
 
-  // Hail Mary
-  ndakwibuka: `[PLACEHOLDER — Ndakwibuka Mariya]`,
+  // ── 3. Igisingizo ─────────────────────────────────────────────────────────
+  inyikirizoIgisingizo: `[PLACEHOLDER — Inyikirizo y'Igisingizo (Antiphon)]`,
+  igisingizo: `[PLACEHOLDER — Igisingizo (Glory Be)]`,
+  igisingizoSentence: `[PLACEHOLDER — "horana impundu rurema iteka ryose, Amen"]`,
 
-  // Glory Be
-  igisingizo: `[PLACEHOLDER — Igisingizo]`,
+  // ── 4. Zaburi ─────────────────────────────────────────────────────────────
+  inyikirizo1: `[PLACEHOLDER — Inyikirizo ya 1]`,
+  inyikirizo2: `[PLACEHOLDER — Inyikirizo ya 2]`,
+  inyikirizo3: `[PLACEHOLDER — Inyikirizo ya 3]`,
+  zaburiWeekday: `[PLACEHOLDER — Zaburi za nimugoroba (Iminsi isanzwe)]`,
+  zaburiSunday: `[PLACEHOLDER — Zaburi za nimugoroba (Ku Cyumweru)]`,
+  igisubizo: `[PLACEHOLDER — Igisubizo (Response after Psalm)]`,
+  zaburiSentence: `ibisingizo bye bizahora ubudatuza mu munwa wange, iteka n'ahantu hose`,
+  ikuzoZaburi: `[PLACEHOLDER — Ikuzo ry'Imana (Glory to God) — mu Zaburi]`,
 
-  // Act of Contrition
-  kunenga: `[PLACEHOLDER — Isengesho cyo kunenga ibyaha (Act of Contrition)]`,
+  // ── 5. Indirimbo ya Mariya (Magnificat) ───────────────────────────────────
+  // Evening prayer uses the Magnificat instead of the Benedictus
+  inyikirizoMariya: `[PLACEHOLDER — Inyikirizo y'Indirimbo ya Mariya]`,
+  magnificat: `[PLACEHOLDER — Indirimbo ya Mariya (Magnificat) — Luka 1:46-55]`,
+  ikuzoMariya: `[PLACEHOLDER — Ikuzo ry'Imana (Glory to God) — nyuma ya Magnificat]`,
 
-  // Examination of conscience
-  kwisuzuma: `[PLACEHOLDER — Kwisuzuma (Examination of Conscience)]`,
+  // ── 6. Amasengesho yo gusaba ──────────────────────────────────────────────
+  gusaba: `[PLACEHOLDER — Amasengesho yo gusaba (Evening Intercessions)]`,
 
-  // Night prayer
-  ijoro: `[PLACEHOLDER — Isengesho ryo ku mugoroba]`,
+  // ── 7. Dawe uri mu ijuru ──────────────────────────────────────────────────
+  dawe: `[PLACEHOLDER — Dawe Uri mu Ijuru (Our Father)]`,
 
-  // Hail Holy Queen
-  hailHolyQueen: `[PLACEHOLDER — Turagusabira Nyina wa Yezu (Salve Regina)]`,
+  // ── 8. Isengesho risoza ───────────────────────────────────────────────────
+  risozaWeekday: `[PLACEHOLDER — Isengesho risoza (Iminsi isanzwe / Weekday Collect)]`,
+  risozaSunday: `[PLACEHOLDER — Isengesho risoza (Ku Cyumweru / Sunday Collect)]`,
+
+  // ── 9. Umusozo ────────────────────────────────────────────────────────────
+  umusozo: `[PLACEHOLDER — Umusozo (Dismissal)]`,
 };
 
 // ── Sub-components ────────────────────────────────────────────────────────────
@@ -51,17 +94,34 @@ function SectionHeader({ title }: { title: string }) {
   );
 }
 
-function PrayerBlock({ name, text }: { name: string; text: string }) {
+function PrayerBlock({ text }: { text: string }) {
   return (
-    <div className="mb-6">
-      <h3 className="font-heading text-lg font-semibold text-siyoni-brown mb-2">
-        {name}
-      </h3>
-      <div className="bg-siyoni-card border border-siyoni-border rounded-card p-5 shadow-card">
-        <p className="prayer-text text-siyoni-brown">{text}</p>
-        {/* Audio player — uncomment when audio files are ready */}
-        {/* <audio controls src="..." className="w-full mt-4" /> */}
-      </div>
+    <div className="bg-siyoni-card border border-siyoni-border rounded-card p-5 shadow-card mb-4">
+      <p className="prayer-text text-siyoni-brown">{text}</p>
+    </div>
+  );
+}
+
+function SubBlock({ label, text }: { label: string; text: string }) {
+  return (
+    <div className="mb-4 ml-4 border-l-2 border-siyoni-ochre/30 pl-4">
+      {label && (
+        <p className="font-body text-xs font-medium text-siyoni-ochre tracking-widest uppercase mb-2">
+          {label}
+        </p>
+      )}
+      <p className="prayer-text text-siyoni-brown text-sm">{text}</p>
+    </div>
+  );
+}
+
+function DialogueLine({ speaker, text }: { speaker: string; text: string }) {
+  return (
+    <div className="flex gap-3 mb-2">
+      <span className="font-body text-xs font-semibold text-siyoni-mid uppercase w-16 flex-shrink-0 pt-0.5">
+        {speaker}
+      </span>
+      <p className="prayer-text text-siyoni-brown text-sm flex-1">{text}</p>
     </div>
   );
 }
@@ -69,6 +129,10 @@ function PrayerBlock({ name, text }: { name: string; text: string }) {
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 export default function NimugorobaPage() {
+  const today = new Date();
+  const isSunday = today.getDay() === 0;
+  const inLent = isLent(today);
+
   return (
     <div className="min-h-screen bg-siyoni-cream font-body pb-20 md:pb-0">
       <Navbar />
@@ -89,38 +153,68 @@ export default function NimugorobaPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.35, ease: "easeOut" as const }}
         >
-          <h1 className="font-heading text-4xl font-bold text-siyoni-brown mb-2">
+          <h1 className="font-heading text-4xl font-bold text-siyoni-brown mb-1">
             Amasengesho ya Nimugoroba
           </h1>
           <p className="font-body text-sm text-siyoni-mid mb-10">
-            Soza umunsi wawe neza mbere y'ubuturo.
+            {isSunday ? "Ku Cyumweru" : "Iminsi isanzwe"}
+            {inLent && " · Igisibo"}
           </p>
 
-          {/* ── Opening ───────────────────────────────────────────────────── */}
-          <SectionHeader title="Gutangira" />
-          <PrayerBlock name="Ikimenyetso ky'Umusalaba" text={PRAYERS.ikimenyetso} />
+          {/* ── 1. Intangiriro ─────────────────────────────────────────────── */}
+          <SectionHeader title="Intangiriro" />
+          <PrayerBlock text={PRAYERS.intangiriro} />
+          <SubBlock label="Ikuzo ry'Imana" text={PRAYERS.ikuzoIntangiriro} />
 
-          {/* ── Thanksgiving ──────────────────────────────────────────────── */}
-          <SectionHeader title="Gushimira" />
-          <PrayerBlock name="Isengesho cyo Gushimira" text={PRAYERS.gushimira} />
+          {/* ── 2. Indirimbo ───────────────────────────────────────────────── */}
+          <SectionHeader title="Indirimbo" />
+          <SubBlock label="Inyikirizo" text={PRAYERS.inyikirizoIndirimbo} />
+          {!inLent && <SubBlock label="Alleluya" text={PRAYERS.alleluya} />}
+          <PrayerBlock text={PRAYERS.indirimbo} />
 
-          {/* ── Examination of conscience ─────────────────────────────────── */}
-          <SectionHeader title="Kwisuzuma" />
-          <PrayerBlock name="Kwisuzuma Inkesha" text={PRAYERS.kwisuzuma} />
-          <PrayerBlock name="Kunenga Ibyaha" text={PRAYERS.kunenga} />
+          {/* ── 3. Igisingizo ──────────────────────────────────────────────── */}
+          <SectionHeader title="Igisingizo" />
+          <SubBlock label="Inyikirizo" text={PRAYERS.inyikirizoIgisingizo} />
+          <PrayerBlock text={PRAYERS.igisingizo} />
+          <SubBlock label="" text={PRAYERS.igisingizoSentence} />
 
-          {/* ── Core prayers ──────────────────────────────────────────────── */}
-          <SectionHeader title="Amasengesho Asanzwe" />
-          <PrayerBlock name="Baba Wacu" text={PRAYERS.babaWacu} />
-          <PrayerBlock name="Ndakwibuka Mariya" text={PRAYERS.ndakwibuka} />
-          <PrayerBlock name="Igisingizo" text={PRAYERS.igisingizo} />
-          <PrayerBlock name="Turagusabira Nyina wa Yezu" text={PRAYERS.hailHolyQueen} />
+          {/* ── 4. Zaburi ──────────────────────────────────────────────────── */}
+          <SectionHeader title={isSunday ? "Zaburi — Ku Cyumweru" : "Zaburi — Iminsi Isanzwe"} />
+          <SubBlock label="Inyikirizo 1" text={PRAYERS.inyikirizo1} />
+          <SubBlock label="Inyikirizo 2" text={PRAYERS.inyikirizo2} />
+          <SubBlock label="Inyikirizo 3" text={PRAYERS.inyikirizo3} />
+          <PrayerBlock text={isSunday ? PRAYERS.zaburiSunday : PRAYERS.zaburiWeekday} />
+          <SubBlock label="Igisubizo" text={PRAYERS.igisubizo} />
+          <SubBlock label="" text={PRAYERS.zaburiSentence} />
+          <SubBlock label="Ikuzo ry'Imana" text={PRAYERS.ikuzoZaburi} />
 
-          {/* ── Night prayer ──────────────────────────────────────────────── */}
-          <SectionHeader title="Isengesho ryo ku Mugoroba" />
-          <PrayerBlock name="Isengesho ryo ku Mugoroba" text={PRAYERS.ijoro} />
+          {/* ── 5. Indirimbo ya Mariya (Magnificat) ────────────────────────── */}
+          <SectionHeader title="Indirimbo ya Mariya" />
+          <SubBlock label="Inyikirizo" text={PRAYERS.inyikirizoMariya} />
+          <PrayerBlock text={PRAYERS.magnificat} />
+          <SubBlock label="Ikuzo ry'Imana" text={PRAYERS.ikuzoMariya} />
 
-          {/* Done */}
+          {/* ── 6. Amasengesho yo gusaba ───────────────────────────────────── */}
+          <SectionHeader title="Amasengesho yo Gusaba" />
+          <PrayerBlock text={PRAYERS.gusaba} />
+
+          {/* ── 7. Dawe uri mu ijuru ───────────────────────────────────────── */}
+          <SectionHeader title="Dawe Uri mu Ijuru" />
+          <PrayerBlock text={PRAYERS.dawe} />
+
+          {/* ── 8. Isengesho risoza ────────────────────────────────────────── */}
+          <SectionHeader title="Isengesho Risoza" />
+          <PrayerBlock text={isSunday ? PRAYERS.risozaSunday : PRAYERS.risozaWeekday} />
+
+          {/* ── 9. Umusozo ─────────────────────────────────────────────────── */}
+          <SectionHeader title="Umusozo" />
+          <PrayerBlock text={PRAYERS.umusozo} />
+          <div className="bg-siyoni-card border border-siyoni-border rounded-card p-5 shadow-card mt-4">
+            <DialogueLine speaker="Umutambyi" text="Dusingize Nyagasani" />
+            <DialogueLine speaker="Abantu" text="Dushimiye Imana" />
+          </div>
+
+          {/* End */}
           <div className="mt-10 text-center">
             <div className="w-12 h-0.5 bg-siyoni-ochre mx-auto mb-4" />
             <p className="font-heading text-xl text-siyoni-brown">
