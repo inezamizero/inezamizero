@@ -81,13 +81,13 @@ export default function ContactPage() {
                 Murakoze!
               </p>
               <p className="font-body text-siyoni-mid">
-                Ubutumwa bwawe bwakiriwe. Tuzakugarukaho vuba.
+                Ubutumwa bwawe bwakiriwe.
               </p>
               <button
                 onClick={() => setStatus("idle")}
                 className="mt-6 font-body text-sm text-siyoni-mid underline underline-offset-2 hover:text-siyoni-brown transition-colors"
               >
-                Ohereza undi butumwa
+                Ohereza ubundi butumwa
               </button>
             </div>
           ) : (
