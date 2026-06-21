@@ -139,31 +139,37 @@ export default function MisaPage() {
         <ImigongoPattern className="w-full h-full" />
       </div>
 
-      {/* ── TOP INFO — season badge, then date, then saint ──────────────── */}
+      {/* ── TOP INFO — left: season + date, right: saint ────────────────── */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.35, ease: "easeOut" as const }}
-        className="max-w-5xl mx-auto px-4 pt-4 pb-2"
+        className="max-w-5xl mx-auto px-4 pt-4 pb-2 flex items-start justify-between gap-6"
       >
-        {/* Season badge — top */}
-        <span
-          className="inline-block font-body text-xs font-medium px-2.5 py-1 rounded-full mb-2"
-          style={{ backgroundColor: season.accent + "22", color: season.accent }}
-        >
-          {season.nameRw}
-        </span>
-
-        {/* Date — its own line, heading font */}
-        <p className="font-heading text-2xl font-semibold text-siyoni-brown leading-snug">
-          {dateLabel}
-        </p>
-
-        {/* Saint — below date, accent color */}
-        {saintName && (
-          <p className="font-heading text-lg font-medium mt-0.5" style={{ color: season.accent }}>
-            {saintName}
+        {/* Left: season badge + date */}
+        <div>
+          <span
+            className="inline-block font-body text-xs font-medium px-2.5 py-1 rounded-full mb-2"
+            style={{ backgroundColor: season.accent + "22", color: season.accent }}
+          >
+            {season.nameRw}
+          </span>
+          <p className="font-heading text-2xl font-semibold text-siyoni-brown leading-snug">
+            {dateLabel}
           </p>
+        </div>
+
+        {/* Right: saint of the day */}
+        {saintName && (
+          <div className="text-right flex-shrink-0">
+            <p className="font-body text-xs font-medium tracking-widest uppercase mb-1"
+              style={{ color: season.accent }}>
+              Umutagatifu w'uyu munsi
+            </p>
+            <p className="font-heading text-lg font-semibold text-siyoni-brown">
+              {saintName}
+            </p>
+          </div>
         )}
       </motion.div>
 
