@@ -2,38 +2,6 @@ import { NextResponse } from "next/server";
 
 // Pacis TV YouTube channel ID
 const CHANNEL_ID = "UCkKVUyOqvKk1W-QadPy_WHQ";
-const RSS_URL = `https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`;
-
-interface Video {
-  id: string;
-  title: string;
-}
-
-// Extract videos from YouTube's Atom RSS XML using regex.
-// No external XML library needed — the feed structure is consistent.
-function parseVideos(xml: string): Video[] {
-  const videos: Video[] = [];
-  const entryPattern = /<entry>([\s\S]*?)<\/entry>/g;
-  let match;
-
-  while ((match = entryPattern.exec(xml)) !== null) {
-    const entry = match[1];
-    const idMatch = entry.match(/<yt:videoId>(.*?)<\/yt:videoId>/);
-    // YouTube XML-encodes titles — decode &amp; and &quot; just in case
-    const titleMatch = entry.match(/<title>([\s\S]*?)<\/title>/);
-
-    if (idMatch && titleMatch) {
-      const title = titleMatch[1]
-        .replace(/&amp;/g, "&")
-        .replace(/&quot;/g, '"')
-        .replace(/&#39;/g, "'")
-        .trim();
-      videos.push({ id: idMatch[1], title });
-    }
-  }
-
-  return videos;
-}
 
 function formatDate(date: Date): string {
   const dd = String(date.getDate()).padStart(2, "0");
@@ -42,59 +10,74 @@ function formatDate(date: Date): string {
   return `${dd}/${mm}/${yyyy}`;
 }
 
-function findMassVideo(videos: Video[], date: Date): Video | null {
+function findMassVideo(
+  items: Array<{ id: { videoId: string }; snippet: { title: string } }>,
+  date: Date
+): { videoId: string; title: string } | null {
   const dateStr = formatDate(date);
   const isSunday = date.getDay() === 0;
 
-  const matches = videos.filter((v) => {
-    const upper = v.title.toUpperCase();
+  const matches = items.filter(({ snippet: { title } }) => {
+    const upper = title.toUpperCase();
     if (!upper.includes(dateStr)) return false;
-
-    if (isSunday) {
-      // Sunday format: IGITAMBO CYA MISA YA GATATU TALIKI DD/MM/YYYY
-      return upper.includes("IGITAMBO CYA MISA YA GATATU TALIKI");
-    } else {
-      // Weekday format: IGITAMBO CYA MISA YA MBERE YA MUGITONDO DD/MM/YYYY
-      // "MBERE YA" sits between MISA and MUGITONDO so we check both separately
-      return upper.includes("IGITAMBO CYA MISA") && upper.includes("MUGITONDO");
-    }
+    if (isSunday) return upper.includes("IGITAMBO CYA MISA YA GATATU TALIKI");
+    return upper.includes("IGITAMBO CYA MISA") && upper.includes("MUGITONDO");
   });
 
   if (matches.length === 0) return null;
 
-  // Prefer Regina Pacis Remera — if not found, use the first match
-  return (
-    matches.find((v) =>
-      v.title.toUpperCase().includes("REGINA PACIS REMERA")
-    ) ?? matches[0]
+  // Prefer Regina Pacis Remera, fall back to any match
+  const preferred = matches.find(({ snippet: { title } }) =>
+    title.toUpperCase().includes("REGINA PACIS REMERA")
   );
+
+  const winner = preferred ?? matches[0];
+  return { videoId: winner.id.videoId, title: winner.snippet.title };
 }
 
 export async function GET() {
+  const apiKey = process.env.YOUTUBE_API_KEY;
+
+  if (!apiKey) {
+    return NextResponse.json(
+      { error: "YOUTUBE_API_KEY not set" },
+      { status: 500 }
+    );
+  }
+
   try {
-    // Fetch the RSS feed and cache the result for 1 hour.
-    // Next.js revalidates automatically — no one needs to do anything manually.
-    const res = await fetch(RSS_URL, {
-      next: { revalidate: 3600 },
+    // Search only within Pacis TV's completed live streams for today.
+    // eventType=completed returns past live streams — exactly what the Live tab shows.
+    // Cached for 1 hour so we don't burn through the daily quota.
+    const url = new URL("https://www.googleapis.com/youtube/v3/search");
+    url.searchParams.set("part", "snippet");
+    url.searchParams.set("channelId", CHANNEL_ID);
+    url.searchParams.set("type", "video");
+    url.searchParams.set("eventType", "completed"); // live streams only
+    url.searchParams.set("order", "date");
+    url.searchParams.set("maxResults", "10");
+    url.searchParams.set("key", apiKey);
+
+    const res = await fetch(url.toString(), {
+      next: { revalidate: 3600 }, // 1 hour cache
     });
 
     if (!res.ok) {
-      return NextResponse.json(
-        { error: "Could not reach YouTube RSS feed" },
-        { status: 502 }
-      );
+      const err = await res.text();
+      console.error("YouTube API error:", err);
+      return NextResponse.json({ videoId: null, title: null });
     }
 
-    const xml = await res.text();
-    const videos = parseVideos(xml);
-    const video = findMassVideo(videos, new Date());
+    const data = await res.json();
+    const video = findMassVideo(data.items ?? [], new Date());
 
     if (!video) {
       return NextResponse.json({ videoId: null, title: null });
     }
 
-    return NextResponse.json({ videoId: video.id, title: video.title });
-  } catch {
-    return NextResponse.json({ error: "Server error" }, { status: 500 });
+    return NextResponse.json({ videoId: video.videoId, title: video.title });
+  } catch (err) {
+    console.error("pacistv route error:", err);
+    return NextResponse.json({ videoId: null, title: null });
   }
 }
