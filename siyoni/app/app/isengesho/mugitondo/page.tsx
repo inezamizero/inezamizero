@@ -97,8 +97,7 @@ cyangwa Luka 24, 1-12, n'ahandi.`,
 
   igisubizo: `Nzasingiza Nyagasani, iteka n'ahantu hose (2).`,
   zaburiSentence: `Ibisingizo bye bizahora ubudatuza mu munwa wanjye, iteka n'ahantu hose.`,
-  ikuzoZaburi: `Hubahwe Imana Data na Mwana na Roho Mutagatifu,
-Nzasingiza Nyagasani, iteka n'ahantu hose.`,
+  ikuzoZaburi: `Nzasingiza Nyagasani, iteka n'ahantu hose.`,
 
   // ── 5. Indirimbo ya Zakariya (Benedictus — Lk 1:68-79) ───────────────────
   inyikirizoZakariya: `Amahanga yose azaza apfukame imbere yawe,
@@ -131,8 +130,7 @@ akabonekera abari batuye mu mwijima
 no mu gicuku cy'urupfu,
 kugira ngo atuyobore mu nzira y'amahoro.`,
 
-  ikuzoZakariya: `Hubahwe Imana Data na Mwana na Roho Mutagatifu,
-nk'uko bisanzwe iteka, bubahwe n'ubu n'iteka ryose. Amen.`,
+  ikuzoZakariya: `nk'uko bisanzwe iteka, bubahwe n'ubu n'iteka ryose. Amen.`,
 
   // ── 6. Amasengesho yo gusaba ──────────────────────────────────────────────
   gusabaIntro: `Dusabe Imana, Umubyeyi wacu ushobora byose, We wumvana ubwuzu ukwinginga kw'abana be, tumusingize tugira tuti: "NYAGASANI, UTWUMVE UTUBABARIRE."`,
@@ -223,7 +221,8 @@ export default function MugitondoPage() {
           {/* ── 1. Intangiriro ─────────────────────────────────────────────── */}
           <SectionHeader title="Intangiriro" />
           <PrayerBlock text={PRAYERS.intangiriro} />
-          <SubBlock label="Ikuzo ry'Imana" text={PRAYERS.ikuzoIntangiriro} />
+          <SubBlock label="Ikuzo ry'Imana" text="Hubahwe Imana Data na Mwana na Roho Mutagatifu" />
+          <SubBlock label="" text={PRAYERS.ikuzoIntangiriro} />
           {!inLent && <SubBlock label="Alleluya" text={PRAYERS.alleluya} />}
 
           {/* ── 2. Indirimbo ───────────────────────────────────────────────── */}
@@ -248,13 +247,15 @@ export default function MugitondoPage() {
           <PrayerBlock text={isSunday ? PRAYERS.isomoSunday : PRAYERS.isomoWeekday} />
           <SubBlock label="Igisubizo" text={PRAYERS.igisubizo} />
           <SubBlock label="" text={PRAYERS.zaburiSentence} />
-          <SubBlock label="Ikuzo ry'Imana" text={PRAYERS.ikuzoZaburi} />
+          <SubBlock label="Ikuzo ry'Imana" text="Hubahwe Imana Data na Mwana na Roho Mutagatifu" />
+          <SubBlock label="" text={PRAYERS.ikuzoZaburi} />
 
           {/* ── 6. Indirimbo ya Zakariya ───────────────────────────────────── */}
           <SectionHeader title="Indirimbo ya Zakariya — Lk 1, 68-79" />
           <SubBlock label="Inyikirizo" text={PRAYERS.inyikirizoZakariya} />
           <PrayerBlock text={PRAYERS.zakariya} />
-          <SubBlock label="Ikuzo ry'Imana" text={PRAYERS.ikuzoZakariya} />
+          <SubBlock label="Ikuzo ry'Imana" text="Hubahwe Imana Data na Mwana na Roho Mutagatifu" />
+          <SubBlock label="" text={PRAYERS.ikuzoZakariya} />
 
           {/* ── 6. Amasengesho yo gusaba ───────────────────────────────────── */}
           <SectionHeader title="Amasengesho yo Gusaba" />
