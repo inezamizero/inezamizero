@@ -89,7 +89,7 @@ function SectionHeader({ title }: { title: string }) {
   return (
     <div className="flex items-center gap-4 my-8">
       <div className="flex-1 h-px bg-siyoni-border" />
-      <span className="font-body text-xs font-medium text-siyoni-mid tracking-widest uppercase whitespace-nowrap">
+      <span className="font-body text-sm font-medium text-siyoni-mid tracking-widest uppercase whitespace-nowrap">
         {title}
       </span>
       <div className="flex-1 h-px bg-siyoni-border" />

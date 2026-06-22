@@ -141,7 +141,7 @@ function SectionHeader({ title }: { title: string }) {
   return (
     <div className="flex items-center gap-4 my-8">
       <div className="flex-1 h-px bg-siyoni-border" />
-      <span className="font-body text-xs font-medium text-siyoni-mid tracking-widest uppercase whitespace-nowrap">
+      <span className="font-body text-sm font-medium text-siyoni-mid tracking-widest uppercase whitespace-nowrap">
         {title}
       </span>
       <div className="flex-1 h-px bg-siyoni-border" />
@@ -253,13 +253,12 @@ export default function NimugorobaPage() {
           {/* ── 10. Umusozo ─────────────────────────────────────────────────── */}
           <SectionHeader title="Umusozo" />
           <PrayerBlock text={PRAYERS.umusozo} />
-          <SubBlock label="Umutambyi" text="Dusingize Nyagasani." />
+          <SubBlock label="Umusaseridoti" text="Dusingize Nyagasani." />
           <SubBlock label="Abantu" text="Dushimiye Imana." />
-          <SubBlock label="" text="(Ni byiza kuvuga indamutso ya Malayika aya masengesho arangiye)" />
 
           <div className="mt-10 text-center">
             <div className="w-12 h-0.5 bg-siyoni-ochre mx-auto mb-4" />
-            <p className="font-heading text-xl text-siyoni-brown">Imana ikuhe ijoro ryiza. 🙏</p>
+            <p className="font-heading text-xl text-siyoni-brown">Imana iguhe ijoro ryiza. 🙏</p>
             <Link href="/isengesho" className="inline-block mt-6 font-body text-sm text-siyoni-mid hover:text-siyoni-brown transition-colors underline underline-offset-2">
               Subira ku masengesho
             </Link>

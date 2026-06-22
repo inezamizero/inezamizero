@@ -12,13 +12,13 @@ const options = [
   },
   {
     name: "Amasengesho ya Nimugoroba",
-    desc: "Soza umunsi wawe neza mbere y'ubuturo",
+    desc: "Soza umunsi wawe neza mbere yo kuryama",
     href: "/isengesho/nimugoroba",
     available: true,
   },
   {
     name: "Andi Masengesho",
-    desc: "Amasengesho atandukanye — gusenga imbere ya Sakramentu, kwatura, n'ibindi",
+    desc: "Amasengesho atandukanye; gusenga imbere y'isakramentu, n'ibindi",
     href: "/isengesho/andi",
     available: false,
   },
