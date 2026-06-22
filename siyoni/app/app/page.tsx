@@ -108,7 +108,7 @@ export default function Home() {
             {...fadeUp(0.3)}
             className="font-body text-base md:text-lg text-siyoni-cream/70 italic mb-10 leading-relaxed"
           >
-            &ldquo;Kuko Kiliziya ikuri mu mutima, aho uri hose&rdquo;
+            &ldquo;Kuko Kiliziya muri kumwe, aho uri hose&rdquo;
           </motion.p>
 
           <motion.div {...fadeUp(0.4)}>

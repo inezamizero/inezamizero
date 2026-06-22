@@ -100,11 +100,15 @@ const SAINTS: Record<string, string> = {
   "6-30": "Abapfiriye Imana ba mbere i Roma, Mutagatifu Adoifi, Mutagatifu Marsiyali, na Mutagatifu Teobaldi",
 
   // ── July ─────────────────────────────────────────────────────────────────
+  "7-1":  "Mutagatifu Aroni, Mutagatifu Esiteri, Mutagatifu Gali, na Mutagatifu Tiyeri",
+  "7-2":  "Mutagatifu Martiniyani na Mutagatifu Oto",
   "7-3":  "Mutagatifu Tomasi (Intumwa)",
   "7-4":  "Mutagatifu Elizabeti wa Portugali",
-  "7-5":  "Mutagatifu Antuwani Zakkaria",
+  "7-5":  "Mutagatifu Antuwani Mariya Zakkaria",
   "7-6":  "Mutagatifu Mariya Goreti",
-  "7-9":  "Mutagatifu Agusitino Zhao Rong n'Inshuti ze",
+  "7-7":  "MutagatifuOdoni",
+  "7-8":  "Mutagatifu Edgari, Mutagatifu Landrada, na Mutagatifu Adriyani",
+  "7-9":  "Mutagatifu Amandina, Mutagatifu Irma, Mutagatifu Mariyana, na Mutagatifu Veronika-Yuliyana",
   "7-11": "Mutagatifu Benedikyito",
   "7-13": "Mutagatifu Henri",
   "7-14": "Mutagatifu Kamiyo wa Leli",

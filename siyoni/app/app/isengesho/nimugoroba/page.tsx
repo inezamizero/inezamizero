@@ -48,7 +48,7 @@ nk'uko bisanzwe iteka, bubahwe n'ubu n'iteka ryose. Amen.`,
 
   // ── 3. Igisingizo cya Kristu ──────────────────────────────────────────────
   // Canticle of Christ — Colossians 1:12-20 (primary option)
-  igisingizoKristu: `"Nimunezerwe kandi mushimire Imana Data watumye mugira umugabane ku murage w'abatagatifujwe bari mu mucyo. Koko rero, yatugobotoye ku ngoyi y'umwijima, atujyana mu Ngoma y'Umwana we akunda byimazeyo, ari na We dukesha gucungurwa no kubabarirwa ibyaha.
+  igisingizoKristu: `Nimunezerwe kandi mushimire Imana Data watumye mugira umugabane ku murage w'abatagatifujwe bari mu mucyo. Koko rero, yatugobotoye ku ngoyi y'umwijima, atujyana mu Ngoma y'Umwana we akunda byimazeyo, ari na We dukesha gucungurwa no kubabarirwa ibyaha.
 Ni We shusho ry'Imana itagaragara,
 Umuvukambere mu byitwa ikiremwa cyose,
 kuko byose byaremewe muri We,
@@ -61,10 +61,10 @@ Ni We kandi Mutwe w'umubiri, ari wo Kiliziya,
 akaba n'Ishingiro, n'Umuvukambere mu bapfuye,
 kugira ngo ahorane muri byose umwanya w'ibanze;
 kuko Imana yizihijwe no kumusenderezamo ibyiza byose,
-kandi muri We yiyunga n'ibiriho byose, ndetse ari We ibigirira, ari ibiri ku isi, ari n'ibiri mu ijuru, byose ibisakazaho amahoro aturutse ku maraso ye yameneye ku musaraba."`,
+kandi muri We yiyunga n'ibiriho byose, ndetse ari We ibigirira, ari ibiri ku isi, ari n'ibiri mu ijuru, byose ibisakazaho amahoro aturutse ku maraso ye yameneye ku musaraba.`,
 
   // Alternative canticle — Ephesians 1:3-10
-  igisingizoAlt: `"Nihasingizwe Imana, Se w'Umwami wacu Yezu Kristu,
+  igisingizoAlt: `Nihasingizwe Imana, Se w'Umwami wacu Yezu Kristu,
 Yo yadusakajemo imigisha y'amoko yose, ituruka kuri Roho, mu ijuru, ku bwa Kristu.
 Nguko uko yadutoreye muri We nyine, mbere y'ihangwa ry'ibiriho byose,
 kugira ngo tuzayihore imbere mu rukundo, turi intungane n'abaziranenge.
@@ -77,7 +77,7 @@ ikaba yarabudusesekajemo ibigiranye ubuhanga n'ubumenyi bwose.
 Yaduhishuriye ibanga ry'ugushaka kwayo,
 wa mugambi wuje urugwiro yari yifitemo kuva kera,
 ngo izawuzuze ibihe bigeze: umugambi wo gukoranyiriza ibintu byose
-ku Mutware umwe rukumbi, Kristu, ari ibiri mu ijuru, ari n'ibiri ku isi."`,
+ku Mutware umwe rukumbi, Kristu, ari ibiri mu ijuru, ari n'ibiri ku isi.`,
 
   // Antiphons after the canticle
   inyikirizoKristu1: `Habwa ikuzo Nyagasani, icyubahiro, ububasha n'ishema.`,
@@ -85,16 +85,11 @@ ku Mutware umwe rukumbi, Kristu, ari ibiri mu ijuru, ari n'ibiri ku isi."`,
 
   // ── 4. Zaburi ─────────────────────────────────────────────────────────────
   inyikirizoZab1: `Nihasingizwe izina rya Nyagasani, ubu n'iteka ryose.`,
-  zaburi1ref: `Zab 113 (112)`,
-  zaburi1: `[PLACEHOLDER — Shyiramo hano inyandiko ya Zaburi 113 (112) mu Kinyarwanda]`,
-
   inyikirizoZab2: `Ubuvunyi n'ingabire bituruka kuri Uhoraho.`,
-  zaburi2ref: `Zab 130 (129)`,
-  zaburi2: `[PLACEHOLDER — Shyiramo hano inyandiko ya Zaburi 130 (129) mu Kinyarwanda]`,
 
   // ── 5. Isomo ──────────────────────────────────────────────────────────────
   // Reading — 1 Peter 3:8-9
-  isomo: `"Ahasigaye, nimutekereze ibihuje, mugirirane impuhwe, mukundane urwa kivandimwe, mube abanyambabazi kandi mwicishe bugufi. Ntimukiture undi inabi yabagiriye, cyangwa ngo nabatuka mumusubize; ahubwo mwifurizanye umugisha, kuko ari cyo mwahamagariwe, kugira ngo muzahabwe umugisha ho umurage."`,
+  isomo: `Ahasigaye, nimutekereze ibihuje, mugirirane impuhwe, mukundane urwa kivandimwe, mube abanyambabazi kandi mwicishe bugufi. Ntimukiture undi inabi yabagiriye, cyangwa ngo nabatuka mumusubize; ahubwo mwifurizanye umugisha, kuko ari cyo mwahamagariwe, kugira ngo muzahabwe umugisha ho umurage.`,
 
   igisubizo: `Nishyize mu biganza byawe, Nyagasani.
 Ni wowe uducungura Nyagasani, Mana y'ukuri.`,
@@ -103,7 +98,7 @@ Ni wowe uducungura Nyagasani, Mana y'ukuri.`,
   inyikirizoMariyaWeekday: `Uhoraho yangiriye ibintu by'agatangaza, izina rye ni ritagatifu.`,
   inyikirizoMariyaSunday: `Ku mugoroba wa Pasika abigishwa bamenye Nyagasani, igihe yamanyuraga umugati.`,
 
-  magnificat: `"Umutima wanjye urasingiza Nyagasani,
+  magnificat: `Umutima wanjye urasingiza Nyagasani,
 kandi uhimbajwe n'Imana Umukiza wanjye.
 Kuko yibutse umuja we utavugwaga,
 rwose, kuva ubu amašekuruza yose azanyita umuhire.
@@ -117,7 +112,7 @@ abashonji yabagwirije ibintu, abakungu abasezerera amara masa.
 Yagobotoye Israheli umugaragu we,
 bityo yibuka impuhwe ze,
 nk'uko yari yarabibwiye abakurambere bacu,
-agirira Abrahamu n'urubyaro rwe iteka."`,
+agirira Abrahamu n'urubyaro rwe iteka.`,
 
   ikuzoMariya: `Hubahwe Imana Data na Mwana na Roho Mutagatifu,
 nk'uko bisanzwe iteka, bubahwe n'ubu n'iteka ryose. Amen.`,
@@ -225,9 +220,7 @@ export default function NimugorobaPage() {
           {/* ── 4. Zaburi ──────────────────────────────────────────────────── */}
           <SectionHeader title="Zaburi" />
           <SubBlock label="Inyikirizo" text={PRAYERS.inyikirizoZab1} />
-          <SubBlock label={PRAYERS.zaburi1ref} text={PRAYERS.zaburi1} />
           <SubBlock label="Inyikirizo" text={PRAYERS.inyikirizoZab2} />
-          <SubBlock label={PRAYERS.zaburi2ref} text={PRAYERS.zaburi2} />
 
           {/* ── 5. Isomo ───────────────────────────────────────────────────── */}
           <SectionHeader title="Isomo — 1 Petero 3, 8-9" />
