@@ -221,8 +221,7 @@ export default function MugitondoPage() {
           {/* ── 1. Intangiriro ─────────────────────────────────────────────── */}
           <SectionHeader title="Intangiriro" />
           <PrayerBlock text={PRAYERS.intangiriro} />
-          <SubBlock label="Ikuzo ry'Imana" text="Hubahwe Imana Data na Mwana na Roho Mutagatifu" />
-          <SubBlock label="" text={PRAYERS.ikuzoIntangiriro} />
+          <SubBlock label="Hubahwe Imana Data na Mwana na Roho Mutagatifu" text={PRAYERS.ikuzoIntangiriro} />
           {!inLent && <SubBlock label="Alleluya" text={PRAYERS.alleluya} />}
 
           {/* ── 2. Indirimbo ───────────────────────────────────────────────── */}
@@ -247,15 +246,13 @@ export default function MugitondoPage() {
           <PrayerBlock text={isSunday ? PRAYERS.isomoSunday : PRAYERS.isomoWeekday} />
           <SubBlock label="Igisubizo" text={PRAYERS.igisubizo} />
           <SubBlock label="" text={PRAYERS.zaburiSentence} />
-          <SubBlock label="Ikuzo ry'Imana" text="Hubahwe Imana Data na Mwana na Roho Mutagatifu" />
-          <SubBlock label="" text={PRAYERS.ikuzoZaburi} />
+          <SubBlock label="Hubahwe Imana Data na Mwana na Roho Mutagatifu" text={PRAYERS.ikuzoZaburi} />
 
           {/* ── 6. Indirimbo ya Zakariya ───────────────────────────────────── */}
           <SectionHeader title="Indirimbo ya Zakariya — Lk 1, 68-79" />
           <SubBlock label="Inyikirizo" text={PRAYERS.inyikirizoZakariya} />
           <PrayerBlock text={PRAYERS.zakariya} />
-          <SubBlock label="Ikuzo ry'Imana" text="Hubahwe Imana Data na Mwana na Roho Mutagatifu" />
-          <SubBlock label="" text={PRAYERS.ikuzoZakariya} />
+          <SubBlock label="Hubahwe Imana Data na Mwana na Roho Mutagatifu" text={PRAYERS.ikuzoZakariya} />
 
           {/* ── 6. Amasengesho yo gusaba ───────────────────────────────────── */}
           <SectionHeader title="Amasengesho yo Gusaba" />

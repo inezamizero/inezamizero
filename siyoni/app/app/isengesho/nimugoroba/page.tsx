@@ -204,8 +204,7 @@ export default function NimugorobaPage() {
           {/* ── 1. Intangiriro ─────────────────────────────────────────────── */}
           <SectionHeader title="Intangiriro" />
           <PrayerBlock text={PRAYERS.intangiriro} />
-          <SubBlock label="Ikuzo ry'Imana" text="Hubahwe Imana Data na Mwana na Roho Mutagatifu" />
-          <SubBlock label="" text={PRAYERS.ikuzoIntangiriro} />
+          <SubBlock label="Hubahwe Imana Data na Mwana na Roho Mutagatifu" text={PRAYERS.ikuzoIntangiriro} />
           {!inLent && <SubBlock label="Alleluya" text={PRAYERS.alleluya} />}
 
           {/* ── 2. Igisingizo cya Kristu ───────────────────────────────────── */}
@@ -230,8 +229,7 @@ export default function NimugorobaPage() {
             text={isSunday ? PRAYERS.inyikirizoMariyaSunday : PRAYERS.inyikirizoMariyaWeekday}
           />
           <PrayerBlock text={PRAYERS.magnificat} />
-          <SubBlock label="Ikuzo ry'Imana" text="Hubahwe Imana Data na Mwana na Roho Mutagatifu" />
-          <SubBlock label="" text={PRAYERS.ikuzoMariya} />
+          <SubBlock label="Hubahwe Imana Data na Mwana na Roho Mutagatifu" text={PRAYERS.ikuzoMariya} />
 
           {/* ── 7. Amasengesho yo gusaba ───────────────────────────────────── */}
           <SectionHeader title="Amasengesho yo Gusaba" />
