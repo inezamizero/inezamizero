@@ -13,6 +13,7 @@ import {
   CalendarDays,
   Heart,
   Home,
+  Mail,
   Music,
   Sun,
 } from "lucide-react";
@@ -26,10 +27,11 @@ const sections = [
   { name: "Indirimbo",           mobileLabel: "Indirimbo",  href: "/indirimbo", icon: Music },
 ];
 
-// Mobile tab bar also includes a Home tab as the first item.
+// Mobile tab bar includes Home and Contact in addition to the five sections.
 const mobileTabs = [
-  { name: "Gusenga", href: "/", icon: Home },
+  { name: "Gusenga",    mobileLabel: "Gusenga",    href: "/",        icon: Home },
   ...sections,
+  { name: "Tuvugishe", mobileLabel: "Tuvugishe",  href: "/contact", icon: Mail },
 ];
 
 export default function Navbar() {
@@ -152,7 +154,7 @@ export default function Navbar() {
                 className="transition-all duration-200"
               />
               <span className="truncate max-w-[52px] text-center leading-tight">
-                {"mobileLabel" in tab ? tab.mobileLabel : tab.name}
+                {tab.mobileLabel}
               </span>
             </Link>
           );

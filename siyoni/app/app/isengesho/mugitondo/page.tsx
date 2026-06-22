@@ -33,13 +33,12 @@ function isLent(date: Date): boolean {
 const PRAYERS = {
 
   // ── 1. Intangiriro ────────────────────────────────────────────────────────
-  intangiriro: `Nyagasani, bumbura umunwa wanjye +
+  intangiriro: `Nyagasani, bumbura umunwa wanjye.
 Maze ururimi rwanjye ruzatangaze ibisingizo byawe.`,
 
-  ikuzoIntangiriro: `Hubahwe Imana Data na Mwana na Roho Mutagatifu,
-nk'uko bisanzwe iteka, bubahwe n'ubu n'iteka ryose. Amen.`,
+  ikuzoIntangiriro: `Nk'uko bisanzwe iteka, bubahwe n'ubu n'iteka ryose. Amen.`,
 
-  alleluya: `Alleluya (usibye mu gihe cy'igisibo)`,
+  alleluya: `Alleluya`,
 
   // ── 2. Indirimbo ──────────────────────────────────────────────────────────
   inyikirizoIndirimbo: `Nimuze dusingize Nyagasani, Imana yacu.`,
@@ -230,7 +229,6 @@ export default function MugitondoPage() {
           {/* ── 2. Indirimbo ───────────────────────────────────────────────── */}
           <SectionHeader title="Indirimbo" />
           <SubBlock label="Inyikirizo" text={PRAYERS.inyikirizoIndirimbo} />
-          <PrayerBlock text={PRAYERS.indirimbo} />
 
           {/* ── 3. Igisingizo ──────────────────────────────────────────────── */}
           <SectionHeader title="Igisingizo" />
