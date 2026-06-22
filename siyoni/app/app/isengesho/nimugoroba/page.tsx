@@ -33,8 +33,7 @@ function isLent(date: Date): boolean {
 const PRAYERS = {
 
   // ── 1. Intangiriro ────────────────────────────────────────────────────────
-  intangiriro: `Mana ngwino unyikirize +
-Nyagasani banguka undengere.`,
+  intangiriro: `Mana ngwino unyikirize. Nyagasani banguka undengere.`,
 
   ikuzoIntangiriro: `Hubahwe Imana Data na Mwana na Roho Mutagatifu,
 nk'uko bisanzwe iteka, bubahwe n'ubu n'iteka ryose. Amen.`,
@@ -114,8 +113,7 @@ bityo yibuka impuhwe ze,
 nk'uko yari yarabibwiye abakurambere bacu,
 agirira Abrahamu n'urubyaro rwe iteka.`,
 
-  ikuzoMariya: `Hubahwe Imana Data na Mwana na Roho Mutagatifu,
-nk'uko bisanzwe iteka, bubahwe n'ubu n'iteka ryose. Amen.`,
+  ikuzoMariya: `Nk'uko bisanzwe iteka, bubahwe n'ubu n'iteka ryose, Amen.`,
 
   // ── 7. Amasengesho yo gusaba ──────────────────────────────────────────────
   gusabaIntro: `Dusabe Imana, Umubyeyi wacu, We ukunda abana be kandi ntiyirengagize amasezerano yabo, tumubwire twiyoroheje tuti: "NYAGASANI UTWIYEGEREZE."`,
@@ -127,14 +125,14 @@ nk'uko bisanzwe iteka, bubahwe n'ubu n'iteka ryose. Amen.`,
   gusaba5: `Abapfuye bahe kureba uruhanga rwawe, natwe uduhe kuzasangira na bo umunezero w'ubwiza bwawe. Tubisabe Imana.`,
 
   // ── 8. Dawe uri mu ijuru ──────────────────────────────────────────────────
-  dawe: `[PLACEHOLDER — Dawe Uri mu Ijuru (Our Father)]`,
+  dawe: `Izina ryawe ryubahwe Ingoma yawe yogere hose, icyo ushaka gikorwe mu isi nk'uko gikorwa mu ijuru. Ifunguro ridutunga uriduhe none. Utubabarire ibicumuro byacu, nk'uko natwe tubabarira abaducumuyeho. Ntudutererane mu bitwoshya, ahubwo udukize icyago, Amen.`,
 
   // ── 9. Isengesho risoza ───────────────────────────────────────────────────
   risozaWeekday: `Mana itumurikira, duhe gutsinda imitego y'umwanzi muri iri joro, maze ejo mu gitondo tuzahimbarirwe imbere yawe, tugushimira muri Yezu Kristu Umwana wawe n'Umwami wacu. Amen.`,
   risozaSunday: `Nyagasani, gumana natwe kuko bwije n'umunsi ukaba uciye ikibu; susurutsa imitima yacu iyoboke inzira zawe, tuguhishure mu Byanditswe bitagatifu. Ibyo turabigusaba ku bwa Yezu Kristu, Umwana wawe n'Umwami wacu. Amen.`,
 
   // ── 10. Umusozo ───────────────────────────────────────────────────────────
-  umusozo: `Imana iduhe umugisha + iturinde ikibi cyose, kandi izatugeze mu bugingo bw'iteka. Amen.`,
+  umusozo: `Imana iduhe umugisha, iturinde ikibi cyose, kandi izatugeze mu bugingo bw'iteka. Amen.`,
 };
 
 // ── Sub-components ────────────────────────────────────────────────────────────
@@ -214,8 +212,6 @@ export default function NimugorobaPage() {
           <SectionHeader title="Igisingizo cya Kristu" />
           <PrayerBlock text={PRAYERS.igisingizoKristu} />
           <SubBlock label="Inyikirizo" text={PRAYERS.inyikirizoKristu1} />
-          <PrayerBlock text={PRAYERS.igisingizoAlt} />
-          <SubBlock label="Inyikirizo" text={PRAYERS.inyikirizoKristu2} />
 
           {/* ── 4. Zaburi ──────────────────────────────────────────────────── */}
           <SectionHeader title="Zaburi" />
@@ -234,7 +230,7 @@ export default function NimugorobaPage() {
             text={isSunday ? PRAYERS.inyikirizoMariyaSunday : PRAYERS.inyikirizoMariyaWeekday}
           />
           <PrayerBlock text={PRAYERS.magnificat} />
-          <SubBlock label="Ikuzo ry'Imana" text={PRAYERS.ikuzoMariya} />
+          <SubBlock label="Hubahwe Imana Data na Mwana na Roho Mutagatifu" text={PRAYERS.ikuzoMariya} />
 
           {/* ── 7. Amasengesho yo gusaba ───────────────────────────────────── */}
           <SectionHeader title="Amasengesho yo Gusaba" />
