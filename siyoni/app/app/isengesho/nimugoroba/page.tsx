@@ -38,7 +38,7 @@ const PRAYERS = {
   ikuzoIntangiriro: `Hubahwe Imana Data na Mwana na Roho Mutagatifu,
 nk'uko bisanzwe iteka, bubahwe n'ubu n'iteka ryose. Amen.`,
 
-  alleluya: `Alleluya (usibye mu gihe cy'igisibo)`,
+  alleluya: `Alleluya`,
 
   // ── 2. Indirimbo ──────────────────────────────────────────────────────────
   // References to the physical hymn book — add the hymn text here when available
