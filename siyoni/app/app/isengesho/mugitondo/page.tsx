@@ -236,23 +236,21 @@ export default function MugitondoPage() {
           <PrayerBlock text={PRAYERS.igisingizo} />
           <SubBlock label="" text={PRAYERS.igisingizoSentence} />
 
-          {/* ── 4. Zaburi + Isomo ──────────────────────────────────────────── */}
+          {/* ── 4. Zaburi ──────────────────────────────────────────────────── */}
           <SectionHeader title={isSunday ? "Zaburi — Ku Cyumweru" : "Zaburi — Iminsi Isanzwe"} />
           <SubBlock label="Inyikirizo 1" text={PRAYERS.inyikirizo1} />
           <SubBlock label="Inyikirizo 2" text={PRAYERS.inyikirizo2} />
           <SubBlock label="Inyikirizo 3" text={PRAYERS.inyikirizo3} />
           <PrayerBlock text={isSunday ? PRAYERS.zaburiSunday : PRAYERS.zaburiWeekday} />
 
-          {/* Isomo — inside the Zaburi section per the book */}
-          <SubBlock
-            label={isSunday ? "Isomo — Ku Cyumweru" : "Isomo — Ku Mibyizi"}
-            text={isSunday ? PRAYERS.isomoSunday : PRAYERS.isomoWeekday}
-          />
+          {/* ── 5. Isomo ───────────────────────────────────────────────────── */}
+          <SectionHeader title={isSunday ? "Isomo — Ku Cyumweru" : "Isomo — Ku Mibyizi"} />
+          <PrayerBlock text={isSunday ? PRAYERS.isomoSunday : PRAYERS.isomoWeekday} />
           <SubBlock label="Igisubizo" text={PRAYERS.igisubizo} />
           <SubBlock label="" text={PRAYERS.zaburiSentence} />
           <SubBlock label="Ikuzo ry'Imana" text={PRAYERS.ikuzoZaburi} />
 
-          {/* ── 5. Indirimbo ya Zakariya ───────────────────────────────────── */}
+          {/* ── 6. Indirimbo ya Zakariya ───────────────────────────────────── */}
           <SectionHeader title="Indirimbo ya Zakariya — Lk 1, 68-79" />
           <SubBlock label="Inyikirizo" text={PRAYERS.inyikirizoZakariya} />
           <PrayerBlock text={PRAYERS.zakariya} />
