@@ -13,7 +13,7 @@ function findMassVideo(
     const upper = title.toUpperCase().replace(/\s+/g, " ");
     if (!upper.includes(dateStr)) return false;
     if (isSunday) return upper.includes("IGITAMBO CYA MISA YA GATATU");
-    return upper.includes("IGITAMBO CYA MISA") && upper.includes("MUGITONDO");
+    return upper.includes("IGITAMBO CYA MISA") && /MU\s*GITONDO/.test(upper);
   });
 
   if (matches.length === 0) return null;
@@ -47,7 +47,7 @@ export async function GET(request: Request) {
 
   const searchQuery = isSunday
     ? "IGITAMBO CYA MISA YA GATATU"
-    : "IGITAMBO CYA MISA YA MUGITONDO";
+    : "IGITAMBO CYA MISA YA MU GITONDO";
 
   try {
     const url = new URL("https://www.googleapis.com/youtube/v3/search");
