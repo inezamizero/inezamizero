@@ -114,14 +114,21 @@ export default function MisaPage() {
   const [saintName, setSaintName] = useState<string | null | undefined>(undefined);
 
   useEffect(() => {
-    // Pacis TV morning mass
-    fetch("/api/pacistv")
+    // Use the user's local date so everything matches their timezone
+    const localDate = new Date();
+    const dd = String(localDate.getDate()).padStart(2, "0");
+    const mm = String(localDate.getMonth() + 1).padStart(2, "0");
+    const yyyy = localDate.getFullYear();
+    const dateStr = `${dd}/${mm}/${yyyy}`;  // DD/MM/YYYY — matches Pacis TV title format
+    const month = localDate.getMonth() + 1;
+    const day = localDate.getDate();
+
+    fetch(`/api/pacistv?date=${dateStr}`)
       .then((r) => r.json())
       .then((data) => setVideoId(data.videoId ?? null))
       .catch(() => setVideoId(null));
 
-    // Saint of the day — no-store prevents browser from caching the response
-    fetch("/api/saint", { cache: "no-store" })
+    fetch(`/api/saint?month=${month}&day=${day}`, { cache: "no-store" })
       .then((r) => r.json())
       .then((data) => setSaintName(data.name ?? null))
       .catch(() => setSaintName(null));
