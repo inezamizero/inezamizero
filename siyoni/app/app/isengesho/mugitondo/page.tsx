@@ -65,18 +65,16 @@ Akira amasengesho yacu turagushimira.
 Hubahwe Imana Data na Mwana na Roho Mutagatifu
 Nk'uko bisanzwe iteka bubahwe n'ubu n'iteka ryose. Amen.`,
 
-  igisingizoSentence: `Horana impundu Rurema iteka ryose. Amen.
-cyangwa X 2, X 8, Zab 66 (65)...`,
+  igisingizoSentence: `Horana impundu Rurema iteka ryose. Amen.`,
 
   // ── 4. Zaburi ─────────────────────────────────────────────────────────────
   // Three antiphon options — the reader picks one
   inyikirizo1: `Ndashaka kugusingiza Mana yanjye
-Ku bw'izina ryawe, nzamuye ibiganza. Zab 63 (62)`,
+Ku bw'izina ryawe, nzamuye ibiganza.`,
 
-  inyikirizo2: `Nimumukuze kandi mumurate ubuziraherezo. Zab 148`,
+  inyikirizo2: `Nimumukuze kandi mumurate ubuziraherezo.`,
 
-  inyikirizo3: `Mahanga yose, nimusingize Uhoraho.
-Zab 117 (116), reba ku rupapuro rwa 471`,
+  inyikirizo3: `Mahanga yose, nimusingize Uhoraho.`,
 
   // Psalm texts — add the full psalm for each reference above
   zaburiWeekday: `[PLACEHOLDER — Shyiramo hano inyandiko ya Zaburi (Iminsi isanzwe: Zab 63, Zab 148, Zab 117)]`,
@@ -130,7 +128,8 @@ akabonekera abari batuye mu mwijima
 no mu gicuku cy'urupfu,
 kugira ngo atuyobore mu nzira y'amahoro.`,
 
-  ikuzoZakariya: `nk'uko bisanzwe iteka, bubahwe n'ubu n'iteka ryose. Amen.`,
+  ikuzoZakariya: `Hubahwe Imana Data na Mwana na Roho Mutagatifu,
+nk'uko bisanzwe iteka, bubahwe n'ubu n'iteka ryose. Amen.`,
 
   // ── 6. Amasengesho yo gusaba ──────────────────────────────────────────────
   gusabaIntro: `Dusabe Imana, Umubyeyi wacu ushobora byose, We wumvana ubwuzu ukwinginga kw'abana be, tumusingize tugira tuti: "NYAGASANI, UTWUMVE UTUBABARIRE."`,
@@ -148,7 +147,7 @@ kugira ngo atuyobore mu nzira y'amahoro.`,
   risozaSunday: `Mana, wowe ushyira ibyishimo by'ukuri mu mbaga yawe, ugaha umuryango wawe umunezero utazashira, turagusaba ngo uduhe guhorana ubwuzu mu byawe, maze tukogeze, tukumenyeshe n'abatakuzi. Ibyo tubigusabye ku bwa Yezu Kristu, Umwami wacu. Amen.`,
 
   // ── 9. Umusozo ────────────────────────────────────────────────────────────
-  umusozo: `Imana niduhe umugisha + iturinde ikibi cyose, kandi izatugeze mu bugingo bw'iteka. Amen.`,
+  umusozo: `Imana niduhe umugisha, iturinde ikibi cyose, kandi izatugeze mu bugingo bw'iteka. Amen.`,
 };
 
 // ── Sub-components ────────────────────────────────────────────────────────────
@@ -222,24 +221,25 @@ export default function MugitondoPage() {
           <SectionHeader title="Intangiriro" />
           <PrayerBlock text={PRAYERS.intangiriro} />
           <SubBlock label="Hubahwe Imana Data na Mwana na Roho Mutagatifu" text={PRAYERS.ikuzoIntangiriro} />
-          {!inLent && <SubBlock label="Alleluya" text={PRAYERS.alleluya} />}
 
           {/* ── 2. Indirimbo ───────────────────────────────────────────────── */}
           <SectionHeader title="Indirimbo" />
           <SubBlock label="Inyikirizo" text={PRAYERS.inyikirizoIndirimbo} />
+          {!inLent && <SubBlock label="Alleluya" text={PRAYERS.alleluya} />}
 
           {/* ── 3. Igisingizo ──────────────────────────────────────────────── */}
           <SectionHeader title="Igisingizo" />
           <SubBlock label="Inyikirizo" text={PRAYERS.inyikirizoIgisingizo} />
           <PrayerBlock text={PRAYERS.igisingizo} />
-          <SubBlock label="" text={PRAYERS.igisingizoSentence} />
+          <SubBlock label="Hubahwe Imana Data na Mwana na Roho Mutagatifu" text={PRAYERS.ikuzoIntangiriro} />
+          
 
           {/* ── 4. Zaburi ──────────────────────────────────────────────────── */}
           <SectionHeader title={isSunday ? "Zaburi — Ku Cyumweru" : "Zaburi — Iminsi Isanzwe"} />
           <SubBlock label="Inyikirizo 1" text={PRAYERS.inyikirizo1} />
           <SubBlock label="Inyikirizo 2" text={PRAYERS.inyikirizo2} />
           <SubBlock label="Inyikirizo 3" text={PRAYERS.inyikirizo3} />
-          <PrayerBlock text={isSunday ? PRAYERS.zaburiSunday : PRAYERS.zaburiWeekday} />
+          
 
           {/* ── 5. Isomo ───────────────────────────────────────────────────── */}
           <SectionHeader title={isSunday ? "Isomo — Ku Cyumweru" : "Isomo — Ku Mibyizi"} />
@@ -248,11 +248,11 @@ export default function MugitondoPage() {
           <SubBlock label="" text={PRAYERS.zaburiSentence} />
           <SubBlock label="Hubahwe Imana Data na Mwana na Roho Mutagatifu" text={PRAYERS.ikuzoZaburi} />
 
-          {/* ── 6. Indirimbo ya Zakariya ───────────────────────────────────── */}
+          {/* ── 5. Indirimbo ya Zakariya ───────────────────────────────────── */}
           <SectionHeader title="Indirimbo ya Zakariya — Lk 1, 68-79" />
           <SubBlock label="Inyikirizo" text={PRAYERS.inyikirizoZakariya} />
           <PrayerBlock text={PRAYERS.zakariya} />
-          <SubBlock label="Hubahwe Imana Data na Mwana na Roho Mutagatifu" text={PRAYERS.ikuzoZakariya} />
+          <SubBlock label="Ikuzo ry'Imana" text={PRAYERS.ikuzoZakariya} />
 
           {/* ── 6. Amasengesho yo gusaba ───────────────────────────────────── */}
           <SectionHeader title="Amasengesho yo Gusaba" />
@@ -261,7 +261,6 @@ export default function MugitondoPage() {
           <SubBlock label="" text={PRAYERS.gusaba2} />
           <SubBlock label="" text={PRAYERS.gusaba3} />
           <SubBlock label="" text={PRAYERS.gusaba4} />
-          <SubBlock label="" text="(Bashobora kongeraho andi)" />
 
           {/* ── 7. Dawe uri mu ijuru ───────────────────────────────────────── */}
           <SectionHeader title="Dawe Uri mu Ijuru" />
@@ -274,14 +273,13 @@ export default function MugitondoPage() {
           {/* ── 9. Umusozo ─────────────────────────────────────────────────── */}
           <SectionHeader title="Umusozo" />
           <PrayerBlock text={PRAYERS.umusozo} />
-          <SubBlock label="Umutambyi" text="Dusingize Nyagasani." />
+          <SubBlock label="Umusaseridoti" text="Dusingize Nyagasani." />
           <SubBlock label="Abantu" text="Dushimiye Imana." />
-          <SubBlock label="" text="(Ni byiza kuvuga indamutso ya Malayika aya masengesho arangiye)" />
 
           <div className="mt-10 text-center">
             <div className="w-12 h-0.5 bg-siyoni-ochre mx-auto mb-4" />
             <p className="font-heading text-xl text-siyoni-brown">
-              Imana ikuhe umunsi mwiza. 🙏
+              Imana iguhe umunsi mwiza. 🙏
             </p>
             <Link href="/isengesho" className="inline-block mt-6 font-body text-sm text-siyoni-mid hover:text-siyoni-brown transition-colors underline underline-offset-2">
               Subira ku masengesho

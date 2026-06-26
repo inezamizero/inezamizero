@@ -19,14 +19,14 @@ const devotions = [
     // Chaplet of Divine Mercy
     desc: "Isengesho ry'impuhwe z'Imana ryatanzwe na Mutagatifu Mama Faustina",
     href: "/rozari/impuhwe",
-    available: false,
+    available: true,
   },
   {
     name: "Ishapure y'Ububabare Burindwi",
-    // Chaplet of Suffering / Sorrowful
-    desc: "Gusenga uzirikana ububabare bwa Yezu Kristu",
+    // Chaplet of the Seven Sorrows of Mary — as taught at Kibeho
+    desc: "Gusenga uzirikana ububabare burindwi bwa Bikira Mariya, uko yayigishije i Kibeho",
     href: "/rozari/ububabare",
-    available: false,
+    available: true,
   },
 ];
 
