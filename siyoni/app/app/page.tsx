@@ -15,7 +15,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ImigongoPattern from "@/components/ImigongoPattern";
 import Navbar from "@/components/Navbar";
-import { translateGospelRef } from "@/lib/readings";
+import { translateBibleRef } from "@/lib/readings";
 
 const sections = [
   {
@@ -87,7 +87,7 @@ export default function Home() {
       .then((r) => r.json())
       .then((data) => {
         const gospel = data.readings?.gospel;
-        setGospelRef(gospel ? translateGospelRef(gospel) : null);
+        setGospelRef(gospel ? translateBibleRef(gospel) : null);
       })
       .catch(() => setGospelRef(null));
   }, []);
