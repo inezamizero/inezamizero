@@ -1,9 +1,13 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Link from "next/link";
-import Navbar from "@/components/Navbar";
-import ImigongoPattern from "@/components/ImigongoPattern";
+import { useSlideshow } from "@/lib/useSlideshow";
+import DarkSlideshowShell from "@/components/DarkSlideshowShell";
+import { DarkCard, DarkPrayerBlock, SlideNav } from "@/components/DarkPrayerUI";
+
+// A distinct dark-chocolate shade for evening prayer — deep cacao with a
+// cooler, duskier undertone than morning's warm coffee brown.
+const BG_COLOR = "#12100E";
 
 // ── Liturgical helpers ────────────────────────────────────────────────────────
 
@@ -31,21 +35,11 @@ function isLent(date: Date): boolean {
 // ── Prayer content ────────────────────────────────────────────────────────────
 
 const PRAYERS = {
-
-  // ── 1. Intangiriro ────────────────────────────────────────────────────────
   intangiriro: `Mana ngwino unyikirize. Nyagasani banguka undengere.`,
-
   ikuzoIntangiriro: `nk'uko bisanzwe iteka, bubahwe n'ubu n'iteka ryose. Amen.`,
-
   alleluya: `Alleluya`,
-
-  // ── 2. Indirimbo ──────────────────────────────────────────────────────────
-  // References to the physical hymn book — add the hymn text here when available
   indirimboRef: `D 54 cyangwa X 4, X 6, X 13`,
   indirimbo: `[PLACEHOLDER — Shyiramo hano inyandiko y'indirimbo yo mu mugoroba]`,
-
-  // ── 3. Igisingizo cya Kristu ──────────────────────────────────────────────
-  // Canticle of Christ — Colossians 1:12-20 (primary option)
   igisingizoKristu: `Nimunezerwe kandi mushimire Imana Data watumye mugira umugabane ku murage w'abatagatifujwe bari mu mucyo. Koko rero, yatugobotoye ku ngoyi y'umwijima, atujyana mu Ngoma y'Umwana we akunda byimazeyo, ari na We dukesha gucungurwa no kubabarirwa ibyaha.
 Ni We shusho ry'Imana itagaragara,
 Umuvukambere mu byitwa ikiremwa cyose,
@@ -60,8 +54,6 @@ akaba n'Ishingiro, n'Umuvukambere mu bapfuye,
 kugira ngo ahorane muri byose umwanya w'ibanze;
 kuko Imana yizihijwe no kumusenderezamo ibyiza byose,
 kandi muri We yiyunga n'ibiriho byose, ndetse ari We ibigirira, ari ibiri ku isi, ari n'ibiri mu ijuru, byose ibisakazaho amahoro aturutse ku maraso ye yameneye ku musaraba.`,
-
-  // Alternative canticle — Ephesians 1:3-10
   igisingizoAlt: `Nihasingizwe Imana, Se w'Umwami wacu Yezu Kristu,
 Yo yadusakajemo imigisha y'amoko yose, ituruka kuri Roho, mu ijuru, ku bwa Kristu.
 Nguko uko yadutoreye muri We nyine, mbere y'ihangwa ry'ibiriho byose,
@@ -76,26 +68,15 @@ Yaduhishuriye ibanga ry'ugushaka kwayo,
 wa mugambi wuje urugwiro yari yifitemo kuva kera,
 ngo izawuzuze ibihe bigeze: umugambi wo gukoranyiriza ibintu byose
 ku Mutware umwe rukumbi, Kristu, ari ibiri mu ijuru, ari n'ibiri ku isi.`,
-
-  // Antiphons after the canticle
   inyikirizoKristu1: `Habwa ikuzo Nyagasani, icyubahiro, ububasha n'ishema.`,
   inyikirizoKristu2: `Uragasingizwa Mubyeyi wacu, Wowe waduhereye umugisha muri Kristu.`,
-
-  // ── 4. Zaburi ─────────────────────────────────────────────────────────────
   inyikirizoZab1: `Nihasingizwe izina rya Nyagasani, ubu n'iteka ryose.`,
   inyikirizoZab2: `Ubuvunyi n'ingabire bituruka kuri Uhoraho.`,
-
-  // ── 5. Isomo ──────────────────────────────────────────────────────────────
-  // Reading — 1 Peter 3:8-9
   isomo: `Ahasigaye, nimutekereze ibihuje, mugirirane impuhwe, mukundane urwa kivandimwe, mube abanyambabazi kandi mwicishe bugufi. Ntimukiture undi inabi yabagiriye, cyangwa ngo nabatuka mumusubize; ahubwo mwifurizanye umugisha, kuko ari cyo mwahamagariwe, kugira ngo muzahabwe umugisha ho umurage.`,
-
   igisubizo: `Nishyize mu biganza byawe, Nyagasani.
 Ni wowe uducungura Nyagasani, Mana y'ukuri.`,
-
-  // ── 6. Indirimbo ya Bikira Mariya (Magnificat — Lk 1:47-55) ──────────────
   inyikirizoMariyaWeekday: `Uhoraho yangiriye ibintu by'agatangaza, izina rye ni ritagatifu.`,
   inyikirizoMariyaSunday: `Ku mugoroba wa Pasika abigishwa bamenye Nyagasani, igihe yamanyuraga umugati.`,
-
   magnificat: `Umutima wanjye urasingiza Nyagasani,
 kandi uhimbajwe n'Imana Umukiza wanjye.
 Kuko yibutse umuja we utavugwaga,
@@ -111,159 +92,166 @@ Yagobotoye Israheli umugaragu we,
 bityo yibuka impuhwe ze,
 nk'uko yari yarabibwiye abakurambere bacu,
 agirira Abrahamu n'urubyaro rwe iteka.`,
-
   ikuzoMariya: `Nk'uko bisanzwe iteka, bubahwe n'ubu n'iteka ryose, Amen.`,
-
-  // ── 7. Amasengesho yo gusaba ──────────────────────────────────────────────
   gusabaIntro: `Dusabe Imana, Umubyeyi wacu, We ukunda abana be kandi ntiyirengagize amasezerano yabo, tumubwire twiyoroheje tuti: "NYAGASANI UTWIYEGEREZE."`,
-
   gusaba1: `Mana y'urukundo, wowe wagiranye n'umuryango wawe isezerano ry'iteka, dufashe kwibuka ibitangaza byawe. Tubisabe Imana.`,
   gusaba2: `Kiliziya yawe uyihe kujya mbere mu rukundo, kandi abakwemera ubakomeze mu bumwe no mu mahoro. Tubisabe Imana.`,
   gusaba3: `Nyagasani, duhe kutakwirengagiza mu mitunganyirize y'iyi si, maze imigirire yacu ihuze n'ugushaka kwawe. Tubisabe Imana.`,
   gusaba4: `Ohereza abakozi mu murima wawe, kugira ngo izina ryawe rimenyekane mu miryango yose. Tubisabe Imana.`,
   gusaba5: `Abapfuye bahe kureba uruhanga rwawe, natwe uduhe kuzasangira na bo umunezero w'ubwiza bwawe. Tubisabe Imana.`,
-
-  // ── 8. Dawe uri mu ijuru ──────────────────────────────────────────────────
   dawe: `Izina ryawe ryubahwe Ingoma yawe yogere hose, icyo ushaka gikorwe mu isi nk'uko gikorwa mu ijuru. Ifunguro ridutunga uriduhe none. Utubabarire ibicumuro byacu, nk'uko natwe tubabarira abaducumuyeho. Ntudutererane mu bitwoshya, ahubwo udukize icyago, Amen.`,
-
-  // ── 9. Isengesho risoza ───────────────────────────────────────────────────
   risozaWeekday: `Mana itumurikira, duhe gutsinda imitego y'umwanzi muri iri joro, maze ejo mu gitondo tuzahimbarirwe imbere yawe, tugushimira muri Yezu Kristu Umwana wawe n'Umwami wacu. Amen.`,
   risozaSunday: `Nyagasani, gumana natwe kuko bwije n'umunsi ukaba uciye ikibu; susurutsa imitima yacu iyoboke inzira zawe, tuguhishure mu Byanditswe bitagatifu. Ibyo turabigusaba ku bwa Yezu Kristu, Umwana wawe n'Umwami wacu. Amen.`,
-
-  // ── 10. Umusozo ───────────────────────────────────────────────────────────
   umusozo: `Imana iduhe umugisha, iturinde ikibi cyose, kandi izatugeze mu bugingo bw'iteka. Amen.`,
 };
 
-// ── Sub-components ────────────────────────────────────────────────────────────
-
-function SectionHeader({ title }: { title: string }) {
-  return (
-    <div className="flex items-center gap-4 my-8">
-      <div className="flex-1 h-px bg-siyoni-border" />
-      <span className="font-body text-sm font-medium text-siyoni-mid tracking-widest uppercase whitespace-nowrap">
-        {title}
-      </span>
-      <div className="flex-1 h-px bg-siyoni-border" />
-    </div>
-  );
-}
-
-function PrayerBlock({ text }: { text: string }) {
-  return (
-    <div className="bg-siyoni-card border border-siyoni-border rounded-card p-5 shadow-card mb-4">
-      <p className="prayer-text text-siyoni-brown">{text}</p>
-    </div>
-  );
-}
-
-function SubBlock({ label, text }: { label: string; text: string }) {
-  return (
-    <div className="mb-4 ml-4 border-l-2 border-siyoni-ochre/30 pl-4">
-      {label && (
-        <p className="font-body text-[10px] font-medium text-siyoni-ochre tracking-widest uppercase mb-1">
-          {label}
-        </p>
-      )}
-      <p className="prayer-text text-siyoni-brown text-xs leading-relaxed">{text}</p>
-    </div>
-  );
-}
-
-// ── Page ──────────────────────────────────────────────────────────────────────
+const TOTAL_SLIDES = 11; // cover, 9 sections, outro
 
 export default function NimugorobaPage() {
   const today = new Date();
   const isSunday = today.getDay() === 0;
   const inLent = isLent(today);
+  const { slideIndex, direction, next, prev } = useSlideshow(TOTAL_SLIDES);
 
-  return (
-    <div className="min-h-screen bg-siyoni-cream font-body pb-20 md:pb-0">
-      <Navbar />
-      <div className="h-10 overflow-hidden">
-        <ImigongoPattern className="w-full h-full" />
+  let slide: React.ReactNode;
+
+  if (slideIndex === 0) {
+    slide = (
+      <div className="flex flex-col items-center text-center gap-3">
+        <h1 className="font-heading text-4xl md:text-5xl font-bold text-siyoni-cream mb-1">
+          Amasengesho ya Nimugoroba
+        </h1>
+        <p className="font-body text-sm text-siyoni-cream/50">
+          {isSunday ? "Ku Cyumweru" : "Iminsi isanzwe"}
+          {inLent && " · Igisibo"}
+        </p>
       </div>
-
-      <main className="max-w-xl mx-auto px-6 py-12">
-        <Link href="/isengesho" className="inline-flex items-center gap-1 text-siyoni-mid text-sm mb-8 hover:text-siyoni-brown transition-colors">
-          ← Subira
-        </Link>
-
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.35, ease: "easeOut" as const }}
-        >
-          <h1 className="font-heading text-4xl font-bold text-siyoni-brown mb-1">
-            Amasengesho ya Nimugoroba
-          </h1>
-          <p className="font-body text-sm text-siyoni-mid mb-10">
-            {isSunday ? "Ku Cyumweru" : "Iminsi isanzwe"}
-            {inLent && " · Igisibo"}
-          </p>
-
-          {/* ── 1. Intangiriro ─────────────────────────────────────────────── */}
-          <SectionHeader title="Intangiriro" />
-          <PrayerBlock text={PRAYERS.intangiriro} />
-          <SubBlock label="Hubahwe Imana Data na Mwana na Roho Mutagatifu" text={PRAYERS.ikuzoIntangiriro} />
-          {!inLent && <SubBlock label="Alleluya" text={PRAYERS.alleluya} />}
-
-          {/* ── 2. Igisingizo cya Kristu ───────────────────────────────────── */}
-          <SectionHeader title="Igisingizo cya Kristu" />
-          <PrayerBlock text={PRAYERS.igisingizoKristu} />
-          <SubBlock label="Inyikirizo" text={PRAYERS.inyikirizoKristu1} />
-
-          {/* ── 4. Zaburi ──────────────────────────────────────────────────── */}
-          <SectionHeader title="Zaburi" />
-          <SubBlock label="Inyikirizo" text={PRAYERS.inyikirizoZab1} />
-          <SubBlock label="Inyikirizo" text={PRAYERS.inyikirizoZab2} />
-
-          {/* ── 5. Isomo ───────────────────────────────────────────────────── */}
-          <SectionHeader title="Isomo — 1 Petero 3, 8-9" />
-          <PrayerBlock text={PRAYERS.isomo} />
-          <SubBlock label="Igisubizo" text={PRAYERS.igisubizo} />
-
-          {/* ── 6. Indirimbo ya Bikira Mariya (Magnificat) ─────────────────── */}
-          <SectionHeader title="Indirimbo ya Bikira Mariya — Lk 1, 47-55" />
-          <SubBlock
-            label={isSunday ? "Inyikirizo yo ku cyumweru" : "Inyikirizo yo ku mibyizi"}
+    );
+  } else if (slideIndex === 1) {
+    slide = (
+      <div className="flex flex-col gap-4">
+        <p className="font-body text-xs font-medium text-siyoni-ochre tracking-widest uppercase">Intangiriro</p>
+        <DarkCard>
+          <DarkPrayerBlock text={PRAYERS.intangiriro} />
+          <DarkPrayerBlock name="Hubahwe Imana Data na Mwana na Roho Mutagatifu" text={PRAYERS.ikuzoIntangiriro} />
+          {!inLent && <DarkPrayerBlock name="Alleluya" text={PRAYERS.alleluya} />}
+        </DarkCard>
+      </div>
+    );
+  } else if (slideIndex === 2) {
+    slide = (
+      <div className="flex flex-col gap-4">
+        <p className="font-body text-xs font-medium text-siyoni-ochre tracking-widest uppercase">Igisingizo cya Kristu</p>
+        <DarkCard>
+          <DarkPrayerBlock text={PRAYERS.igisingizoKristu} />
+          <DarkPrayerBlock name="Inyikirizo" text={PRAYERS.inyikirizoKristu1} />
+        </DarkCard>
+      </div>
+    );
+  } else if (slideIndex === 3) {
+    slide = (
+      <div className="flex flex-col gap-4">
+        <p className="font-body text-xs font-medium text-siyoni-ochre tracking-widest uppercase">Zaburi</p>
+        <DarkCard>
+          <DarkPrayerBlock name="Inyikirizo" text={PRAYERS.inyikirizoZab1} />
+          <DarkPrayerBlock name="Inyikirizo" text={PRAYERS.inyikirizoZab2} />
+        </DarkCard>
+      </div>
+    );
+  } else if (slideIndex === 4) {
+    slide = (
+      <div className="flex flex-col gap-4">
+        <p className="font-body text-xs font-medium text-siyoni-ochre tracking-widest uppercase">Isomo — 1 Petero 3, 8-9</p>
+        <DarkCard>
+          <DarkPrayerBlock text={PRAYERS.isomo} />
+          <DarkPrayerBlock name="Igisubizo" text={PRAYERS.igisubizo} />
+        </DarkCard>
+      </div>
+    );
+  } else if (slideIndex === 5) {
+    slide = (
+      <div className="flex flex-col gap-4">
+        <p className="font-body text-xs font-medium text-siyoni-ochre tracking-widest uppercase">
+          Indirimbo ya Bikira Mariya — Lk 1, 47-55
+        </p>
+        <DarkCard>
+          <DarkPrayerBlock
+            name={isSunday ? "Inyikirizo yo ku cyumweru" : "Inyikirizo yo ku mibyizi"}
             text={isSunday ? PRAYERS.inyikirizoMariyaSunday : PRAYERS.inyikirizoMariyaWeekday}
           />
-          <PrayerBlock text={PRAYERS.magnificat} />
-          <SubBlock label="Hubahwe Imana Data na Mwana na Roho Mutagatifu" text={PRAYERS.ikuzoMariya} />
+          <DarkPrayerBlock text={PRAYERS.magnificat} />
+          <DarkPrayerBlock name="Hubahwe Imana Data na Mwana na Roho Mutagatifu" text={PRAYERS.ikuzoMariya} />
+        </DarkCard>
+      </div>
+    );
+  } else if (slideIndex === 6) {
+    slide = (
+      <div className="flex flex-col gap-4">
+        <p className="font-body text-xs font-medium text-siyoni-ochre tracking-widest uppercase">Amasengesho yo Gusaba</p>
+        <DarkCard>
+          <DarkPrayerBlock text={PRAYERS.gusabaIntro} />
+          <DarkPrayerBlock text={PRAYERS.gusaba1} />
+          <DarkPrayerBlock text={PRAYERS.gusaba2} />
+          <DarkPrayerBlock text={PRAYERS.gusaba3} />
+          <DarkPrayerBlock text={PRAYERS.gusaba4} />
+          <DarkPrayerBlock text={PRAYERS.gusaba5} />
+          <DarkPrayerBlock text="(Bashobora kongeraho andi)" />
+        </DarkCard>
+      </div>
+    );
+  } else if (slideIndex === 7) {
+    slide = (
+      <div className="flex flex-col gap-4">
+        <p className="font-body text-xs font-medium text-siyoni-ochre tracking-widest uppercase">Dawe Uri mu Ijuru</p>
+        <DarkCard>
+          <DarkPrayerBlock text={PRAYERS.dawe} />
+        </DarkCard>
+      </div>
+    );
+  } else if (slideIndex === 8) {
+    slide = (
+      <div className="flex flex-col gap-4">
+        <p className="font-body text-xs font-medium text-siyoni-ochre tracking-widest uppercase">Isengesho Risoza</p>
+        <DarkCard>
+          <DarkPrayerBlock text={isSunday ? PRAYERS.risozaSunday : PRAYERS.risozaWeekday} />
+        </DarkCard>
+      </div>
+    );
+  } else if (slideIndex === 9) {
+    slide = (
+      <div className="flex flex-col items-center text-center gap-4">
+        <p className="font-body text-xs font-medium text-siyoni-ochre tracking-widest uppercase">Umusozo</p>
+        <DarkCard>
+          <DarkPrayerBlock text={PRAYERS.umusozo} />
+          <DarkPrayerBlock name="Umusaseridoti" text="Dusingize Nyagasani." />
+          <DarkPrayerBlock name="Abantu" text="Dushimiye Imana." />
+        </DarkCard>
+      </div>
+    );
+  } else {
+    slide = (
+      <div className="flex flex-col items-center text-center gap-4">
+        <div className="w-12 h-0.5 bg-siyoni-ochre mx-auto mb-2" />
+        <p className="font-heading text-xl text-siyoni-cream">Imana iguhe ijoro ryiza. 🙏</p>
+        <Link
+          href="/isengesho"
+          className="inline-block font-body text-sm text-siyoni-cream/60 hover:text-siyoni-cream transition-colors underline underline-offset-2"
+        >
+          Subira ku masengesho
+        </Link>
+      </div>
+    );
+  }
 
-          {/* ── 7. Amasengesho yo gusaba ───────────────────────────────────── */}
-          <SectionHeader title="Amasengesho yo Gusaba" />
-          <PrayerBlock text={PRAYERS.gusabaIntro} />
-          <SubBlock label="" text={PRAYERS.gusaba1} />
-          <SubBlock label="" text={PRAYERS.gusaba2} />
-          <SubBlock label="" text={PRAYERS.gusaba3} />
-          <SubBlock label="" text={PRAYERS.gusaba4} />
-          <SubBlock label="" text={PRAYERS.gusaba5} />
-          <SubBlock label="" text="(Bashobora kongeraho andi)" />
-
-          {/* ── 8. Dawe uri mu ijuru ───────────────────────────────────────── */}
-          <SectionHeader title="Dawe Uri mu Ijuru" />
-          <PrayerBlock text={PRAYERS.dawe} />
-
-          {/* ── 9. Isengesho risoza ────────────────────────────────────────── */}
-          <SectionHeader title="Isengesho Risoza" />
-          <PrayerBlock text={isSunday ? PRAYERS.risozaSunday : PRAYERS.risozaWeekday} />
-
-          {/* ── 10. Umusozo ─────────────────────────────────────────────────── */}
-          <SectionHeader title="Umusozo" />
-          <PrayerBlock text={PRAYERS.umusozo} />
-          <SubBlock label="Umusaseridoti" text="Dusingize Nyagasani." />
-          <SubBlock label="Abantu" text="Dushimiye Imana." />
-
-          <div className="mt-10 text-center">
-            <div className="w-12 h-0.5 bg-siyoni-ochre mx-auto mb-4" />
-            <p className="font-heading text-xl text-siyoni-brown">Imana iguhe ijoro ryiza. 🙏</p>
-            <Link href="/isengesho" className="inline-block mt-6 font-body text-sm text-siyoni-mid hover:text-siyoni-brown transition-colors underline underline-offset-2">
-              Subira ku masengesho
-            </Link>
-          </div>
-        </motion.div>
-      </main>
-    </div>
+  return (
+    <DarkSlideshowShell
+      bgColor={BG_COLOR}
+      backHref="/isengesho"
+      slideIndex={slideIndex}
+      direction={direction}
+      footer={<SlideNav index={slideIndex} total={TOTAL_SLIDES} onPrev={prev} onNext={next} />}
+    >
+      {slide}
+    </DarkSlideshowShell>
   );
 }

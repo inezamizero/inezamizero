@@ -7,6 +7,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import ImigongoPattern from "@/components/ImigongoPattern";
 
+// A distinct dark-chocolate shade for this devotion — a deep, cooler
+// aubergine-brown, fitting the more somber tone of the Seven Sorrows.
+const BG_COLOR = "#140D12";
+
 // ── Prayers ───────────────────────────────────────────────────────────────────
 
 const PRAYERS = {
@@ -164,15 +168,15 @@ function SorrowStep({ sorrow }: { sorrow: { title: string; meditation: string } 
     <div className="h-full flex flex-col">
 
       {/* Mobile tab bar */}
-      <div className="md:hidden flex-shrink-0 flex border-b border-siyoni-border">
+      <div className="md:hidden flex-shrink-0 flex border-b border-white/10">
         {(["kuzirikana", "amasengesho"] as const).map((t) => (
           <button
             key={t}
             onClick={() => setTab(t)}
             className={`flex-1 py-2.5 font-body text-sm font-medium transition-colors border-b-2 ${
               tab === t
-                ? "text-siyoni-brown border-siyoni-ochre"
-                : "text-siyoni-mid border-transparent"
+                ? "text-siyoni-cream border-siyoni-ochre"
+                : "text-siyoni-cream/60 border-transparent"
             }`}
           >
             {t === "kuzirikana" ? "Kuzirikana" : "Amasengesho"}
@@ -184,16 +188,16 @@ function SorrowStep({ sorrow }: { sorrow: { title: string; meditation: string } 
       <div className="flex-1 min-h-0 md:grid md:grid-cols-2">
 
         {/* Left — meditation */}
-        <div className={`h-full overflow-y-auto px-6 py-5 md:border-r border-siyoni-border ${
+        <div className={`h-full overflow-y-auto px-6 py-5 md:border-r border-white/10 ${
           tab !== "kuzirikana" ? "hidden md:flex md:flex-col" : "flex flex-col"
         }`}>
           <p className="font-body text-[10px] font-medium text-siyoni-ochre tracking-widest uppercase mb-2 flex-shrink-0">
             Kuzirikana
           </p>
-          <h2 className="font-heading text-base font-bold text-siyoni-brown leading-snug mb-4 flex-shrink-0">
+          <h2 className="font-heading text-base font-bold text-siyoni-cream leading-snug mb-4 flex-shrink-0">
             {sorrow.title}
           </h2>
-          <p className="font-body text-sm text-siyoni-brown whitespace-pre-line" style={{ lineHeight: "1.7" }}>
+          <p className="font-body text-sm text-siyoni-cream whitespace-pre-line" style={{ lineHeight: "1.7" }}>
             {sorrow.meditation}
           </p>
         </div>
@@ -211,16 +215,16 @@ function SorrowStep({ sorrow }: { sorrow: { title: string; meditation: string } 
             { name: "Ndakuramutsa Mariya", text: PRAYERS.ndakuramutsa, repeat: "Inshuro 7" },
             { name: "Mubyeyi ugira ibambe", text: PRAYERS.mubyeyi, note: "Kuyiririmba cyangwa se kuyivuga mu magambo" },
           ].map((p, i) => (
-            <div key={i} className={i > 0 ? "mt-4 pt-4 border-t border-siyoni-border" : ""}>
+            <div key={i} className={i > 0 ? "mt-4 pt-4 border-t border-white/10" : ""}>
               <div className="flex items-baseline justify-between mb-1.5">
-                <span className="font-heading text-sm font-semibold text-siyoni-brown">{p.name}</span>
+                <span className="font-heading text-sm font-semibold text-siyoni-cream">{p.name}</span>
                 {"repeat" in p && p.repeat && (
                   <span className="font-body text-xs text-siyoni-ochre ml-3 whitespace-nowrap">{p.repeat}</span>
                 )}
               </div>
-              <p className="font-body text-sm text-siyoni-brown" style={{ lineHeight: "1.7" }}>{p.text}</p>
+              <p className="font-body text-sm text-siyoni-cream" style={{ lineHeight: "1.7" }}>{p.text}</p>
               {"note" in p && p.note && (
-                <p className="font-body text-xs text-siyoni-mid italic mt-1.5">{p.note}</p>
+                <p className="font-body text-xs text-siyoni-cream/60 italic mt-1.5">{p.note}</p>
               )}
             </div>
           ))}
@@ -236,7 +240,7 @@ function SorrowStep({ sorrow }: { sorrow: { title: string; meditation: string } 
 function LitanyRow({ invocation, response }: { invocation: string; response: string }) {
   return (
     <div className="flex items-baseline justify-between gap-4 py-1">
-      <span className="font-body text-sm text-siyoni-brown leading-relaxed">{invocation}</span>
+      <span className="font-body text-sm text-siyoni-cream leading-relaxed">{invocation}</span>
       <span className="font-body text-sm font-medium text-siyoni-ochre italic whitespace-nowrap">{response}</span>
     </div>
   );
@@ -248,12 +252,12 @@ function PrayerBlock({ name, text, repeat, note }: {
   return (
     <div className="mb-4">
       <div className="flex items-baseline justify-between mb-1.5">
-        <h3 className="font-heading text-sm font-semibold text-siyoni-brown">{name}</h3>
+        <h3 className="font-heading text-sm font-semibold text-siyoni-cream">{name}</h3>
         {repeat && <span className="font-body text-xs text-siyoni-ochre ml-3 whitespace-nowrap">{repeat}</span>}
       </div>
-      <div className="bg-siyoni-card border border-siyoni-border rounded-card px-4 py-3 shadow-card">
-        <p className="font-body text-sm text-siyoni-brown whitespace-pre-line" style={{ lineHeight: "1.7" }}>{text}</p>
-        {note && <p className="font-body text-xs text-siyoni-mid italic mt-2 pt-2 border-t border-siyoni-border">{note}</p>}
+      <div className="bg-black/25 border border-white/10 rounded-card px-4 py-3">
+        <p className="font-body text-sm text-siyoni-cream whitespace-pre-line" style={{ lineHeight: "1.7" }}>{text}</p>
+        {note && <p className="font-body text-xs text-siyoni-cream/60 italic mt-2 pt-2 border-t border-white/10">{note}</p>}
       </div>
     </div>
   );
@@ -262,7 +266,7 @@ function PrayerBlock({ name, text, repeat, note }: {
 function StepContent({ step }: { step: number }) {
   if (step === 0) return (
     <>
-      <h2 className="font-heading text-xl font-bold text-siyoni-brown mb-5">Gutangira</h2>
+      <h2 className="font-heading text-xl font-bold text-siyoni-cream mb-5">Gutangira</h2>
       <PrayerBlock name="Ikimenyetso cy'Umusaraba" text={PRAYERS.ikimenyetso} />
       <PrayerBlock name="Intangiriro" text={PRAYERS.intangiriro} />
       <PrayerBlock name="Isengesho ryo kwicuza ibyaha" text={PRAYERS.kwicuza} />
@@ -273,7 +277,7 @@ function StepContent({ step }: { step: number }) {
 
   if (step === 8) return (
     <>
-      <h2 className="font-heading text-xl font-bold text-siyoni-brown mb-5">Gusoza</h2>
+      <h2 className="font-heading text-xl font-bold text-siyoni-cream mb-5">Gusoza</h2>
       <PrayerBlock name="Isengesho risoza" text={PRAYERS.closing} />
       <PrayerBlock name="Mutima wa Bikira Mariya" text={PRAYERS.mutimaClosure} repeat="Inshuro 3" />
     </>
@@ -282,36 +286,36 @@ function StepContent({ step }: { step: number }) {
   // Step 9 — litany + final
   return (
     <>
-      <h2 className="font-heading text-xl font-bold text-siyoni-brown mb-4">
+      <h2 className="font-heading text-xl font-bold text-siyoni-cream mb-4">
         Ibisingizo by&apos;Umutima Utagira Inenge wa Bikira Mariya
       </h2>
-      <div className="bg-siyoni-card border border-siyoni-border rounded-card px-4 py-3 shadow-card mb-4">
+      <div className="bg-black/25 border border-white/10 rounded-card px-4 py-3 mb-4">
         {LITANY_KYRIE.map(([inv, resp], i) => <LitanyRow key={`k-${i}`} invocation={inv} response={resp} />)}
       </div>
-      <div className="bg-siyoni-card border border-siyoni-border rounded-card px-4 py-3 shadow-card mb-4">
+      <div className="bg-black/25 border border-white/10 rounded-card px-4 py-3 mb-4">
         {LITANY_TRINITY.map(([inv, resp], i) => <LitanyRow key={`t-${i}`} invocation={inv} response={resp} />)}
       </div>
-      <div className="bg-siyoni-card border border-siyoni-border rounded-card px-4 py-3 shadow-card mb-4">
+      <div className="bg-black/25 border border-white/10 rounded-card px-4 py-3 mb-4">
         {LITANY_MAIN.map(([inv, resp], i) => <LitanyRow key={`m-${i}`} invocation={inv} response={resp} />)}
         {LITANY_SORROWS.map(([inv, resp], i) => <LitanyRow key={`s-${i}`} invocation={inv} response={resp} />)}
       </div>
-      <div className="mb-4 bg-siyoni-card border border-siyoni-border rounded-card px-4 py-3 shadow-card space-y-2">
+      <div className="mb-4 bg-black/25 border border-white/10 rounded-card px-4 py-3 space-y-2">
         {([["Ntama w'Imana ukiza abantu ibyaha:", "Udukize Nyagasani"], ["Ntama w'Imana ukiza abantu ibyaha:", "Utwiteho Nyagasani"], ["Ntama w'Imana ukiza abantu ibyaha:", "Utubabarire."]] as [string,string][]).map(([inv, resp], i) => (
           <div key={i} className="flex items-baseline gap-2 flex-wrap">
-            <span className="font-body text-sm text-siyoni-brown italic">{inv}</span>
+            <span className="font-body text-sm text-siyoni-cream italic">{inv}</span>
             <span className="font-body text-sm font-medium text-siyoni-ochre italic">{resp}</span>
           </div>
         ))}
       </div>
-      <div className="mb-4 bg-siyoni-card border border-siyoni-border rounded-card px-4 py-3 shadow-card flex items-baseline gap-2 flex-wrap">
-        <span className="font-body text-sm text-siyoni-brown italic">Mubyeyi Mutagatifu w&apos;Imana urajye udusabira:</span>
+      <div className="mb-4 bg-black/25 border border-white/10 rounded-card px-4 py-3 flex items-baseline gap-2 flex-wrap">
+        <span className="font-body text-sm text-siyoni-cream italic">Mubyeyi Mutagatifu w&apos;Imana urajye udusabira:</span>
         <span className="font-body text-sm font-medium text-siyoni-ochre italic">Tubone guhabwa ibyo Yezu Kristu yadusezeranwije</span>
       </div>
       <PrayerBlock name="Dusabe" text={PRAYERS.dusabe} />
       <PrayerBlock name="Nihasingizwe Umutima utagira inenge wa Bikira Mariya" text={PRAYERS.nihasingizwe} repeat="Inshuro 3" />
       <div className="mt-6 text-center">
         <div className="w-10 h-0.5 bg-siyoni-ochre mx-auto mb-3" />
-        <p className="font-heading text-lg text-siyoni-brown">Ishapure irarangiye.</p>
+        <p className="font-heading text-lg text-siyoni-cream">Ishapure irarangiye.</p>
       </div>
     </>
   );
@@ -339,21 +343,21 @@ export default function IshapureUbubabareBurindwi() {
 
   return (
     // h-dvh = dynamic viewport height — respects mobile browser chrome
-    <div className="h-dvh flex flex-col bg-siyoni-cream font-body overflow-hidden">
+    <div className="h-dvh flex flex-col font-body overflow-hidden" style={{ backgroundColor: BG_COLOR }}>
 
       {/* Imigongo strip */}
       <div className="h-8 overflow-hidden flex-shrink-0">
-        <ImigongoPattern className="w-full h-full" />
+        <ImigongoPattern className="w-full h-full" bgColor={BG_COLOR} fgColor="#C4882A" />
       </div>
 
       {/* Inner container — horizontal margins so content never touches the edges */}
       <div className="flex-1 min-h-0 flex flex-col max-w-5xl mx-auto w-full px-8">
 
         {/* Top bar */}
-        <div className="flex-shrink-0 flex items-center justify-between py-4 border-b border-siyoni-border">
+        <div className="flex-shrink-0 flex items-center justify-between py-4 border-b border-white/10">
           <Link
             href="/rozari"
-            className="flex items-center gap-1 font-body text-sm text-siyoni-mid hover:text-siyoni-brown transition-colors"
+            className="flex items-center gap-1 font-body text-sm text-siyoni-cream/60 hover:text-siyoni-cream transition-colors"
           >
             <ChevronLeft size={15} />
             Subira
@@ -363,7 +367,7 @@ export default function IshapureUbubabareBurindwi() {
               Ishapure y&apos;Ububabare Burindwi
             </p>
           </div>
-          <span className="font-body text-xs text-siyoni-mid w-14 text-right">
+          <span className="font-body text-xs text-siyoni-cream/60 w-14 text-right">
             {isSorrowStep ? `${step} / 7` : ""}
           </span>
         </div>
@@ -388,25 +392,35 @@ export default function IshapureUbubabareBurindwi() {
         </div>
 
         {/* Bottom navigation */}
-        <div className="flex-shrink-0 flex items-center justify-between py-4 border-t border-siyoni-border">
+        <div className="flex-shrink-0 flex items-center justify-between py-4 border-t border-white/10">
           <button
             onClick={goPrev}
-            className={`w-11 h-11 rounded-full border border-siyoni-border flex items-center justify-center transition-colors duration-200 ${
+            className={`w-11 h-11 rounded-full border border-white/10 flex items-center justify-center transition-colors duration-200 ${
               step === 0
                 ? "invisible pointer-events-none"
-                : "text-siyoni-mid hover:text-siyoni-brown hover:border-siyoni-mid"
+                : "text-siyoni-cream/60 hover:text-siyoni-cream hover:border-siyoni-mid"
             }`}
             aria-label="Inyuma"
           >
             <ChevronLeft size={20} strokeWidth={2} />
           </button>
-          <button
-            onClick={goNext}
-            className="w-11 h-11 rounded-full bg-siyoni-brown text-siyoni-cream flex items-center justify-center hover:bg-siyoni-mid transition-colors duration-200"
-            aria-label={step === TOTAL_STEPS - 1 ? "Subira" : "Komeza"}
-          >
-            <ChevronRight size={20} strokeWidth={2} />
-          </button>
+          <div className="flex flex-col items-center gap-1.5">
+            <motion.button
+              onClick={goNext}
+              animate={{ y: [0, -5, 0] }}
+              transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+              className="w-11 h-11 rounded-full bg-siyoni-ochre text-siyoni-brown flex items-center justify-center hover:bg-siyoni-ochre/90 transition-colors duration-200"
+              aria-label={step === TOTAL_STEPS - 1 ? "Subira" : "Komeza"}
+            >
+              <ChevronRight size={20} strokeWidth={2} />
+            </motion.button>
+            <motion.span
+              aria-hidden="true"
+              className="w-7 h-1.5 rounded-full bg-black/30 blur-[2px]"
+              animate={{ scaleX: [1, 0.55, 1], opacity: [0.6, 0.25, 0.6] }}
+              transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </div>
         </div>
 
       </div>

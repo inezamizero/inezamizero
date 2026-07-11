@@ -245,7 +245,7 @@ export default function Home() {
               href="/misa"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-card bg-siyoni-brown text-siyoni-cream font-body text-sm font-medium hover:bg-siyoni-mid transition-colors duration-200"
             >
-              Reba Misa y&apos;Umunsi yose
+              Reba Misa y&apos;uyu munsi
               <ChevronRight size={15} />
             </Link>
           </motion.div>

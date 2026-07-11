@@ -13,6 +13,12 @@ const novenas = [
     href: "/novena/amapfundo",
     available: true,
   },
+  {
+    name: "Noveni y'Izina rya Yezu",
+    desc: "Iminsi icyenda yubaha Izina Ritagatifu rya Yezu, twiyambaza ubushobozi bwaryo",
+    href: "/novena/izina-rya-yezu",
+    available: true,
+  },
 ];
 
 export default function NovenaLanding() {

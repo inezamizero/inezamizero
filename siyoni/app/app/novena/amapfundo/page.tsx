@@ -2,10 +2,11 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import ImigongoPattern from "@/components/ImigongoPattern";
+import { PulsingNextButton } from "@/components/DarkPrayerUI";
 import {
   MYSTERIES,
   MEDITATIONS,
@@ -355,7 +356,7 @@ export default function KnotNovena() {
           onClick={startUntie}
           className="inline-flex items-center gap-2 px-8 py-3 rounded-card bg-siyoni-ochre text-siyoni-brown font-body text-sm font-semibold hover:bg-siyoni-ochre/90 transition-colors duration-200"
         >
-          Pfundura Ipfundo, Utangire Gusenga
+          Tangira Gusenga
         </button>
 
         <details className="w-full max-w-sm text-left">
@@ -541,13 +542,10 @@ export default function KnotNovena() {
             {slideIndex + 1} / {slides.length}
           </span>
 
-          <button
+          <PulsingNextButton
             onClick={handleNext}
             disabled={slideIndex === slides.length - 1}
-            className="flex items-center gap-1 font-body text-sm text-siyoni-cream/70 hover:text-siyoni-cream disabled:opacity-0 disabled:pointer-events-none transition-all"
-          >
-            Ibikurikira <ChevronRight size={18} />
-          </button>
+          />
         </div>
 
         {/* Progress bar */}
