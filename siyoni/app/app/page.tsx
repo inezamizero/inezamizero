@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   BookOpen,
@@ -14,6 +15,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ImigongoPattern from "@/components/ImigongoPattern";
 import Navbar from "@/components/Navbar";
+import { translateGospelRef } from "@/lib/readings";
 
 const sections = [
   {
@@ -71,6 +73,24 @@ export default function Home() {
   const monthRw = MONTHS_RW[today.getMonth()];
   const year = today.getFullYear();
   const todayLabel = `${dayNum} ${monthRw} ${year}`;
+
+  const [gospelRef, setGospelRef] = useState<string | null | undefined>(undefined);
+
+  useEffect(() => {
+    // Use the user's local date so it matches their timezone, same as the Misa page.
+    const localDate = new Date();
+    const month = localDate.getMonth() + 1;
+    const day = localDate.getDate();
+    const y = localDate.getFullYear();
+
+    fetch(`/api/readings?year=${y}&month=${month}&day=${day}`, { cache: "no-store" })
+      .then((r) => r.json())
+      .then((data) => {
+        const gospel = data.readings?.gospel;
+        setGospelRef(gospel ? translateGospelRef(gospel) : null);
+      })
+      .catch(() => setGospelRef(null));
+  }, []);
 
   return (
     <motion.div
@@ -208,14 +228,15 @@ export default function Home() {
                 <p className="font-body text-xs font-medium text-siyoni-ochre tracking-widest uppercase">
                   Ubutumwa bwiza
                 </p>
-                {/* Replace this reference with today's Gospel reference */}
                 <p className="font-body text-xs text-siyoni-mid ml-4">
-                  [PLACEHOLDER — e.g. Lk 9:51-62]
+                  {gospelRef === undefined && "..."}
+                  {gospelRef === null && "Ntibiboneste"}
+                  {gospelRef}
                 </p>
               </div>
-              {/* Replace this with today's Gospel text in Kinyarwanda */}
+              {/* Full Kinyarwanda passage text is entered by hand — no public API has it. */}
               <p className="font-body text-sm text-siyoni-brown leading-relaxed line-clamp-4">
-                [PLACEHOLDER — shyiramo hano ubutumwa bwiza bw&apos;uyu munsi mu Kinyarwanda]
+                [PLACEHOLDER — umwandiko uzongerwaho vuba]
               </p>
             </div>
 
