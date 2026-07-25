@@ -4,21 +4,21 @@ import Link from "next/link";
 import { useSlideshow } from "@/lib/useSlideshow";
 import DarkSlideshowShell from "@/components/DarkSlideshowShell";
 import { DarkCard, DarkPrayerBlock, SlideNav } from "@/components/DarkPrayerUI";
+import { PRAYERS as ROSARY_PRAYERS } from "@/lib/rosaryPrayers";
+import { DECADES, CHAPLET_PRAYERS } from "@/lib/divineMercyPrayers";
 
 // A distinct dark-chocolate shade for this devotion — a deep reddish
 // mahogany, separating it visually from the main Rosary's warm neutral brown.
 const BG_COLOR = "#200D0D";
 
-const DECADES = ["Icya Mbere", "Icya Kabiri", "Icya Gatatu", "Icya Kane", "Icya Gatanu"];
-
 const PRAYERS = {
-  indangakwemera: `Ndemera Imana Data ushobora byose waremye ijuru n'isi ndemera n'umwana w'ikinege Yezu Kristu wasamwe ku bwa Roho mutagatifu akabyarwa na Bikira Mariya, akababara ku ngoma ya Ponsiyo Pilato, akabambwa ku musaraba agapfa, agahambwa, akamuka ajya ikuzimu. Ku munsi wa gatatu akazuka, akajya mu ijuru akaba yicaye iburyo bw'Imana Data ishobora byose, niho azava aje gucira imanza abazima n'abapfuye. Nemera Roho Mutagatifu, na Kiliziya gatorika ntagatifu, n'ubumwe bw'abatagatifujwe, n'uko abanyabyaha babikizwa, n'uko abantu bazazuka bakazabaho iteka, Amen.`,
-  dawe: `Izina ryawe ryubahwe Ingoma yawe yogere hose, icyo ushaka gikorwe mu isi nk'uko gikorwa mu ijuru. Ifunguro ridutunga uriduhe none. Utubabarire ibicumuro byacu, nk'uko natwe tubabarira abaducumuyeho. Ntudutererane mu bitwoshya, ahubwo udukize icyago, Amen.`,
-  ndakuramutsa: `Wuje inema uhorana n'Imana. Wahebuje abagore bose umugisha, na Yezu umwana wabyaye arasingizwa. Mariya Mutagatifu mmubyeyi w'Imana, urajye udusabira twebwe abanyabyaha, kuri ubu, n'igihe tuzapfira, Amen.`,
-  daweMana: `Dawe Mana ihoraho, ngutuye Umubiri n'Amaraso, Roho n'Ubumana by'Umwana wawe ukunda cyane, Umwami wacu Yezu Kristu, ngira ngo mpongerere ibyaha byacu n'iby'isi yose.`,
-  kubwububabare: `Kubw'ububabare bwe bukabije, tugirire impuhwe kandi uzigirire n'isi yose.`,
-  manaNyir: `Mana Nyir'ubutagatifu, Mana y'imbaraga, Mana ihoraho, tugirire impuhwe.`,
-  fatima: `Yezu wacu, tubabarire ibyaha byacu kandi uturinde umuriro w'iteka, igarurire roho z'abantu bose kandi uziyobore inzira y'ijuru, cyane cyane wite ku bakeneye impuhwe zawe.`,
+  indangakwemera: ROSARY_PRAYERS.imigenzo,
+  dawe: ROSARY_PRAYERS.DaweUriMuIjuru,
+  ndakuramutsa: ROSARY_PRAYERS.ndakwibuka,
+  daweMana: CHAPLET_PRAYERS.daweMana,
+  kubwububabare: CHAPLET_PRAYERS.kubwububabare,
+  manaNyir: CHAPLET_PRAYERS.manaNyir,
+  fatima: ROSARY_PRAYERS.yezuwacu,
 };
 
 const TOTAL_SLIDES = 9; // cover, opening, 5 decades, closing, outro

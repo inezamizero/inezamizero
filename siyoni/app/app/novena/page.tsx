@@ -19,6 +19,12 @@ const novenas = [
     href: "/novena/izina-rya-yezu",
     available: true,
   },
+  {
+    name: "Noveni y'Impuhwe z'Imana",
+    desc: "Iminsi icyenda Yezu yasabye Mutagatifu Faustina, buri munsi uvuga Ishapure y'Impuhwe z'Imana wiyambaza roho zihariwe uwo munsi",
+    href: "/novena/impuhwe",
+    available: true,
+  },
 ];
 
 export default function NovenaLanding() {

@@ -115,9 +115,6 @@ export const PRAYERS = {
   // Oh My Jesus
   yezuwacu: `Tubabarire ibyaha byacu, uturinde umuriro w'iteka. Igarurire roho z'abantu bose kandi uziyobore inzira y'ijuru, cyane cyane wite ku bakeneye impuhwe zawe. Maze ubabarire roho ziri muri Purigatori n'iz'abanyabyaha b'isi yose, Amen.`,
 
-  // Fatima Prayer (O My Jesus)
-  fatima: `[PLACEHOLDER — shyiramo hano Isengesho rya Fatima mu Kinyarwanda]`,
-
   // Hail Holy Queen (Salve Regina)
   hailHolyQueen: `Wibuke ko ntawigeze kumva ko waubije inyuma uwaje aguhungiyeho. Agutakambira ngo umurengere umusabire, ni cyo gituma nkwizera. Ndakugana nkuganyira ngo umpagararire ko ndi umunyabyaha. Mubyeyi w'umukiza ntiwirengagize ibyo nkubwira, ubyumve ubyiteho, Amen.`,
 
