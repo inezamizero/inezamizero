@@ -20,25 +20,42 @@ import {
   SHORT_ASPIRATION_RESPONSE,
 } from "@/lib/divineMercyNovena";
 
-// A deep garnet-crimson — distinct from the Chaplet's own mahogany
-// (#200D0D), picking up the red ray from the Divine Mercy image itself.
-const BG_COLOR = "#33090F";
+// A warm dark-chocolate brown, matching the rest of the site's palette —
+// distinct from the other novenas/rozari pages' shades.
+const BG_COLOR = "#2B1A0C";
 
 const TOTAL_DAYS = 9;
 // Cover, chaplet opening, 5 decades, chaplet closing, day's intention,
 // litany, litany closing + short aspiration, outro.
 const TOTAL_SLIDES = 12;
 
-// The two rays of the Divine Mercy image — pale (water) and red (blood) —
-// as an abstract radiating glyph. No figures, matching the site's imagery
-// rules; this is the actual traditional symbolism for this exact devotion.
-function MercyRaysGlyph() {
+// One hand, built from simple pill shapes (palm, thumb, four fingers).
+// Local coordinates: x=0 is the inner edge (where the two hands meet at
+// the thumbs), positive x runs outward toward the pinky. Mirrored via
+// scale(-1,1) for the second hand so both meet cleanly at center.
+function Hand({ mirror }: { mirror?: boolean }) {
+  return (
+    <g transform={`translate(100,148) rotate(-7) ${mirror ? "scale(-1,1)" : ""}`}>
+      <rect x={0} y={-32} width={17} height={32} rx={7} fill="url(#handGradient)" opacity={0.92} />
+      <rect x={-6} y={-20} width={7} height={16} rx={3} fill="url(#handGradient)" opacity={0.92} />
+      <rect x={1} y={-62} width={4} height={30} rx={2} fill="url(#handGradient)" opacity={0.92} />
+      <rect x={5} y={-68} width={4} height={36} rx={2} fill="url(#handGradient)" opacity={0.92} />
+      <rect x={9} y={-60} width={4} height={28} rx={2} fill="url(#handGradient)" opacity={0.92} />
+      <rect x={13} y={-50} width={4} height={18} rx={2} fill="url(#handGradient)" opacity={0.92} />
+    </g>
+  );
+}
+
+// Two hands pressed together in prayer — a plain geometric glyph (pill
+// shapes, no figure/face), matching the site's imagery rules the same way
+// the IHS monogram and knot motif do for the other two novenas.
+function PrayingHandsGlyph() {
   return (
     <div className="relative flex items-center justify-center">
       <motion.div
         animate={{ opacity: [0.5, 0.8, 0.5], scale: [1, 1.08, 1] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute w-56 h-56 rounded-full bg-[#E8536A] blur-3xl opacity-30"
+        className="absolute w-56 h-56 rounded-full bg-[#D9A53D] blur-3xl opacity-30"
       />
       <motion.svg
         width={180}
@@ -48,31 +65,25 @@ function MercyRaysGlyph() {
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       >
         <defs>
-          <linearGradient id="rayPale" x1="0" y1="1" x2="0" y2="0">
-            <stop offset="0%" stopColor="#F7EDE2" stopOpacity="0" />
-            <stop offset="100%" stopColor="#F7EDE2" stopOpacity="0.85" />
-          </linearGradient>
-          <linearGradient id="rayRed" x1="0" y1="1" x2="0" y2="0">
-            <stop offset="0%" stopColor="#E8536A" stopOpacity="0" />
-            <stop offset="100%" stopColor="#E8536A" stopOpacity="0.9" />
+          <linearGradient id="handGradient" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0%" stopColor="#D9A53D" />
+            <stop offset="100%" stopColor="#F7EDE2" />
           </linearGradient>
         </defs>
-        <path d="M 88 100 Q 70 40 82 10 Q 100 40 92 100 Z" fill="url(#rayPale)" transform="rotate(-8 100 100)" />
-        <path d="M 112 100 Q 130 40 118 10 Q 100 40 108 100 Z" fill="url(#rayRed)" transform="rotate(8 100 100)" />
-        <circle cx={100} cy={100} r={14} fill="#FFF6EC" opacity={0.9} />
-        <circle cx={100} cy={100} r={22} fill="none" stroke="#F7EDE2" strokeWidth={1} opacity={0.4} />
+        <Hand />
+        <Hand mirror />
       </motion.svg>
     </div>
   );
 }
 
-// Full-screen transition played once, leaving the cover slide — the two rays
-// flood the viewport, then fade to reveal Day 1 already settled underneath.
-// Same overlay-then-reveal technique as the other two novenas.
-function MercyBurst() {
+// Full-screen transition played once, leaving the cover slide — a warm
+// gold-cream glow floods the viewport, then fades to reveal Day 1 already
+// settled underneath. Same overlay-then-reveal technique as the other two novenas.
+function PrayingHandsBurst() {
   return (
     <motion.div
-      key="mercy-burst"
+      key="praying-hands-burst"
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
@@ -88,13 +99,13 @@ function MercyBurst() {
         transition={{ duration: 1.3, times: [0, 0.6, 1], ease: [0.4, 0, 0.2, 1] }}
       >
         <defs>
-          <radialGradient id="mercyBurstGlow" cx="50%" cy="50%" r="50%">
+          <radialGradient id="prayingHandsBurstGlow" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stopColor="#F7EDE2" />
-            <stop offset="55%" stopColor="#E8536A" />
-            <stop offset="100%" stopColor="#E8536A" stopOpacity="0" />
+            <stop offset="55%" stopColor="#D9A53D" />
+            <stop offset="100%" stopColor="#D9A53D" stopOpacity="0" />
           </radialGradient>
         </defs>
-        <circle cx={100} cy={100} r={70} fill="url(#mercyBurstGlow)" />
+        <circle cx={100} cy={100} r={70} fill="url(#prayingHandsBurstGlow)" />
       </motion.svg>
     </motion.div>
   );
@@ -127,7 +138,7 @@ export default function NoveniYImpuhwe() {
   if (slideIndex === 0) {
     slide = (
       <div className="flex flex-col items-center text-center gap-7">
-        <MercyRaysGlyph />
+        <PrayingHandsGlyph />
 
         <div>
           <h1 className="font-heading text-4xl md:text-5xl font-bold text-siyoni-cream mb-2">
@@ -288,7 +299,7 @@ export default function NoveniYImpuhwe() {
 
   return (
     <>
-      <AnimatePresence>{bursting && <MercyBurst />}</AnimatePresence>
+      <AnimatePresence>{bursting && <PrayingHandsBurst />}</AnimatePresence>
       <DarkSlideshowShell
         bgColor={BG_COLOR}
         backHref="/novena"
