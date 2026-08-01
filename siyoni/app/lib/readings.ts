@@ -83,11 +83,13 @@ const BOOK_NAMES_RW: Record<string, string> = {
 };
 
 export function translateBibleRef(ref: string): string {
-  const spaceIdx = ref.indexOf(" ");
-  if (spaceIdx === -1) return ref;
+  // Split right before the chapter:verse part (e.g. "1 Corinthians 13:4-13"),
+  // not at the first space — book names like "1 Corinthians" or "Song of
+  // Songs" contain spaces themselves and would otherwise split wrong.
+  const match = ref.match(/^(.+)\s(\d+:.*)$/);
+  if (!match) return ref;
 
-  const book = ref.slice(0, spaceIdx);
-  const rest = ref.slice(spaceIdx + 1);
+  const [, book, rest] = match;
   const bookRw = BOOK_NAMES_RW[book];
 
   return bookRw ? `${bookRw} ${rest}` : ref;

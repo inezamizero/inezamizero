@@ -6,6 +6,7 @@ import { ExternalLink } from "lucide-react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import ImigongoPattern from "@/components/ImigongoPattern";
+import { translateBibleRef } from "@/lib/readings";
 
 // ── Date helpers ──────────────────────────────────────────────────────────────
 
@@ -94,14 +95,14 @@ function getLiturgicalSeason(date: Date): Season {
   return SEASONS.ordinary;
 }
 
-// ── Readings placeholders ─────────────────────────────────────────────────────
+// ── Readings ──────────────────────────────────────────────────────────────────
 
-const READINGS = [
-  { label: "Isomo rya mbere",      ref: "[PLACEHOLDER — e.g. Iz 6:1-8]",  text: "[PLACEHOLDER — isomo rya mbere ry'uyu munsi]" },
-  { label: "Zaburi yo gusubiza",   ref: "[PLACEHOLDER — e.g. Zb 138]",    text: "[PLACEHOLDER — zaburi yo gusubiza]" },
-  { label: "Isomo rya kabiri",     ref: "[PLACEHOLDER — e.g. Rm 5:1-5]",  text: "[PLACEHOLDER — isomo rya kabiri (Ku cyumweru gusa)]" },
-  { label: "Ubutumwa bwiza",       ref: "[PLACEHOLDER — e.g. Lk 3:15-22]",text: "[PLACEHOLDER — ubutumwa bwiza bw'uyu munsi]" },
-];
+type Readings = {
+  firstReading: string | null;
+  psalm: string | null;
+  secondReading: string | null;
+  gospel: string | null;
+};
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 
@@ -112,6 +113,7 @@ export default function MisaPage() {
 
   const [videoId, setVideoId] = useState<string | null | undefined>(undefined);
   const [saintName, setSaintName] = useState<string | null | undefined>(undefined);
+  const [readings, setReadings] = useState<Readings | null | undefined>(undefined);
 
   useEffect(() => {
     // Use the user's local date so everything matches their timezone
@@ -132,7 +134,21 @@ export default function MisaPage() {
       .then((r) => r.json())
       .then((data) => setSaintName(data.name ?? null))
       .catch(() => setSaintName(null));
+
+    fetch(`/api/readings?year=${yyyy}&month=${month}&day=${day}`, { cache: "no-store" })
+      .then((r) => r.json())
+      .then((data) => setReadings(data.readings ?? null))
+      .catch(() => setReadings(null));
   }, []);
+
+  const readingItems: { label: string; ref: string }[] = readings
+    ? [
+        { label: "Isomo rya mbere", ref: readings.firstReading },
+        { label: "Zaburi yo gusubiza", ref: readings.psalm },
+        { label: "Isomo rya kabiri", ref: readings.secondReading },
+        { label: "Ubutumwa bwiza", ref: readings.gospel },
+      ].filter((r): r is { label: string; ref: string } => !!r.ref)
+    : [];
 
   return (
     // Seasonal background — very light tint, changes each liturgical season
@@ -249,37 +265,48 @@ export default function MisaPage() {
 
       {/* ── READINGS ─────────────────────────────────────────────────────── */}
       <div className="max-w-5xl mx-auto px-4 pb-12">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="font-heading text-2xl font-semibold text-siyoni-brown">
-            Amasomo y'uyu munsi
-          </h2>
-          <span className="font-body text-xs text-siyoni-mid border border-siyoni-border px-3 py-1 rounded-full">
-            Phase 3
-          </span>
-        </div>
+        <h2 className="font-heading text-2xl font-semibold text-siyoni-brown mb-2">
+          Amasomo y'uyu munsi
+        </h2>
         <p className="font-body text-sm text-siyoni-mid mb-6">
-          Amasomo azabonahana iyo twunganye API y'Itorero Gatorika.
+          Aha hagaragara gusa aho ayo masomo asomwa (igitabo, umutwe n&apos;imirongo). Amagambo
+          yuzuye azongerwaho nyuma yo kubona uburenganzira ku Bibiliya y&apos;Ikinyarwanda.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {READINGS.map((reading, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.07, duration: 0.35, ease: "easeOut" as const }}
-              className="bg-white/60 border border-siyoni-border rounded-card p-5"
-            >
-              <div className="flex items-baseline justify-between mb-2">
-                <p className="font-body text-xs font-medium tracking-widest uppercase" style={{ color: season.accent }}>
+
+        {readings === undefined && (
+          <p className="font-body text-sm text-siyoni-mid">Gushakisha amasomo...</p>
+        )}
+
+        {readings === null && (
+          <p className="font-body text-sm text-siyoni-mid">
+            Ntibishoboka gushakisha amasomo y&apos;uyu munsi ubu. Gerageza nyuma.
+          </p>
+        )}
+
+        {readings && readingItems.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {readingItems.map((reading, i) => (
+              <motion.div
+                key={reading.label}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.07, duration: 0.35, ease: "easeOut" as const }}
+                className="bg-white/60 border border-siyoni-border rounded-card p-5"
+              >
+                <p
+                  className="font-body text-xs font-medium tracking-widest uppercase mb-2"
+                  style={{ color: season.accent }}
+                >
                   {reading.label}
                 </p>
-                <p className="font-body text-xs text-siyoni-mid ml-3">{reading.ref}</p>
-              </div>
-              <p className="prayer-text text-siyoni-brown text-sm">{reading.text}</p>
-            </motion.div>
-          ))}
-        </div>
+                <p className="font-heading text-lg font-semibold text-siyoni-brown">
+                  {translateBibleRef(reading.ref)}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
