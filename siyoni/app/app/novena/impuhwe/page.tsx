@@ -144,7 +144,7 @@ export default function NoveniYImpuhwe() {
           <h1 className="font-heading text-4xl md:text-5xl font-bold text-siyoni-cream mb-2">
             Noveni y&apos;Impuhwe z&apos;Imana
           </h1>
-          <p className="font-body text-sm text-siyoni-cream/60 italic max-w-sm">
+          <p className="font-body text-sm text-siyoni-cream/60 italic max-w-sm mx-auto text-center">
             Iminsi icyenda Yezu yasabye Mutagatifu Faustina, buri munsi uvuga Ishapure y&apos;Impuhwe
             z&apos;Imana wiyambaza roho zihariwe uwo munsi.
           </p>
