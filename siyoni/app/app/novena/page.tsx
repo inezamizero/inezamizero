@@ -8,7 +8,7 @@ import ImigongoPattern from "@/components/ImigongoPattern";
 
 const novenas = [
   {
-    name: "Noveni ya Mariya Upfundura Amapfundo",
+    name: "Noveni ya Bikira Mariya Upfundura Amapfundo",
     desc: "Iminsi icyenda yo gutakambira Mariya kugira ngo apfundure amapfundo yo mu buzima bwacu",
     href: "/novena/amapfundo",
     available: true,
